@@ -22,4 +22,6 @@ Route::resource('/location', 'LocationController')->except([
     'create', 'show'
 ]);
 
-Route::resource('/departement', 'DepartementController');
+Route::resource('/departement', 'DepartementController')->except([
+    'show'
+]);

@@ -29,15 +29,52 @@ class DepartementController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi Data
         request()->validate([
             'name' => 'required|string|max:100',
             'location_id' => 'required|exists:ms_locations,id_location',
         ]);
-
-        // Input data Departemen
+        // Input Data
         $departements = Departement::create($request->all());
-
+        // Redirect dengan Pesan Sukses
         return redirect(route('departement.index'))
                 ->with(['success' => '<strong>' . $departements->name . '</strong> Ditambahkan']);
+    }
+
+    public function destroy($id_departement)
+    {
+        // Query Select based on $id_departement
+        $departements = Departement::findOrFail($id_departement);
+        // Delete Data from Table
+        $departements->delete();
+        // Redirect dengan Pesan Sukses
+        return redirect()->back()->with(['success' => '<strong>' . $departements->name . '</strong> Telah Dihapus!']);
+    }
+
+    public function edit($id_departement)
+    {
+        // Query Select based on $id_departement
+        $departements = Departement::findOrFail($id_departement);
+        $locations = Location::orderBy('name', 'ASC')->get();
+        return view('departements.edit', compact('departements', 'locations'));
+    }
+
+    public function update(Request $request, $id_departement)
+    {
+        // Validasi Data
+        request()->validate([
+            'name' => 'required|string|max:100',
+            'location_id' => 'required|exists:ms_locations,id_location',
+        ]);
+        // Query Select based on $id_departement
+        $departements = Departement::findOrFail($id_departement);
+        // Update Data
+        $departements->update([
+            'name' => $request->name,
+            'location_id' => $request->location_id
+        ]);
+        // Redirect dengan Pesan Sukses
+        return redirect(route('departement.index'))
+                ->with(['success' => '<strong>' . $departements->name . '</strong> Diperbarui']);
     }
 }
