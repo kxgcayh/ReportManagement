@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'ms_users',
+        'passwords' => 'tr_users',
     ],
 
     /*
@@ -38,12 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'ms_users',
+            'provider' => 'tr_users',
         ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'ms_users',
+            'provider' => 'tr_users',
             'hash' => false,
         ],
     ],
@@ -66,7 +66,7 @@ return [
     */
 
     'providers' => [
-        'ms_users' => [
+        'tr_users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
@@ -93,8 +93,8 @@ return [
     */
 
     'passwords' => [
-        'ms_users' => [
-            'provider' => 'ms_users',
+        'tr_users' => [
+            'provider' => 'tr_users',
             'table' => 'ms_password_resets',
             'expire' => 60,
         ],

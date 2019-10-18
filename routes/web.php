@@ -12,16 +12,17 @@
 */
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/', function () {
-    return view('auth.login');
+    return view('/');
 });
 
-Route::resource('/location', 'LocationController')->except([
-    'create', 'show'
-]);
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('/location', 'LocationController')->except([
+        'create', 'show'
+    ]);
+    Route::resource('/departement', 'DepartementController')->except([
+        'show'
+    ]);
 
-Route::resource('/departement', 'DepartementController')->except([
-    'show'
-]);
+    Route::get('/home', 'HomeController@index')->name('home');
+});

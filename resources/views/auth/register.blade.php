@@ -52,6 +52,16 @@
                 @enderror
               </div>
             </div>
+            <div class="form-group">
+              <div class="col-xs-12">
+                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required placeholder="Username">
+                @error('username')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+              </div>
+            </div>
             <div class="form-group ">
               <div class="col-xs-12">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="Email">
@@ -62,6 +72,20 @@
                 @enderror
               </div>
             </div>
+
+            {{-- <div class="form-group">
+                <div class="col-xs-12">
+                    <label for="depatement_id">Lokasi</label>
+                    <select name="depatement_id" id="depatement_id" required class="form-control {{ $errors->has('depatement_id') ? 'is-invalid':'' }}">
+                        <option value=""></option>
+                        @foreach ($departement as $depts)
+                            <option value="{{ $depts->id_departement }}">{{ ucfirst($depts->name) }}</option>
+                        @endforeach
+                    </select>
+                    <p class="text-danger">{{ $errors->first('depatement_id') }}</p>
+                </div>
+            </div> --}}
+
             <div class="form-group ">
               <div class="col-xs-12">
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="Password">
