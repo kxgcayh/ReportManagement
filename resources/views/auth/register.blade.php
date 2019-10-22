@@ -40,6 +40,7 @@
         <div class="card-body">
           <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('register') }}">
             @csrf
+            @include('inc.ifalert')
             <a href="javascript:void(0)" class="text-center db"><img src="{{asset('materialpro')}}/assets/images/logo-icon.png" alt="Home" /><br /><img src="{{asset('materialpro')}}/assets/images/logo-text.png" alt="Home" /></a>
             <h3 class="box-title m-t-40 m-b-0">Register Now</h3><small>Create your account and enjoy</small>
             <div class="form-group m-t-20">
@@ -73,18 +74,21 @@
               </div>
             </div>
 
-            {{-- <div class="form-group">
+            <div class="form-group">
                 <div class="col-xs-12">
-                    <label for="depatement_id">Lokasi</label>
-                    <select name="depatement_id" id="depatement_id" required class="form-control {{ $errors->has('depatement_id') ? 'is-invalid':'' }}">
+                    <label for="departement_id">Departemen</label>
+                    <select name="departement_id" id="departement_id" required
+                    class="form-control {{ $errors->has('departement_id') ? 'is-invalid':'' }}">
                         <option value=""></option>
-                        @foreach ($departement as $depts)
-                            <option value="{{ $depts->id_departement }}">{{ ucfirst($depts->name) }}</option>
+                        @foreach ($departements as $depts)
+                            <option value="{{ $depts->id_departement }}">
+                                {{ ucfirst($depts->name) }}
+                            </option>
                         @endforeach
                     </select>
                     <p class="text-danger">{{ $errors->first('depatement_id') }}</p>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="form-group ">
               <div class="col-xs-12">

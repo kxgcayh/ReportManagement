@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +29,11 @@ class Departement extends Model
      */
     public function location()
     {
-        return $this->belongsTo('App\Models\Location', 'location_id');
+        return $this->belongsTo(Location::class, 'location_id');
+    }
+
+    public function user()
+    {
+        return $this->hasMany(User::class, 'departement_id');
     }
 }

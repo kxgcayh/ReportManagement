@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class DepartementController extends Controller
 {
-        public function ind()
-        {
-            $department = Department::all();
-            return view('views.auth.register',compact('department'));
-        }
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
+
     public function index()
     {
         // Mengenalkan Nama Departemen dan Lokasi

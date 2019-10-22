@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Departement;
 use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
@@ -21,4 +22,9 @@ class Location extends Model
      * @var array
      */
     protected $fillable = ['name', 'description'];
+
+    public function departement()
+    {
+        return $this->hasMany(Departement::class, 'location_id');
+    }
 }
