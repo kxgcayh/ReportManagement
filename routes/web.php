@@ -11,19 +11,15 @@
 |
 */
 Auth::routes(['verify' => true]);
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth'], function() {
-
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return view('/home');
     });
-
-    Route::get('/home', 'HomeController@index')->name('home');
-
     Route::resource('/location', 'LocationController')->except([
         'create', 'show'
     ]);
-
     Route::resource('/departement', 'DepartementController')->except([
         'show'
     ]);

@@ -73,7 +73,6 @@
                 @enderror
               </div>
             </div>
-
             <div class="form-group">
                 <div class="col-xs-12">
                     <label for="departement_id">Departemen</label>

@@ -16,11 +16,7 @@
             <a href="{{ route('departement.create') }}" class="btn waves-effect waves-light btn-primary"><i class="fa fa-edit"></i> Create </a>
         @endslot
 
-        @if (session('success'))
-            @alert(['type' => 'success'])
-                {!! session('success') !!}
-            @endalert
-        @endif
+        @include('inc.ifalert')
 
         <div class="table-responsive">
             <table class="table table-hover">
