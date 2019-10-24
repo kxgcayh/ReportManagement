@@ -18,7 +18,7 @@ class DepartementController extends Controller
         // Mengenalkan Nama Departemen dan Lokasi
         $departements = Departement::with('location')->orderBy('created_at', 'DESC')->paginate(10);
         // Menampilkan Nama Departemen dan Lokasi pada List Departemen
-        return view('departements.index', compact('departements','locations'));
+        return view('departements.index', compact('departements'));
     }
 
     public function create()
@@ -28,8 +28,7 @@ class DepartementController extends Controller
         // Mengenalkan Nama Departemen dan Lokasi
         $departements = Departement::with('location')->orderBy('created_at', 'DESC')->paginate(10);
         // Menampilkan Nama Departemen dan Lokasi pada List Departemen
-        return view('departements.create', compact('departements','locations'));
-
+        return view('departements.create', compact('departements', 'locations'));
     }
 
     public function store(Request $request)
@@ -43,7 +42,7 @@ class DepartementController extends Controller
         $departements = Departement::create($request->all());
         // Redirect dengan Pesan Sukses
         return redirect(route('departement.index'))
-                ->with(['success' => '<strong>' . $departements->name . '</strong> Ditambahkan']);
+            ->with(['success' => '<strong>' . $departements->name . '</strong> Ditambahkan']);
     }
 
     public function destroy($id_departement)
@@ -80,6 +79,6 @@ class DepartementController extends Controller
         ]);
         // Redirect dengan Pesan Sukses
         return redirect(route('departement.index'))
-                ->with(['success' => '<strong>' . $departements->name . '</strong> Diperbarui']);
+            ->with(['success' => '<strong>' . $departements->name . '</strong> Diperbarui']);
     }
 }

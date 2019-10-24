@@ -1,80 +1,103 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {{-- Tell the browser to be responsive to screen width --}}
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {{-- Favicon icon --}}
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('materialpro') }}/assets/images/favicon.png">
+    <title>Material Pro Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    {{-- Bootstrap Core CSS --}}
+    <link href="{{ asset('materialpro') }}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    {{-- chartist CSS --}}
+    <link href="{{ asset('materialpro') }}/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="{{ asset('materialpro') }}/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link href="{{ asset('materialpro') }}/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <link href="{{ asset('materialpro') }}/assets/plugins/css-chart/css-chart.css" rel="stylesheet">
+    {{-- Vector CSS --}}
+    <link href="{{ asset('materialpro') }}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    {{-- Custom CSS --}}
+    <link href="{{ asset('materialpro') }}/css/style.css" rel="stylesheet">
+    {{-- You can change the theme colors from here --}}
+    <link href="{{ asset('materialpro') }}/css/colors/megna.css" id="theme" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<body class="fix-header fix-sidebar card-no-border logo-center">
+    {{-- Preloader - style you can find in spinners.css --}}
+        @include('inc.preloader')
+    {{-- Main wrapper - style you can find in pages.scss --}}
+    <div id="main-wrapper">
+        @guest
+        {{-- Topbar header - style you can find in pages.scss --}}
+            @include('inc.topbar')
+        {{-- End Topbar header --}}
+        @else
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+        {{-- Topbar header - style you can find in pages.scss --}}
+            @include('inc.topbar')
+        {{-- End Topbar header --}}
 
-                    </ul>
+        {{-- Left Sidebar - style you can find in sidebar.scss  --}}
+            @include('inc.left-sidebar')
+        {{-- End Left Sidebar - style you can find in sidebar.scss  --}}
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+        {{-- Page wrapper  --}}
+        <div class="page-wrapper">
+            {{-- Container fluid  --}}
+            <div class="container-fluid">
+                {{-- !Please add breadcumb components --}}
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                {{-- Start Page Content /with Row--}}
+                    @yield('content')
+                {{-- End Page Content --}}
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                {{-- Right sidebar --}}
+                    @include('inc.right-sidebar')
+                {{-- End Right sidebar --}}
             </div>
-        </nav>
+            {{-- End Container fluid  --}}
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+            {{-- footer --}}
+                @include('inc.footer')
+            {{-- End footer --}}
+
+        @endguest
+        </div>
+        {{-- End Page wrapper  --}}
     </div>
+    {{-- End Wrapper --}}
+
+    {{-- All Jquery --}}
+    <script src="{{ asset('materialpro') }}/assets/plugins/jquery/jquery.min.js"></script>
+    {{-- Bootstrap tether Core JavaScript --}}
+    <script src="{{ asset('materialpro') }}/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="{{ asset('materialpro') }}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    {{-- slimscrollbar scrollbar JavaScript --}}
+    <script src="{{ asset('materialpro') }}/js/jquery.slimscroll.js"></script>
+    {{-- ave Effects --}}
+    <script src="{{ asset('materialpro') }}/js/waves.js"></script>
+    {{-- enu sidebar --}}
+    <script src="{{ asset('materialpro') }}/js/sidebarmenu.js"></script>
+    {{-- tickey kit --}}
+    <script src="{{ asset('materialpro') }}/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="{{ asset('materialpro') }}/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    {{-- tickey kit --}}
+    <script src="{{ asset('materialpro') }}/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="{{ asset('materialpro') }}/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="{{ asset('materialpro') }}/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    {{-- Custom JavaScript --}}
+    <script src="{{ asset('materialpro') }}/js/custom.min.js"></script>
+    {{-- This page plugins --}}
+    {{-- chartist chart --}}
+    <script src="{{ asset('materialpro') }}/assets/plugins/chartist-js/dist/chartist.min.js"></script>
+    <script src="{{ asset('materialpro') }}/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    {{-- Vector map JavaScript --}}
+    <script src="{{ asset('materialpro') }}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="{{ asset('materialpro') }}/assets/plugins/vectormap/jquery-jvectormap-us-aea-en.js"></script>
+    <script src="{{ asset('materialpro') }}/js/dashboard3.js"></script>
+    {{-- Style switcher --}}
+    <script src="{{ asset('materialpro') }}/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 </body>
 </html>

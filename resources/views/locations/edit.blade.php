@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('title')
     <title>Edit Location</title>
@@ -21,7 +21,7 @@
                 @endalert
             @endif​
 
-            <form role="form" action="{{ route('location.update', $locations->id_location) }}" method="POST" class="floating-labels">
+            <form role="form" action="{{ route('locations.update', $locations->id_location) }}" method="POST" class="floating-labels">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
                 <div class="form-group">
@@ -33,7 +33,7 @@
                     <textarea name="description" id="description" cols="5" rows="5" class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}">{{ $locations->description }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Update</button>
-                <button href="{{ route('location.index') }}" class="btn btn-warning waves-effect waves-light m-r-10">Cancel</button>
+                <button href="{{ route('locations.index') }}" class="btn btn-warning waves-effect waves-light m-r-10">Cancel</button>
             </form>
         @endcardbox
     </div>

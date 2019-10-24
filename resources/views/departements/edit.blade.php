@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('title')
     <title>Management Departement</title>
@@ -22,7 +22,7 @@
 
         @include('inc.ifalert')
 
-        <form role="form" action="{{ route('departement.update', $departements->id_departement) }}" method="POST" class="form-material">
+        <form role="form" action="{{ route('departements.update', $departements->id_departement) }}" method="POST" class="form-material">
             @method('PUT')
             @csrf
             <input type="hidden" name="_method" value="PUT">
@@ -50,7 +50,7 @@
                 <button class="btn waves-effect waves-light btn-primary">
                     <i class="fa fa-send"></i> Save
                 </button>
-                <a href="{{ route('departement.index') }}" class="btn waves-effect waves-light btn-primary">Back </a>
+                <a href="{{ route('departements.index') }}" class="btn waves-effect waves-light btn-primary">Back </a>
             </div>
         </form>
     @endcardbox

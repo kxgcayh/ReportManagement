@@ -24,7 +24,7 @@ class LocationController extends Controller
         $locations = Location::create($request->all());
 
         return redirect()->back()
-                ->with(['success' => 'Location: ' . $locations->name . ' Succesfully Created']);
+            ->with(['success' => 'Location: ' . $locations->name . ' Succesfully Created']);
     }
 
     public function destroy($id_location)
@@ -49,17 +49,17 @@ class LocationController extends Controller
         ]);
 
         try {
-        //select data berdasarkan id
-        $locations = Location::findOrFail($id_location);
-        //update data
-        $locations->update([
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
+            //select data berdasarkan id
+            $locations = Location::findOrFail($id_location);
+            //update data
+            $locations->update([
+                'name' => $request->name,
+                'description' => $request->description
+            ]);
 
-        return redirect(route('location.index'))->with(['success' => 'Location: ' . $locations->name . ' Changed']);
+            return redirect(route('locations.index'))->with(['success' => 'Location: ' . $locations->name . ' Changed']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);
-            }
+        }
     }
 }

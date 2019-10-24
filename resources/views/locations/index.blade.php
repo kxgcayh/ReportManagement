@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('title')
     <title>Management Location</title>
@@ -14,7 +14,7 @@
 <div class="row">
     <div class="col-md-6">
         @cardbox(['header' => 'Create Location'])
-            <form role="form" action="{{ route('location.store') }}" method="POST" class="floating-labels">
+            <form role="form" action="{{ route('locations.store') }}" method="POST" class="floating-labels">
                 @csrf
                 <div class="form-group">
                     <label for="id_location">Location</label>
@@ -52,10 +52,10 @@
                             <td>{{ $locs->name }}</td>
                             <td>{{ $locs->description }}</td>
                             <td>
-                                <form action="{{ route('location.destroy', $locs->id_location) }}" method="POST">
+                                <form action="{{ route('locations.destroy', $locs->id_location) }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <a href="{{ route('location.edit', $locs->id_location) }}" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('locations.edit', $locs->id_location) }}" class="btn btn-warning btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <button class="btn btn-danger btn-sm">

@@ -40,23 +40,11 @@
         <div class="card-body">
           <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('register') }}">
             @csrf
-            @include('inc.ifalert')
-            <a href="javascript:void(0)" class="text-center db"><img src="{{asset('materialpro')}}/assets/images/logo-icon.png" alt="Home" /><br /><img src="{{asset('materialpro')}}/assets/images/logo-text.png" alt="Home" /></a>
             <h3 class="box-title m-t-40 m-b-0">Register Now</h3><small>Create your account and enjoy</small>
             <div class="form-group m-t-20">
               <div class="col-xs-12">
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="Name">
                 @error('name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-12">
-                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required placeholder="Username">
-                @error('username')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -88,7 +76,6 @@
                     <p class="text-danger">{{ $errors->first('depatement_id') }}</p>
                 </div>
             </div>
-
             <div class="form-group ">
               <div class="col-xs-12">
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="Password">

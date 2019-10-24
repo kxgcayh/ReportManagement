@@ -3,16 +3,14 @@
 namespace App;
 
 use App\Models\Departement;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use Notifiable, HasRoles;
-
-    protected $table = 'tr_users';
 
     /**
      * The attributes that are mass assignable.
@@ -20,13 +18,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name',
-        'username',
-        'email',
-        'departement_id',
-        'password',
+        'name', 'email', 'departement_id', 'password',
     ];
-    // protected $guarded = [];
+    protected $table = 'tr_users';
 
     /**
      * The attributes that should be hidden for arrays.
@@ -46,9 +40,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Variable yang menentukan nama relasi table.
-     */
     public function departement()
     {
         return $this->belongsTo(Departement::class, 'departement_id');

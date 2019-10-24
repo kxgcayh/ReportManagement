@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('title')
     <title>Management Departement</title>
@@ -13,7 +13,7 @@
 @endbreadcumb
     @card
         @slot('header')
-            <a href="{{ route('departement.create') }}" class="btn waves-effect waves-light btn-primary"><i class="fa fa-edit"></i> Create </a>
+            <a href="{{ route('departements.create') }}" class="btn waves-effect waves-light btn-primary"><i class="fa fa-edit"></i> Create </a>
         @endslot
 
         @include('inc.ifalert')
@@ -38,10 +38,10 @@
                             <td>{{ $depts->location['name'] }}</td>
                             <td>{{ $depts->location['description'] }}</td>
                             <td>
-                                <form action="{{ route('departement.destroy', $depts->id_departement) }}" method="POST">
+                                <form action="{{ route('departements.destroy', $depts->id_departement) }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <a href="{{ route('departement.edit', $depts->id_departement) }}"
+                                    <a href="{{ route('departements.edit', $depts->id_departement) }}"
                                         class="btn btn-warning btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </a>
