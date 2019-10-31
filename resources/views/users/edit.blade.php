@@ -34,30 +34,45 @@
                           </div>
                         @endif
 
-                        {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+                        {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id], 'class' => 'form-material']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Name:</strong>
-                                    {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                                    {!! Form::text('name', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Email:</strong>
-                                    {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+                                    {!! Form::text('email', null, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="departement_id">Departement</label>
+                                    <select name="departement_id" id="departement_id" required
+                                    class="form-control {{ $errors->has('departement_id') ? 'is-invalid':'' }}">
+                                        <option value=""></option>
+                                        @foreach ($departements as $depts)
+                                            <option value="{{ $depts->id_departement }}" {{ $depts->id_departement == $user->departement_id ? 'selected':'' }}>
+                                                {{ ucfirst($depts->name) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <p class="text-danger">{{ $errors->first('departement_id') }}</p>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Password:</strong>
-                                    {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
+                                    {!! Form::password('password', array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>Confirm Password:</strong>
-                                    {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
+                                    {!! Form::password('confirm-password', array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">

@@ -6,7 +6,7 @@
     {{-- Bread crumb and right sidebar toggle --}}
     <div class="row page-titles">
         <div class="col-md-5 col-2 align-self-center">
-            {{-- <h4 class="text-themecolor"></h4> --}}
+            <h4 class="text-themecolor">Create Users</h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Create</a></li>
                 <li class="breadcrumb-item active">Users</li>
@@ -18,54 +18,66 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Create Users</h4>
+                    <h4 class="card-title"></h4>
                     <div class="card-text">
                         @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                <ul>
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <ul>
                                 @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+                                <li>{{ $error }}</li>
                                 @endforeach
-                                </ul>
-                            </div>
+                            </ul>
+                        </div>
                         @endif
 
-                        {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
+                        {!! Form::open(array('route' => 'users.store','method'=>'POST', 'class' => 'form-material')) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Name:</strong>
-                                    {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                                    <label for="name">Name</label>
+                                    {!! Form::text('name', null, array('class' => 'form-control', 'id' => 'name', 'required')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Email:</strong>
-                                    {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+                                    <label for="email">Email</label>
+                                    {!! Form::text('email', null, array('class' => 'form-control', 'id' => 'email', 'required')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Password:</strong>
-                                    {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
+                                    <label for="departement">Departement</label>
+                                    <select name="departement_id" id="departement_id" required class="form-control {{ $errors->has('departement_id') ? 'is-invalid':'' }}">
+                                        <option value=""></option>
+                                        @foreach ($departements as $depts)
+                                        <option value="{{ $depts->id_departement }}">
+                                            {{ ucfirst($depts->name) }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    <p class="text-danger">{{ $errors->first('depatement_id') }}</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 m-t-40 row">
+                                <div class="form-group col-md-6 m-t-20">
+                                    <label for="password">Password</label>
+                                    {!! Form::password('password', array('class' => 'form-control', 'id' => 'email', 'required')) !!}
+                                </div>
+                                <div class="form-group col-md-6 m-t-20">
+                                    <label>Confirm Password:</label>
+                                    {!! Form::password('confirm-password', array('Confirm Password','class' => 'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Confirm Password:</strong>
-                                    {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Role:</strong>
+                                    <label>Role:</label>
                                     {{-- {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!} --}}
                                     <select class="form-control {{ $errors->has('id') ? 'is-invalid':'' }}" multiple name="roles[]" required>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">
-                                                {{ ucfirst($role->name) }}
-                                            </option>
+                                        <option value="{{ $role->id }}">
+                                            {{ ucfirst($role->name) }}
+                                        </option>
                                         @endforeach
                                     </select>
                                 </div>

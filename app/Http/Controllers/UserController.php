@@ -34,9 +34,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        // $roles = Role::pluck('name', 'name')->all();
+        $departements = Departement::orderBy('name', 'ASC')->get();
         $roles = Role::orderBy('name', 'ASC')->get();
-        return view('users.create', compact('roles'));
+        return view('users.create', compact('roles', 'departements'));
     }
 
 
@@ -52,6 +52,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:tr_users,email',
             'password' => 'required|same:confirm-password',
+            'departement_id' => 'required|exists:tr_departements,id_departement',
             'roles' => 'required'
         ]);
 
@@ -74,7 +75,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::with('departement')->find($id);
+        // $departements = Departement::find($id_departement);
         return view('users.show', compact('user'));
     }
 
@@ -88,10 +90,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        $departements = Departement::orderBy('name', 'ASC')->get();
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.edit', compact('user', 'roles', 'userRole'));
+        return view('users.edit', compact('user', 'departements', 'roles', 'userRole'));
     }
 
 

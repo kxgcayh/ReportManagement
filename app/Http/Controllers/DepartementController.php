@@ -41,7 +41,7 @@ class DepartementController extends Controller
         // Input Data
         $departements = Departement::create($request->all());
         // Redirect dengan Pesan Sukses
-        return redirect(route('departement.index'))
+        return redirect(route('departements.index'))
             ->with(['success' => '<strong>' . $departements->name . '</strong> Ditambahkan']);
     }
 

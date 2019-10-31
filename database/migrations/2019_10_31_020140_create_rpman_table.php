@@ -22,20 +22,16 @@ class CreateRpmanTable extends Migration
             $table->bigIncrements('id_location');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->boolean('is_active')->nullable();
-            $table->timestamps();
         });
 
         Schema::create('tr_departements', function (Blueprint $table) {
             $table->bigIncrements('id_departement');
             $table->string('name');
-            $table->boolean('is_active')->nullable();
-
-            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('location_id')->nullable();
             $table->foreign('location_id')
                 ->references('id_location')->on('ms_locations')
+                ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->timestamps();
         });
 
         Schema::create('ms_failed_jobs', function (Blueprint $table) {
@@ -52,6 +48,7 @@ class CreateRpmanTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->string('password');
 
             $table->unsignedBigInteger('departement_id')->nullable();
@@ -59,10 +56,6 @@ class CreateRpmanTable extends Migration
                 ->references('id_departement')->on('tr_departements')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
-            $table->boolean('is_active')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
         });
 
         Schema::create('ms_password_resets', function (Blueprint $table) {
@@ -74,106 +67,39 @@ class CreateRpmanTable extends Migration
         Schema::create('ms_categories', function (Blueprint $table) {
             $table->bigIncrements('id_category');
             $table->string('name');
-            $table->boolean('is_active')->nullable();
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by');
-            $table->foreign('updated_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
         });
 
         Schema::create('ms_machines', function (Blueprint $table) {
             $table->bigIncrements('id_machine');
             $table->string('name');
-            $table->boolean('is_active')->nullable();
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by');
-            $table->foreign('updated_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
         });
 
         Schema::create('ms_projects', function (Blueprint $table) {
             $table->bigIncrements('id_project');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->boolean('is_active')->nullable();
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by');
-            $table->foreign('updated_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
         });
 
         Schema::create('ms_types', function (Blueprint $table) {
             $table->bigIncrements('id_type');
             $table->string('name');
-            $table->boolean('is_active')->nullable();
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by');
-            $table->foreign('updated_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
         });
 
         Schema::create('tr_productions', function (Blueprint $table) {
             $table->bigIncrements('id_production');
             $table->string('name');
-            $table->boolean('is_active')->nullable();
-
-            $table->unsignedBigInteger('location_id');
-            $table->foreign('location_id')
-                ->references('id_location')->on('ms_locations')
-                ->onDelete('cascade');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by');
-            $table->foreign('updated_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
         });
 
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('detail');
-            $table->timestamps();
         });
 
         Schema::create('tr_reports', function (Blueprint $table) {
             $table->bigIncrements('id_report');
             $table->string('name');
             $table->boolean('approval');
-            $table->boolean('is_active')->nullable();
 
             $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id')
@@ -194,37 +120,15 @@ class CreateRpmanTable extends Migration
             $table->foreign('type_id')
                 ->references('id_type')->on('ms_types')
                 ->onDelete('cascade');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by');
-            $table->foreign('updated_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
         });
 
         Schema::create('tr_report_revs', function (Blueprint $table) {
             $table->bigIncrements('id_report_rev');
             $table->string('name');
-            $table->boolean('is_active')->nullable();
 
             $table->unsignedBigInteger('report_id');
             $table->foreign('report_id')
                 ->references('id_report')->on('tr_reports')
-                ->onDelete('cascade');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')
-                ->references('id')->on('tr_users')
-                ->onDelete('cascade');
-            $table->unsignedBigInteger('updated_by');
-            $table->foreign('updated_by')
-                ->references('id')->on('tr_users')
                 ->onDelete('cascade');
         });
     }
