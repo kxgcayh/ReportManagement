@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Models\Departement;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -51,8 +52,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:tr_users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
             'departement_id' => ['required'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 

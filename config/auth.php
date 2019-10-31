@@ -95,7 +95,7 @@ return [
     'passwords' => [
         'tr_users' => [
             'provider' => 'tr_users',
-            'table' => 'password_resets',
+            'table' => 'ms_password_resets',
             'expire' => 60,
         ],
     ],
