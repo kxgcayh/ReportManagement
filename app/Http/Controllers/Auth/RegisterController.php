@@ -9,8 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-// use Symfony\Component\HttpFoundation\Request;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 class RegisterController extends Controller
 {
@@ -26,6 +25,18 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $roles = Role::orderBy('name', 'ASC')->get();
+        $departements = Departement::orderBy('name', 'ASC')->get();
+        return view('auth.register', compact('departements', 'roles'));
+    }
 
     /**
      * Where to redirect users after registration.
@@ -74,17 +85,5 @@ class RegisterController extends Controller
             'departement_id' => $data['departement_id'],
             'password' => Hash::make($data['password']),
         ]);
-    }
-
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'roles' => 'required|exists:ms_roles,id'
-        ]);
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-
-        $user = User::create($input);
-        $user->assignRole($request->input('roles'));
     }
 }
