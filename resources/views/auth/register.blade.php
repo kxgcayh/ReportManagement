@@ -64,12 +64,26 @@
           </div>
           <div class="form-group">
             <div class="col-xs-12">
-              <label for="departement_id">Departemen</label>
+              <label for="departement_id">Departement</label>
               <select name="departement_id" id="departement_id" required class="form-control {{ $errors->has('departement_id') ? 'is-invalid':'' }}">
                 <option value=""></option>
                 @foreach ($departements as $depts)
                 <option value="{{ $depts->id_departement }}">
                   {{ ucfirst($depts->name) }}
+                </option>
+                @endforeach
+              </select>
+              <p class="text-danger">{{ $errors->first('depatement_id') }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-xs-12">
+              <label for="role">Role</label>
+              <select name="role" id="role" required class="form-control {{ $errors->has('id') ? 'is-invalid':'' }}">
+                <option value=""></option>
+                @foreach ($roles as $role)
+                <option value="{{ $role->id }}">
+                  {{ ucfirst($role->name) }}
                 </option>
                 @endforeach
               </select>
