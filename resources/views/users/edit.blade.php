@@ -63,14 +63,12 @@
                                     <p class="text-danger">{{ $errors->first('departement_id') }}</p>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 m-t-40 row">
+                                <div class="form-group col-md-6 m-t-20">
                                     <strong>Password:</strong>
                                     {!! Form::password('password', array('class' => 'form-control')) !!}
                                 </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
+                                <div class="form-group col-md-6 m-t-20">
                                     <strong>Confirm Password:</strong>
                                     {!! Form::password('confirm-password', array('class' => 'form-control')) !!}
                                 </div>
