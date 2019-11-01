@@ -1,53 +1,81 @@
-@extends('layouts.old_app')
+@extends('layouts.app')
 
+@section('title')
+<title>Management Brand</title>
+@endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Add New Product</h2>
+
+@breadcumb(['header' => 'Create Brand'])
+@breadc_item(['active' => 'Create'])
+@breadc_active Management Brand @endbreadc_active
+@breadc_active Data Master @endbreadc_active
+@endbreadc_item
+@endbreadcumb
+
+<div class="row">
+    <div class="col-md-6">
+        @cardbox
+        @slot('header')
+            <a class="btn btn-primary" href="{{ route('brands.index') }}"> Back</a>
+        @endslot
+
+        @include('inc.ifalert')
+
+        <form role="form" action="{{ route('brands.store') }}" method="post" class="form-material">
+            @csrf
+            <div class="form-group">
+                <label for="id_brand">Nama Brand</label>
+                <input id="id_brand" type="text" name="name" required class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}">
+                <p class="text-danger">{{ $errors->first('name') }}</p>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('brands.index') }}"> Back</a>
+            <div class="form-group">
+                <label for="production_id">Produksi</label>
+                <select name="production_id" id="production_id" required class="form-control {{ $errors->has('production_id') ? 'is-invalid':'' }}">
+                    <option value=""></option>
+                    @foreach ($productions as $prods)
+                    <option value="{{ $prods->id_production }}">{{ ucfirst($prods->name) }}</option>
+                    @endforeach
+                </select>
+                <p class="text-danger">{{ $errors->first('production_id') }}</p>
             </div>
-        </div>
+            <div class="form-group col-md-6">
+                <button class="btn waves-effect waves-light btn-primary">
+                    <i class="fa fa-send"></i> Save
+                </button>
+                <a href="{{ route('brands.index') }}" class="btn waves-effect waves-light btn-primary">Back </a>
+            </div>
+        </form>
+        @endcardbox
     </div>
-
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    <div class="col-md-6">
+        @cardbox(['header' => 'Production List'])
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nama Brand</th>
+                        <th>Tempat Produksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php $no = 1; @endphp
+                    @forelse ($brands as $value)
+                    <tr>
+                        <td>{{ $no++ }}</td>
+                        <td>{{ $value->name }}</td>
+                        <td>{{ $value->production['name'] }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="4" class="text-center">Tidak ada data Lokasi</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-    @endif
-
-
-    <form action="{{ route('brands.store') }}" method="POST">
-    	@csrf
-
-
-         <div class="row">
-		    <div class="col-xs-12 col-sm-12 col-md-12">
-		        <div class="form-group">
-		            <strong>Name:</strong>
-		            <input type="text" name="name" class="form-control" placeholder="Name">
-		        </div>
-		    </div>
-		    <div class="col-xs-12 col-sm-12 col-md-12">
-		        <div class="form-group">
-		            <strong>Detail:</strong>
-		            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
-		        </div>
-		    </div>
-		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-		            <button type="submit" class="btn btn-primary">Submit</button>
-		    </div>
-		</div>
-
-
-    </form>
+        @endcardbox
+    </div>
+</div>
 @endsection

@@ -34,11 +34,10 @@
 	                    <td>{{ $brand->name }}</td>
 	                    <td>{{ $brand->detail }}</td>
 	                    <td>
-
-                            <form action="{{ route('brands.destroy', $brand->id_brand) }}" method="POST">
+                            <form action="{{ route('brands.destroy', [$brand->id_brand]) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="DELETE">
-                                <a href="{{ route('brands.edit', $brand->id_brand) }}"
+                                <a href="{{ route('brands.edit', [$brand->id_brand]) }}"
                                     class="btn btn-warning btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a>

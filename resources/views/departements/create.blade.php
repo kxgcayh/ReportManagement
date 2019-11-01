@@ -17,7 +17,7 @@
     <div class="col-md-6">
         @cardbox
         @slot('header')
-
+            <a class="btn btn-primary" href="{{ route('departements.index') }}"> Back</a>
         @endslot
 
         @include('inc.ifalert')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Production;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -39,7 +40,9 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('brands.create');
+        $productions = Production::orderBy('name', 'ASC')->get();
+        $brands = Brand::with('production')->orderBy('created_at', 'DESC')->paginate(10);
+        return view('brands.create', compact('productions', 'brands'));
     }
 
 
@@ -69,7 +72,7 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function show(Brand $brand)
+    public function show(Brand $brands)
     {
         return view('brands.show', compact('brand'));
     }
@@ -81,7 +84,7 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Brand $brand)
+    public function edit(Brand $brands)
     {
         return view('brands.edit', compact('brand'));
     }
@@ -93,14 +96,14 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brand)
+    public function update(Request $request, Brand $brands)
     {
         request()->validate([
             'name' => 'required',
             'detail' => 'required',
         ]);
 
-        $brand->update($request->all());
+        $brands->update($request->all());
 
         return redirect()->route('brands.index')
             ->with('success', 'Brand updated successfully');
@@ -113,9 +116,9 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $brand)
+    public function destroy(Brand $brands)
     {
-        $brand->delete();
+        $brands->delete();
         return redirect()->route('brands.index')
             ->with('success', 'Brand deleted successfully');
     }
