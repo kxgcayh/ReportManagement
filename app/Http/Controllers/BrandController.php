@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-
-use App\Product;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
-
-class ProductController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,8 +26,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(5);
-        return view('products.index', compact('products'))
+        $brands = Brand::latest()->paginate(5);
+        return view('brands.index', compact('brands'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -42,7 +39,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        return view('brands.create');
     }
 
 
@@ -55,78 +52,71 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         request()->validate([
+            // 'production_id' => 'required',
             'name' => 'required',
             'detail' => 'required',
         ]);
 
-
-        Product::create($request->all());
-
-
-        return redirect()->route('products.index')
-            ->with('success', 'Product created successfully.');
+        Brand::create($request->all());
+        return redirect()->route('brands.index')
+            ->with('success', 'Brand created successfully.');
     }
 
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Brand $brand)
     {
-        return view('products.show', compact('product'));
+        return view('brands.show', compact('brand'));
     }
 
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Brand $brand)
     {
-        return view('products.edit', compact('product'));
+        return view('brands.edit', compact('brand'));
     }
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Brand $brand)
     {
         request()->validate([
             'name' => 'required',
             'detail' => 'required',
         ]);
 
+        $brand->update($request->all());
 
-        $product->update($request->all());
-
-
-        return redirect()->route('products.index')
-            ->with('success', 'Product updated successfully');
+        return redirect()->route('brands.index')
+            ->with('success', 'Brand updated successfully');
     }
 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Brand $brand)
     {
-        $product->delete();
-
-
-        return redirect()->route('products.index')
-            ->with('success', 'Product deleted successfully');
+        $brand->delete();
+        return redirect()->route('brands.index')
+            ->with('success', 'Brand deleted successfully');
     }
 }

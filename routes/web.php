@@ -20,7 +20,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
-    Route::resource('products', 'ProductController');
+    Route::resource('brands', 'BrandController');
 
     Route::resource('/locations', 'LocationController')->except([
         'create', 'show'

@@ -133,7 +133,7 @@ class AddStandartColumnTable extends Migration
                 ->onDelete('cascade');
         });
 
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('tr_brands', function (Blueprint $table) {
             $table->boolean('is_active')->nullable()->after('name');
 
             $table->timestamps();
@@ -242,7 +242,7 @@ class AddStandartColumnTable extends Migration
             $table->dropColumn('updated_by');
         });
 
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('tr_products', function (Blueprint $table) {
             $table->dropForeign(['created_by']);
             $table->dropColumn('created_by');
             $table->dropForeign(['updated_by']);

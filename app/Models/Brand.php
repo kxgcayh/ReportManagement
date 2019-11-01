@@ -21,13 +21,13 @@ class Brand extends Model
      * Variable yang mendaftarkan atribut yang bisa di isi.
      * @var array
      */
-    protected $fillable = ['name', 'production_id'];
+    protected $fillable = ['name', 'production_id', 'detail'];
 
     /**
      * Variable yang menentukan nama relasi table.
      */
     public function production()
     {
-        return $this->belongsTo('App\Models\Production', 'production_id');
+        return $this->belongsTo(Production::class, 'production_id');
     }
 }

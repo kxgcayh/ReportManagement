@@ -27,4 +27,9 @@ class Location extends Model
     {
         return $this->hasMany(Departement::class, 'location_id');
     }
+
+    public function production()
+    {
+        return $this->hasMany(Production::class, 'location_id');
+    }
 }
