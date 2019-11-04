@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    <title>Management Departement</title>
+    <title>Management Brands</title>
 @endsection
 
 @section('content')
@@ -18,21 +18,23 @@
 
         @include('inc.ifalert')
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Name</th>
                         <th>Details</th>
+                        <th>Tempat Produksi</th>
                         <th width="280px">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-	                @foreach ($brands as $brand)
+	                @forelse ($brands as $brand)
 	                <tr>
 	                    <td>{{ ++$i }}</td>
 	                    <td>{{ $brand->name }}</td>
 	                    <td>{{ $brand->detail }}</td>
+                        <td>{{ $brand->production['name'] }}</td>
 	                    <td>
                             <form action="{{ route('brands.destroy', [$brand->id_brand]) }}" method="POST">
                                 @csrf
@@ -47,7 +49,11 @@
                             </form>
 	                    </td>
 	                </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="5" class="text-center">Tidak ada data Brand</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

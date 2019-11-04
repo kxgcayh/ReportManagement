@@ -6,10 +6,10 @@
     {{-- Bread crumb and right sidebar toggle --}}
     <div class="row page-titles">
         <div class="col-md-5 col-2 align-self-center">
-            <h4 class="text-themecolor">Dashboard</h4>
+            <h4 class="text-themecolor">Edit Role</h4>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Role Management</a></li>
+                <li class="breadcrumb-item active">Home</li>
             </ol>
         </div>
     </div>
@@ -18,7 +18,6 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Dashboard</h4>
                     <div class="card-text">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -39,19 +38,16 @@
                                     {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-xs-12 col-sm-12 col-md-12">                                
                                 <div class="form-group">
-                                    <strong>Permission:</strong>
-                                    <br/>
-                                    <div class="form-group">
-                                        @foreach($permission as $value)
-                                            {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
-                                            <label>
-                                                {{ $value->name }}
-                                            </label>
-                                            <br/>
-                                        @endforeach
-                                    </div>
+                                    @foreach($permission as $value)
+                                        {{-- {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }} --}}
+                                        <input type="checkbox" class="name" value="{{ $value->id }}" name="permission[]" id="square-checkbox-{{ $value->id }}" data-checkbox="icheckbox_square-green">
+                                        <label for="square-checkbox-{{ $value->id }}">
+                                            {{ $value->name }}
+                                        </label>
+                                        <br/>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

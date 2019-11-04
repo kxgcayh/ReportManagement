@@ -21,6 +21,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
     Route::resource('brands', 'BrandController');
+    Route::resource('productions', 'ProductionController')->except([
+        'show'
+    ]);
 
     Route::resource('/locations', 'LocationController')->except([
         'create', 'show'

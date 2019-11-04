@@ -10,7 +10,7 @@
     {{-- Favicon icon --}}
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('materialpro') }}/assets/images/favicon.png">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Material Pro Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    @yield('title')
     {{-- Bootstrap Core CSS --}}
     <link href="{{ asset('materialpro') }}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     {{-- chartist CSS --}}
@@ -22,8 +22,6 @@
     <link href="{{ asset('materialpro') }}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     {{-- Custom CSS --}}
     <link href="{{ asset('materialpro') }}/css/style.css" rel="stylesheet">
-    {{-- Scripts --}}
-    <script src="{{ asset('js/app.js') }}"></script>
     {{-- You can change the theme colors from here --}}
     <link href="{{ asset('materialpro') }}/css/colors/megna.css" id="theme" rel="stylesheet">
 </head>

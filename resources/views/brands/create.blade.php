@@ -7,10 +7,10 @@
 @section('content')
 
 @breadcumb(['header' => 'Create Brand'])
-@breadc_item(['active' => 'Create'])
-@breadc_active Management Brand @endbreadc_active
-@breadc_active Data Master @endbreadc_active
-@endbreadc_item
+    @breadc_item(['active' => 'Create'])
+        @breadc_active Management Brand @endbreadc_active
+        @breadc_active Data Master @endbreadc_active
+    @endbreadc_item
 @endbreadcumb
 
 <div class="row">
@@ -30,8 +30,13 @@
                 <p class="text-danger">{{ $errors->first('name') }}</p>
             </div>
             <div class="form-group">
+                <label for="id_detail">Description</label>
+                <input id="id_detail" type="text" name="detail" required class="form-control {{ $errors->has('detail') ? 'is-invalid':'' }}">
+                <p class="text-danger">{{ $errors->first('detail') }}</p>
+            </div>
+            <div class="form-group">
                 <label for="production_id">Produksi</label>
-                <select name="production_id" id="production_id" required class="form-control {{ $errors->has('production_id') ? 'is-invalid':'' }}">
+                <select name="production_id" id="production_id" class="form-control {{ $errors->has('production_id') ? 'is-invalid':'' }}">
                     <option value=""></option>
                     @foreach ($productions as $prods)
                     <option value="{{ $prods->id_production }}">{{ ucfirst($prods->name) }}</option>
@@ -69,7 +74,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" class="text-center">Tidak ada data Lokasi</td>
+                        <td colspan="3" class="text-center">Tidak ada data Lokasi</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -79,3 +84,4 @@
     </div>
 </div>
 @endsection
+

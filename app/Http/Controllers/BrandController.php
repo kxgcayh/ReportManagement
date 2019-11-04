@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Production;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class BrandController extends Controller
 {
@@ -15,17 +16,17 @@ class BrandController extends Controller
      */
     function __construct()
     {
-        // $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
-        // $this->middleware('permission:product-create', ['only' => ['create','store']]);
-        // $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
-        // $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:product-create', ['only' => ['create','store']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $brands = Brand::latest()->paginate(5);
         return view('brands.index', compact('brands'))
@@ -84,9 +85,11 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Brand $brands)
-    {
-        return view('brands.edit', compact('brand'));
+    public function edit($id_brand)
+    {        
+        $brands = Brand::findOrFail($id_brand);
+        $productions = Production::orderBy('name', 'ASC')->get();
+        return view('brands.edit', compact('brands','productions'));
     }
 
     /**
@@ -96,13 +99,15 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Brand $brands)
+    public function update(Request $request, $id_brand)
     {
         request()->validate([
             'name' => 'required',
+            'production_id' => 'required|exists:tr_productions,id_production',
             'detail' => 'required',
         ]);
 
+        $brands = Brand::findOrFail($id_brand);
         $brands->update($request->all());
 
         return redirect()->route('brands.index')
@@ -116,10 +121,12 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Brand $brands)
+    public function destroy($id_brand)
     {
+        $brands = Brand::findOrFail($id_brand);
         $brands->delete();
-        return redirect()->route('brands.index')
-            ->with('success', 'Brand deleted successfully');
+        return redirect()->back()->with([
+            'success' => '<strong>' . $brands->name . '</strong> Telah Dihapus!'
+        ]);        
     }
 }

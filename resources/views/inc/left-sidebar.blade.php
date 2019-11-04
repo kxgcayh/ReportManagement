@@ -14,6 +14,7 @@
                         <li><a href="{{ route('users.index')  }}">User</a></li>
                         <li><a href="{{ route('roles.index') }}">Role</a></li>
                         <li><a href="{{ route('brands.index') }}">Brand</a></li>
+                        <li><a href="{{ route('productions.index') }}">Production</a></li>
                         <li><a href="{{ route('departements.index') }}">Departement</a></li>
                         <li><a href="{{ route('locations.index') }}">Location</a></li>
                     </ul>

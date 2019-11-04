@@ -21,7 +21,11 @@ class Brand extends Model
      * Variable yang mendaftarkan atribut yang bisa di isi.
      * @var array
      */
-    protected $fillable = ['name', 'production_id', 'detail'];
+    protected $fillable = [
+        'name',
+        'production_id', 
+        'detail'
+    ];
 
     /**
      * Variable yang menentukan nama relasi table.
