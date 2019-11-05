@@ -88,12 +88,8 @@ class CreateRpmanTable extends Migration
             $table->bigIncrements('id_brand');
             $table->string('name');
             $table->text('detail');
-            $table->unsignedBigInteger('production_id')->nullable();
-            $table->foreign('production_id')
-                ->references('id_production')->on('tr_productions')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
+
         Schema::create('tr_reports', function (Blueprint $table) {
             $table->bigIncrements('id_report');
             $table->string('name');

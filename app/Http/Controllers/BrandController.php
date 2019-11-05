@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
-use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 
 class BrandController extends Controller
 {
@@ -16,10 +16,10 @@ class BrandController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:product-create', ['only' => ['create','store']]);
-        $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:brand-list|brand-create|brand-edit|brand-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:brand-create', ['only' => ['create','store']]);
+        $this->middleware('permission:brand-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:brand-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -41,9 +41,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        $productions = Production::orderBy('name', 'ASC')->get();
-        $brands = Brand::with('production')->orderBy('created_at', 'DESC')->paginate(10);
-        return view('brands.create', compact('productions', 'brands'));
+        $brands = Brand::orderBy('created_at', 'DESC')->paginate(10);
+        return view('brands.create', compact('brands'));
     }
 
 
@@ -56,7 +55,6 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            // 'production_id' => 'required',
             'name' => 'required',
             'detail' => 'required',
         ]);
@@ -88,8 +86,7 @@ class BrandController extends Controller
     public function edit($id_brand)
     {        
         $brands = Brand::findOrFail($id_brand);
-        $productions = Production::orderBy('name', 'ASC')->get();
-        return view('brands.edit', compact('brands','productions'));
+        return view('brands.edit', compact('brands'));
     }
 
     /**
@@ -102,8 +99,7 @@ class BrandController extends Controller
     public function update(Request $request, $id_brand)
     {
         request()->validate([
-            'name' => 'required',
-            'production_id' => 'required|exists:tr_productions,id_production',
+            'name' => 'required',            
             'detail' => 'required',
         ]);
 

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('title')
-    <title>Management Departement</title>
+    <title>Management Productions</title>
 @endsection
 
 @section('content')
 
-@breadcumb(['header' => 'Edit Departement'])
+@breadcumb(['header' => 'Edit Productions'])
     @breadc_item(['active' => 'Edit'])
-        @breadc_active Management Departement @endbreadc_active
+        @breadc_active Management Productions @endbreadc_active
         @breadc_active Data Master @endbreadc_active
     @endbreadc_item
 @endbreadcumb
@@ -22,14 +22,14 @@
 
         @include('inc.ifalert')
 
-        <form role="form" action="{{ route('departements.update', $departements->id_departement) }}" method="POST" class="form-material">
+        <form role="form" action="{{ route('productions.update', $productions->id_production) }}" method="POST" class="form-material">
             @method('PUT')
             @csrf
             <input type="hidden" name="_method" value="PUT">
             <div class="form-group">
-                <label for="id_departement">Nama Departement</label>
-                <input id="id_departement" type="text" name="name" required
-                    value="{{ $departements->name }}"
+                <label for="id_production">Nama Production</label>
+                <input id="id_production" type="text" name="name" required
+                    value="{{ $productions->name }}"
                     class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}">
                 <p class="text-danger">{{ $errors->first('name') }}</p>
             </div>
@@ -39,7 +39,7 @@
                 class="form-control {{ $errors->has('location_id') ? 'is-invalid':'' }}">
                     <option value=""></option>
                     @foreach ($locations as $locs)
-                        <option value="{{ $locs->id_location }}" {{ $locs->id_location == $departements->location_id ? 'selected':'' }}>
+                        <option value="{{ $locs->id_location }}" {{ $locs->id_location == $productions->location_id ? 'selected':'' }}>
                             {{ ucfirst($locs->name) }}
                         </option>
                     @endforeach
@@ -50,7 +50,7 @@
                 <button class="btn waves-effect waves-light btn-primary">
                     <i class="fa fa-send"></i> Save
                 </button>
-                <a href="{{ route('departements.index') }}" class="btn waves-effect waves-light btn-primary">Back </a>
+                <a href="{{ route('productions.index') }}" class="btn waves-effect waves-light btn-primary">Back </a>
             </div>
         </form>
     @endcardbox

@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class UsersTableSeeder extends Seeder
+class CreateManagerUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,12 +15,12 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'departement_id' => 2,
-            'name' => 'Galih',
-            'email' => 'galih@user.com',
+            'departement_id' => 3,
+            'name' => 'Benny',
+            'email' => 'benny@manager.com',
             'password' => bcrypt('password')
         ]);
-        $role = Role::create(['name' => 'User']);        
+        $role = Role::create(['name' => 'Manager']);
         $user->assignRole([$role->id]);
     }
 }

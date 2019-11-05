@@ -6,7 +6,6 @@ use App\Models\Location;
 use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 class ProductionController extends Controller
@@ -87,12 +86,9 @@ class ProductionController extends Controller
         ]);
 
         $productions = Production::findOrFail($id_production);
-        $productions->update([
-            'name' => $request->name,
-            'location_id' => $request->location_id
-        ]);
+        $productions->update($request->all());
 
-        return redirect(route('productions.index'))
+        return redirect()->route('productions.index')
             ->with(['success' => '<strong>' . $productions->name . '</strong> Diperbarui']);
     }
 

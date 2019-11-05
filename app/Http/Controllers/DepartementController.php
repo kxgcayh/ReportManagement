@@ -78,7 +78,7 @@ class DepartementController extends Controller
             'location_id' => $request->location_id
         ]);
         // Redirect dengan Pesan Sukses
-        return redirect(route('departement.index'))
+        return redirect(route('departements.index'))
             ->with(['success' => '<strong>' . $departements->name . '</strong> Diperbarui']);
     }
 }

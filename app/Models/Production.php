@@ -28,10 +28,5 @@ class Production extends Model
     public function location()
     {
         return $this->belongsTo(Location::class, 'location_id');
-    }
-
-    public function brand()
-    {
-        return $this->hasMany(Brand::class, 'brand_id');
-    }
+    }    
 }

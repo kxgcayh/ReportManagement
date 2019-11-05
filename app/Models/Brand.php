@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Production;
 use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
@@ -23,15 +22,6 @@ class Brand extends Model
      */
     protected $fillable = [
         'name',
-        'production_id', 
         'detail'
     ];
-
-    /**
-     * Variable yang menentukan nama relasi table.
-     */
-    public function production()
-    {
-        return $this->belongsTo(Production::class, 'production_id');
-    }
 }

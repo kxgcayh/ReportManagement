@@ -33,17 +33,7 @@
                 <label for="id_detail">Description</label>
                 <input id="id_detail" type="text" name="detail" required class="form-control {{ $errors->has('detail') ? 'is-invalid':'' }}">
                 <p class="text-danger">{{ $errors->first('detail') }}</p>
-            </div>
-            <div class="form-group">
-                <label for="production_id">Produksi</label>
-                <select name="production_id" id="production_id" class="form-control {{ $errors->has('production_id') ? 'is-invalid':'' }}">
-                    <option value=""></option>
-                    @foreach ($productions as $prods)
-                    <option value="{{ $prods->id_production }}">{{ ucfirst($prods->name) }}</option>
-                    @endforeach
-                </select>
-                <p class="text-danger">{{ $errors->first('production_id') }}</p>
-            </div>
+            </div>            
             <div class="form-group col-md-6">
                 <button class="btn waves-effect waves-light btn-primary">
                     <i class="fa fa-send"></i> Save
@@ -54,14 +44,13 @@
         @endcardbox
     </div>
     <div class="col-md-6">
-        @cardbox(['header' => 'Production List'])
+        @cardbox(['header' => 'Brand List'])
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Nama Brand</th>
-                        <th>Tempat Produksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,11 +59,10 @@
                     <tr>
                         <td>{{ $no++ }}</td>
                         <td>{{ $value->name }}</td>
-                        <td>{{ $value->production['name'] }}</td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="3" class="text-center">Tidak ada data Lokasi</td>
+                        <td colspan="2" class="text-center">Tidak ada data Lokasi</td>
                     </tr>
                     @endforelse
                 </tbody>
