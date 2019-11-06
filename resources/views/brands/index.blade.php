@@ -24,7 +24,6 @@
                         <th>No</th>
                         <th>Name</th>
                         <th>Details</th>
-                        <th>Tempat Produksi</th>
                         <th width="280px">Action</th>
                     </tr>
                 </thead>
@@ -34,7 +33,6 @@
 	                    <td>{{ ++$i }}</td>
 	                    <td>{{ $brand->name }}</td>
 	                    <td>{{ $brand->detail }}</td>
-                        <td>{{ $brand->production['name'] }}</td>
 	                    <td>
                             <form action="{{ route('brands.destroy', [$brand->id_brand]) }}" method="POST">
                                 @csrf
