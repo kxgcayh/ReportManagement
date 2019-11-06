@@ -28,6 +28,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/locations', 'LocationController')->except([
         'create', 'show'
     ]);
+
+    Route::resource('/types', 'TypeController')->except([
+        'create', 'show'
+    ]);
+
     Route::resource('/departements', 'DepartementController')->except([
         'show'
     ]);
