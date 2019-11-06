@@ -17,6 +17,8 @@
                         <li><a href="{{ route('productions.index') }}">Production</a></li>
                         <li><a href="{{ route('departements.index') }}">Departement</a></li>
                         <li><a href="{{ route('locations.index') }}">Location</a></li>
+                        <li><a href="{{ route('types.index') }}">Type</a></li>
+                        <li><a href="{{ route('categories.index') }}">Category</a></li>
                     </ul>
                 </li>
             </ul>

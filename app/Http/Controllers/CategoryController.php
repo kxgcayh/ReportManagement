@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Type;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class TypeController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types = Type::orderBy('created_at', 'DESC')->paginate(10);
-        return view('types.index', compact('types'));
+        $categories = Category::orderBy('created_at', 'DESC')->paginate(10);
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -29,11 +29,9 @@ class TypeController extends Controller
         request()->validate([
             'name' => 'required|string|max:50',
         ]);
-
-        $types = Type::create($request->all());
-
+        $categories = Category::create($request->all());
         return redirect()->back()
-            ->with(['success' => 'Type: ' . $types->name . ' Succesfully Created']);
+            ->with(['success' => 'Category: ' . $categories->name . ' Succesfully Created']);
     }
 
     /**
@@ -42,10 +40,10 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id_type)
+    public function edit($id_category)
     {
-        $types = Type::findOrFail($id_type);
-        return view('types.edit', compact('types'));
+        $categories = Type::findOrFail($id_category);
+        return view('categories.edit', compact('categories'));
     }
 
     /**
@@ -55,18 +53,18 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_type)
+    public function update(Request $request, $id_category)
     {
         request()->validate([
             'name' => 'required|string|max:50',
         ]);
 
         try {
-            $types = Type::findOrFail($id_type);
-            $types->update([
+            $categories = Category::findOrFail($id_category);
+            $categories->update([
                 'name' => $request->name,
             ]);
-            return redirect(route('types.index'))->with(['success' => 'Type: ' . $types->name . ' Changed']);
+            return redirect(route('categories.index'))->with(['success' => 'Type: ' . $categories->name . ' Changed']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
@@ -78,10 +76,10 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_type)
+    public function destroy($id)
     {
-        $types = Type::findOrFail($id_type);
-        $types->delete();
-        return redirect()->back()->with(['warning' => 'Type: ' . $types->name . ' Succesfully Deleted']);
+        $categories = Type::findOrFail($id_type);
+        $categories->delete();
+        return redirect()->back()->with(['warning' => 'Category: ' . $categories->name . ' Succesfully Deleted']);
     }
 }
