@@ -19,6 +19,7 @@
                         <li><a href="{{ route('locations.index') }}">Location</a></li>
                         <li><a href="{{ route('types.index') }}">Type</a></li>
                         <li><a href="{{ route('categories.index') }}">Category</a></li>
+                        {{-- <li><a href="{{ route('') }}">Project</a></li> --}}
                     </ul>
                 </li>
             </ul>
