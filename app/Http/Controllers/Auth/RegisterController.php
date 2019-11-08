@@ -1,15 +1,15 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
-
 use App\User;
 use App\Models\Departement;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -23,9 +23,7 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
-
     /**
      * Show the application registration form.
      *
@@ -37,14 +35,29 @@ class RegisterController extends Controller
         $departements = Departement::orderBy('name', 'ASC')->get();
         return view('auth.register', compact('departements', 'roles'));
     }
-
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        event(new Registered(
+            $user = $this->create($request->all()),
+            $user->assignRole($request->input('roles'))
+        ));
+        $this->guard()->login($user);
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
     protected $redirectTo = '/';
-
     /**
      * Create a new controller instance.
      *
@@ -54,7 +67,6 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -68,9 +80,9 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:tr_users'],
             'departement_id' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'roles' => ['required','exists:ms_roles,id'],
         ]);
     }
-
     /**
      * Create a new user instance after a valid registration.
      *
