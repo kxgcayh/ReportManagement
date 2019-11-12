@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+                        <a class="btn btn-primary pull-right" href="{{ route('users.index') }}"> Back</a>
                     </h4>
                     <div class="card-text">
                         @if (session('status'))

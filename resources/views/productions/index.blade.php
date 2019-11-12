@@ -30,10 +30,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $no = 1; @endphp
                     @forelse ($productions as $prods)
                         <tr>
-                            <td>{{ $no++ }}</td>
+                            <td>{{ ++$no }}</td>
                             <td>{{ $prods->name }}</td>
                             <td>{{ $prods->location['name'] }}</td>
                             <td>{{ $prods->location['description'] }}</td>
@@ -59,5 +58,6 @@
                 </tbody>
             </table>
         </div>
+        {{ $productions->links() }}
     @endcard
 @endsection

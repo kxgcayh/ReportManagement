@@ -12,10 +12,11 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $types = Type::orderBy('created_at', 'DESC')->paginate(10);
-        return view('types.index', compact('types'));
+        $types = Type::orderBy('created_at', 'DESC')->paginate(5);
+        return view('types.index', compact('types'))
+            ->with('no', ($request->input('page', 1) - 1) * 5);
     }
 
     /**

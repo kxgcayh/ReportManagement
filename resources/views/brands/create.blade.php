@@ -33,7 +33,7 @@
                 <label for="id_detail">Description</label>
                 <input id="id_detail" type="text" name="detail" required class="form-control {{ $errors->has('detail') ? 'is-invalid':'' }}">
                 <p class="text-danger">{{ $errors->first('detail') }}</p>
-            </div>            
+            </div>
             <div class="form-group col-md-6">
                 <button class="btn waves-effect waves-light btn-primary">
                     <i class="fa fa-send"></i> Save
@@ -54,10 +54,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $no = 1; @endphp
                     @forelse ($brands as $value)
                     <tr>
-                        <td>{{ $no++ }}</td>
+                        <td>{{ ++$no }}</td>
                         <td>{{ $value->name }}</td>
                     </tr>
                     @empty
@@ -68,6 +67,7 @@
                 </tbody>
             </table>
         </div>
+        {{ $brands->links() }}
         @endcardbox
     </div>
 </div>

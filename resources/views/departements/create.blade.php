@@ -16,12 +16,8 @@
 <div class="row">
     <div class="col-md-6">
         @cardbox
-        @slot('header')
-            <a class="btn btn-primary" href="{{ route('departements.index') }}"> Back</a>
-        @endslot
-
+        @slot('header')@endslot
         @include('inc.ifalert')
-
         <form role="form" action="{{ route('departements.store') }}" method="post" class="form-material">
             @csrf
             <div class="form-group">
@@ -60,10 +56,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $no = 1; @endphp
                     @forelse ($departements as $depts)
                     <tr>
-                        <td>{{ $no++ }}</td>
+                        <td>{{ ++$no }}</td>
                         <td>{{ $depts->name }}</td>
                         <td>{{ $depts->location['name'] }}</td>
                     </tr>
@@ -75,6 +70,7 @@
                 </tbody>
             </table>
         </div>
+        {{ $departements->links() }}
         @endcardbox
     </div>
 </div>

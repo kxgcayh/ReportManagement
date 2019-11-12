@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $locations = Location::orderBy('created_at', 'DESC')->paginate(10);
-        return view('locations.index', compact('locations'));
+        $locations = Location::orderBy('created_at', 'DESC')->paginate(5);
+        return view('locations.index', compact('locations'))
+            ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
     public function store(Request $request)

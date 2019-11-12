@@ -30,7 +30,7 @@ class BrandController extends Controller
     {
         $brands = Brand::latest()->paginate(5);
         return view('brands.index', compact('brands'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
 
@@ -39,10 +39,11 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $brands = Brand::orderBy('created_at', 'DESC')->paginate(10);
-        return view('brands.create', compact('brands'));
+        $brands = Brand::orderBy('created_at', 'DESC')->paginate(5);
+        return view('brands.create', compact('brands'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 
@@ -84,7 +85,7 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id_brand)
-    {        
+    {
         $brands = Brand::findOrFail($id_brand);
         return view('brands.edit', compact('brands'));
     }
@@ -99,7 +100,7 @@ class BrandController extends Controller
     public function update(Request $request, $id_brand)
     {
         request()->validate([
-            'name' => 'required',            
+            'name' => 'required',
             'detail' => 'required',
         ]);
 
@@ -123,6 +124,6 @@ class BrandController extends Controller
         $brands->delete();
         return redirect()->back()->with([
             'success' => '<strong>' . $brands->name . '</strong> Telah Dihapus!'
-        ]);        
+        ]);
     }
 }

@@ -23,10 +23,11 @@ class ProductionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productions = Production::with('location')->orderBy('created_at', 'DESC')->paginate(10);
-        return view('productions.index', compact('productions'));
+        $productions = Production::with('location')->orderBy('created_at', 'DESC')->paginate(5);
+        return view('productions.index', compact('productions'))
+            ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -34,11 +35,12 @@ class ProductionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $productions = Production::with('location')->orderBy('created_at', 'DESC')->paginate(10);
+        $productions = Production::with('location')->orderBy('created_at', 'DESC')->paginate(5);
         $locations = Location::orderBy('name', 'ASC')->get();
-        return view('productions.create', compact('productions', 'locations'));
+        return view('productions.create', compact('productions', 'locations'))
+            ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
     /**

@@ -30,10 +30,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $no = 1; @endphp
                     @forelse ($departements as $depts)
                         <tr>
-                            <td>{{ $no++ }}</td>
+                            <td>{{ ++$no }}</td>
                             <td>{{ $depts->name }}</td>
                             <td>{{ $depts->location['name'] }}</td>
                             <td>{{ $depts->location['description'] }}</td>
@@ -58,6 +57,7 @@
                     @endforelse
                 </tbody>
             </table>
+            {{ $departements->links() }}
         </div>
     @endcard
 @endsection

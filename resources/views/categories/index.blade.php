@@ -39,10 +39,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php $no = 1; @endphp
                         @forelse ($categories as $cats)
                         <tr>
-                            <td>{{ $no++ }}</td>
+                            <td>{{ ++$no }}</td>
                             <td>{{ $cats->name }}</td>
                             <td>
                                 <form action="{{ route('categories.destroy', $cats->id_category) }}" method="POST">
@@ -65,6 +64,7 @@
                     </tbody>
                 </table>
             </div>
+            {{ $categories->links() }}
         @endcardbox
     </div>
 </div>

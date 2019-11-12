@@ -39,10 +39,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php $no = 1; @endphp
                         @forelse ($types as $type)
                         <tr>
-                            <td>{{ $no++ }}</td>
+                            <td>{{ ++$no }}</td>
                             <td>{{ $type->name }}</td>
                             <td>
                                 <form action="{{ route('types.destroy', $type->id_type) }}" method="POST">
@@ -65,6 +64,7 @@
                     </tbody>
                 </table>
             </div>
+            {{ $types->links() }}
         @endcardbox
     </div>
 </div>

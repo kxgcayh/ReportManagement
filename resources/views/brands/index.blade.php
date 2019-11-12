@@ -30,7 +30,7 @@
                 <tbody>
 	                @forelse ($brands as $brand)
 	                <tr>
-	                    <td>{{ ++$i }}</td>
+	                    <td>{{ ++$no }}</td>
 	                    <td>{{ $brand->name }}</td>
 	                    <td>{{ $brand->detail }}</td>
 	                    <td>
@@ -56,5 +56,5 @@
             </table>
         </div>
     @endcard
-{!! $brands->render() !!}
+{{ $brands->links() }}
 @endsection

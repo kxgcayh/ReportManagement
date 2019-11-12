@@ -86,7 +86,6 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::with('departement')->find($id);
-        // $departements = Departement::find($id_departement);
         return view('users.show', compact('user'));
     }
 
