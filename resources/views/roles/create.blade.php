@@ -31,16 +31,27 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Permission:</strong><br/>
-                <div class="form-group">
-                    @foreach($permission as $value)
-                    <input type="checkbox" class="check" value="{{ $value->id }}" name="permission[]" id="square-checkbox-{{ $value->id }}" data-checkbox="icheckbox_square-green">
+            <strong>Permission:</strong><br/>
+            <div class="form-group">
+                @foreach($permission as $value)
+                <input type="checkbox" class="check" value="{{ $value->id }}" name="permission[]" id="square-checkbox-{{ $value->id }}" data-checkbox="icheckbox_square-green">
                         <label for="square-checkbox-{{ $value->id }}">
                             {{$value->name}}
                         </label><br/>
                     @endforeach
                 </div>
             </div>
+            {{-- <div class="form-group"> --}}
+                {{-- <label for="permission">Permission --}}
+                    {{-- <span class="btn btn-info btn-xs select-all">Select All</span> --}}
+                    {{-- <span class="btn btn-info btn-xs deselect-all">Deselect All</span> --}}
+                {{-- </label> --}}
+                {{-- <select name="permission[]" id="permission" class="selectpicker" multiple data-style="form-control btn-secondary" required> --}}
+                    {{-- @foreach($permission as $id => $permission) --}}
+                        {{-- <option value="{{ $id }}" {{ (in_array($id, old('permission', [])) || isset($role) && $role->permission->contains($id)) ? 'selected' : '' }}>{{ $permission }}</option> --}}
+                    {{-- @endforeach --}}
+                {{-- </select> --}}
+            {{-- </div> --}}
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>

@@ -75,6 +75,7 @@
     {{-- Bootstrap tether Core JavaScript --}}
     <script src="{{ asset('materialpro') }}/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="{{ asset('materialpro') }}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset('materialpro') }}/assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
     {{-- slimscrollbar scrollbar JavaScript --}}
     <script src="{{ asset('materialpro') }}/js/jquery.slimscroll.js"></script>
     {{-- ave Effects --}}

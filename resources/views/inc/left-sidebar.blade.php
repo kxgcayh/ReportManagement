@@ -6,7 +6,7 @@
             <ul id="sidebarnav">
                 <li class="nav-small-cap">ReportMan</li>
                 <li>
-                    <a class="has-arrow" href="{{route('home') }}" aria-expanded="false"><i class="mdi mdi-gauge"></i>Home</a>
+                    <a class="has-arrow" href="{{route('home') }}" aria-expanded="false"><i class="mdi mdi-home-variant"></i>Home</a>
                 </li>
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-bullseye"></i><span class="hide-menu">Management</span></a>

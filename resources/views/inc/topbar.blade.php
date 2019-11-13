@@ -16,9 +16,9 @@
                 {{-- Logo text  --}}
                 <span>
                 {{-- dark Logo text  --}}
-                 <img src="{{ asset('materialpro') }}/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                <img src="{{ asset('materialpro') }}/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                 {{-- Light Logo text  --}}
-                 <img src="{{ asset('materialpro') }}/assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                <img src="{{ asset('materialpro') }}/assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
         </div>
         {{-- End Logo  --}}
         <div class="navbar-collapse">
@@ -100,12 +100,18 @@
                 {{-- End Messages  --}}
                 {{-- Profile  --}}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('materialpro') }}/assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+                    <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="mdi mdi-account-circle">
+                            {{-- <label>{{ Auth::user()->name }}</label> --}}
+                        </i>
+                    </a>
                     <div class="dropdown-menu dropdown-menu-right scale-up">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="{{ asset('materialpro') }}/assets/images/users/1.jpg" alt="user"></div>
+                                    <div class="u-img">
+                                        {{-- <img src="{{ asset('materialpro') }}/assets/images/users/1.jpg" alt="user"> --}}
+                                    </div>
                                     <div class="u-text">
                                         <h4>{{ Auth::user()->name }}</h4>
                                         <p class="text-muted">{{ Auth::user()->email }}</p>

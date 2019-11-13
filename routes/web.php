@@ -20,12 +20,10 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
-    Route::resource('projects', 'ProjectController');
+    Route::resource('projects', 'ProjectController')->except(['create']);
     Route::resource('brands', 'BrandController');
 
-    Route::resource('productions', 'ProductionController')->except([
-        'show'
-    ]);
+    Route::resource('productions', 'ProductionController')->except(['show']);
 
     Route::resource('/locations', 'LocationController')->except([
         'create', 'show'

@@ -15,12 +15,7 @@
 <div class="row">
     <div class="col-md-6">
         @cardbox(['header' => 'Edit Location'])
-            @if (session('error'))
-                @alert(['type' => 'danger'])
-                    {!! session('error') !!}
-                @endalert
-            @endif​
-
+            @include('inc.ifalert')
             <form role="form" action="{{ route('locations.update', $locations->id_location) }}" method="POST" class="floating-labels">
                 @csrf
                 <input type="hidden" name="_method" value="PUT">
