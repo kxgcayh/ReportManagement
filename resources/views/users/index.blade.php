@@ -1,16 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.app', (['title' => 'Management Users']))
 
 @section('content')
 {{-- Bread crumb and right sidebar toggle --}}
-@breadcumb(['header' => 'User List'])
-    @breadc_item(['active' => 'Users'])
-        @breadc_active Users @endbreadc_active
-    @endbreadc_item
-@endbreadcumb
+@breadcrumb(['header' => 'User List', 'active' => 'View'])
+    @bcItem(['value' => 'User'])
+    @bcItem(['value' => 'Data Master'])
+@endbreadcrumb
 {{-- End Bread crumb and right sidebar toggle --}}
 @component('components.card')
     @slot('header')
-        <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+        <a class="btn btn-primary" href="{{ route('users.create') }}"> Create New User</a>
     @endslot
 
     @include('inc.ifalert')
@@ -42,11 +41,15 @@
                         @endif
                     </td>
                     <td>
-                        <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-                        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-                        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                        {!! Form::close() !!}
+                        <a class="btn btn-info" href="{{ route('users.show',$user->id) }}"><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-warning" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-edit"></i></a>
+                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline">
+                        @csrf
+                        <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn btn-danger" name="delete">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

@@ -1,27 +1,14 @@
-@extends('layouts.app')
-
-@section('title')
-    <title>Management Departement</title>
-@endsection
+@extends('layouts.app', (['title' => 'Management Departement']))
 
 @section('content')
-
-@breadcumb(['header' => 'Edit Departement'])
-    @breadc_item(['active' => 'Edit'])
-        @breadc_active Management Departement @endbreadc_active
-        @breadc_active Data Master @endbreadc_active
-    @endbreadc_item
-@endbreadcumb
+@breadcrumb(['header' => 'Edit Departement', 'active' => 'Edit'])
+    @bcItem(['value' => 'Departements'])
+    @bcItem(['value' => 'Data Master'])
+@endbreadcrumb
 
 <div class="row">
-    <div class="col-md-6">
-    @cardbox
-        @slot('header')
-
-        @endslot
-
-        @include('inc.ifalert')
-
+    @cardbox(['header' => ''])
+        @ifAlert
         <form role="form" action="{{ route('departements.update', $departements->id_departement) }}" method="POST" class="form-material">
             @method('PUT')
             @csrf
@@ -46,14 +33,13 @@
                 </select>
                 <p class="text-danger">{{ $errors->first('location_id') }}</p>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group pull-right">
                 <button class="btn waves-effect waves-light btn-primary">
                     <i class="fa fa-send"></i> Save
                 </button>
-                <a href="{{ route('departements.index') }}" class="btn waves-effect waves-light btn-primary">Back </a>
+                <a href="{{ route('departements.index') }}" class="btn waves-effect waves-light btn-info">Back </a>
             </div>
         </form>
     @endcardbox
-    </div>
 </div>
 @endsection

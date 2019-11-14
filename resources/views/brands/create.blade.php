@@ -1,75 +1,57 @@
-@extends('layouts.app')
-
-@section('title')
-<title>Management Brand</title>
-@endsection
+@extends('layouts.app', (['title' => 'Management Brand']))
 
 @section('content')
 
-@breadcumb(['header' => 'Create Brand'])
-    @breadc_item(['active' => 'Create'])
-        @breadc_active Management Brand @endbreadc_active
-        @breadc_active Data Master @endbreadc_active
-    @endbreadc_item
-@endbreadcumb
+@breadcrumb(['header' => 'Create Brand', 'active' => 'Create'])
+    @bcItem(['value' => 'Data Master'])
+@endbreadcrumb
 
 <div class="row">
-    <div class="col-md-6">
-        @cardbox
-        @slot('header')
-            <a class="btn btn-primary" href="{{ route('brands.index') }}"> Back</a>
-        @endslot
-
-        @include('inc.ifalert')
-
-        <form role="form" action="{{ route('brands.store') }}" method="post" class="form-material">
-            @csrf
-            <div class="form-group">
-                <label for="id_brand">Nama Brand</label>
-                <input id="id_brand" type="text" name="name" required class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}">
-                <p class="text-danger">{{ $errors->first('name') }}</p>
-            </div>
-            <div class="form-group">
-                <label for="id_detail">Description</label>
-                <input id="id_detail" type="text" name="detail" required class="form-control {{ $errors->has('detail') ? 'is-invalid':'' }}">
-                <p class="text-danger">{{ $errors->first('detail') }}</p>
-            </div>
-            <div class="form-group col-md-6">
-                <button class="btn waves-effect waves-light btn-primary">
-                    <i class="fa fa-send"></i> Save
-                </button>
-                <a href="{{ route('brands.index') }}" class="btn waves-effect waves-light btn-primary">Back </a>
-            </div>
-        </form>
-        @endcardbox
-    </div>
-    <div class="col-md-6">
-        @cardbox(['header' => 'Brand List'])
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nama Brand</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($brands as $value)
-                    <tr>
-                        <td>{{ ++$no }}</td>
-                        <td>{{ $value->name }}</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="2" class="text-center">Tidak ada data Lokasi</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+    @cardbox(['header' => ''])
+    @ifAlert
+    <form role="form" action="{{ route('brands.store') }}" method="post" class="form-material">
+        @csrf
+        <div class="form-group">
+            <input id="id_brand" type="text" name="name" required class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Brand Name">
+            <p class="text-danger">{{ $errors->first('name') }}</p>
         </div>
-        {{ $brands->links() }}
-        @endcardbox
+        <div class="form-group">
+            <input id="id_detail" type="text" name="detail" required class="form-control {{ $errors->has('detail') ? 'is-invalid':'' }}" placeholder="Description">
+            <p class="text-danger">{{ $errors->first('detail') }}</p>
+        </div>
+        <div class="form-group pull-right">
+            <button class="btn waves-effect waves-light btn-primary">
+                <i class="fa fa-send"></i> Save
+            </button>
+            <a href="{{ route('brands.index') }}" class="btn waves-effect waves-light btn-info">Back </a>
+        </div>
+    </form>
+    @endcardbox
+    @cardbox(['header' => 'Brand List'])
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nama Brand</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($brands as $value)
+                <tr>
+                    <td>{{ ++$no }}</td>
+                    <td>{{ $value->name }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="2" class="text-center">Tidak ada data Lokasi</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
+    {{ $brands->links() }}
+    @endcardbox
 </div>
 @endsection
 

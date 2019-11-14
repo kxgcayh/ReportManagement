@@ -1,18 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.app', (['title' => 'Management User']))
 
 @section('content')
 
 <div class="container-fluid">
     {{-- Bread crumb and right sidebar toggle --}}
-    <div class="row page-titles">
-        <div class="col-md-5 col-2 align-self-center">
-            <h4 class="text-themecolor">Create Users</h4>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Create</a></li>
-                <li class="breadcrumb-item active">Users</li>
-            </ol>
-        </div>
-    </div>
+    @breadcrumb(['header' => 'Create User', 'active' => 'Create'])
+        @bcItem(['value' => 'User'])
+        @bcItem(['value' => 'Data Master'])
+    @endbreadcrumb
     {{-- End Bread crumb and right sidebar toggle --}}
     <div class="row">
         <div class="col-12">

@@ -1,32 +1,18 @@
-@extends('layouts.app')
+@extends('layouts.app', (['title' => 'Management Role']))
 @section('content')
 {{-- Bread crumb and right sidebar toggle --}}
-@breadcumb(['header' => 'Create Roles'])
-    @breadc_item(['active' => 'Role Management'])
-        @breadc_active Data Master @endbreadc_active
-    @endbreadc_item
-@endbreadcumb
+@breadcrumb(['header' => 'Create Role', 'active' => 'Create'])
+    @bcItem(['value' => 'Roles'])
+    @bcItem(['value' => 'Data Master'])
+@endbreadcrumb
 {{-- End Bread crumb and right sidebar toggle --}}
-@card
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-            </ul>
-        </div>
-    @endif
-    @slot('header')
-        <a class="btn btn-success" href="{{ route('roles.index') }}"> Back</a>
-    @endslot
+@card(['header' => ''])
+    @ifAlert
     {!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong></strong>
-                {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+            <div class="form-group form-material">
+                <input placeholder="Name" class="form-control" name="name" type="text">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -35,26 +21,16 @@
             <div class="form-group">
                 @foreach($permission as $value)
                 <input type="checkbox" class="check" value="{{ $value->id }}" name="permission[]" id="square-checkbox-{{ $value->id }}" data-checkbox="icheckbox_square-green">
-                        <label for="square-checkbox-{{ $value->id }}">
-                            {{$value->name}}
-                        </label><br/>
-                    @endforeach
+                    <label for="square-checkbox-{{ $value->id }}">
+                        {{$value->name}}
+                    </label><br/>
+                @endforeach
                 </div>
             </div>
-            {{-- <div class="form-group"> --}}
-                {{-- <label for="permission">Permission --}}
-                    {{-- <span class="btn btn-info btn-xs select-all">Select All</span> --}}
-                    {{-- <span class="btn btn-info btn-xs deselect-all">Deselect All</span> --}}
-                {{-- </label> --}}
-                {{-- <select name="permission[]" id="permission" class="selectpicker" multiple data-style="form-control btn-secondary" required> --}}
-                    {{-- @foreach($permission as $id => $permission) --}}
-                        {{-- <option value="{{ $id }}" {{ (in_array($id, old('permission', [])) || isset($role) && $role->permission->contains($id)) ? 'selected' : '' }}>{{ $permission }}</option> --}}
-                    {{-- @endforeach --}}
-                {{-- </select> --}}
-            {{-- </div> --}}
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-success" href="{{ route('roles.index') }}"> Back</a>
         </div>
     </div>
     {!! Form::close() !!}

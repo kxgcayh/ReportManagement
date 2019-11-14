@@ -1,3 +1,3 @@
 <li class="breadcrumb-item">
-    {{ $slot }}
+    {{ $value ?? 'text' }}
 </li>

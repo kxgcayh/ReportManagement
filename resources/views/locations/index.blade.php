@@ -1,17 +1,10 @@
-@extends('layouts.app')
-
-@section('title')
-    <title>Management Location</title>
-@endsection
-
+@extends('layouts.app', (['title' => 'Management Locations']))
 @section('content')
-@breadcumb(['header' => 'Management Location'])
-    @breadc_item(['active' => 'Location'])
-        @breadc_active Data Master @endbreadc_active
-    @endbreadc_item
-@endbreadcumb
-
-@card(['header' => 'Create Location'])
+@breadcrumb(['header' => 'Management Locations', 'active' => 'Locations'])
+    @bcItem(['value' => 'Data Master'])
+@endbreadcrumb
+@ifAlert
+@cwidget(['widget' => 'create', 'title' => 'Create Locations'])
     <form role="form" action="{{ route('locations.store') }}" method="POST" class="form-material">
         @csrf
         <div class="form-group">
@@ -22,9 +15,8 @@
         </div>
         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Submit</button>
     </form>
-@endcard
+@endcwidget
 @card(['header' => 'List Location'])
-    @include('inc.ifalert')
     <div class="table-responsive">
         <table class="table">
             <thead>

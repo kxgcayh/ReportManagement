@@ -1,16 +1,12 @@
-@extends('layouts.app')
-
-@section('title')
-    <title>Management Departement</title>
-@endsection
+@extends('layouts.app', (['title' => 'Management Departement']))
 
 @section('content')
 
-@breadcumb(['header' => 'Management Departement'])
-    @breadc_item(['active' => 'Departement'])
-        @breadc_active Data Master @endbreadc_active
-    @endbreadc_item
-@endbreadcumb
+@breadcrumb(['header' => 'Departement List', 'active' => 'View'])
+    @bcItem(['value' => 'Departements'])
+    @bcItem(['value' => 'Data Master'])
+@endbreadcrumb
+
     @card
         @slot('header')
             <a href="{{ route('departements.create') }}" class="btn waves-effect waves-light btn-primary"><i class="fa fa-edit"></i> Create </a>
@@ -41,10 +37,10 @@
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE">
                                     <a href="{{ route('departements.edit', $depts->id_departement) }}"
-                                        class="btn btn-warning btn-sm">
+                                        class="btn btn-warning">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <button class="btn btn-danger btn-sm">
+                                    <button class="btn btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>

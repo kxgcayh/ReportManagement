@@ -10,7 +10,8 @@
     {{-- Favicon icon --}}
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('materialpro') }}/assets/images/favicon.png">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @yield('title')
+    {{-- Usage: @extends('layouts.app', (['title' => 'Management Brand'])) --}}
+    <title>{{ $title }}</title>
     {{-- Bootstrap Core CSS --}}
     <link href="{{ asset('materialpro') }}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     {{-- chartist CSS --}}
@@ -27,21 +28,21 @@
 </head>
 <body class="fix-header fix-sidebar card-no-border logo-center">
     {{-- Preloader - style you can find in spinners.css --}}
-        @include('inc.preloader')
+        @preloader
     {{-- Main wrapper - style you can find in pages.scss --}}
     <div id="main-wrapper">
         @guest
         {{-- Topbar header - style you can find in pages.scss --}}
-            @include('inc.topbar')
+            @topbar
         {{-- End Topbar header --}}
         @else
 
         {{-- Topbar header - style you can find in pages.scss --}}
-            @include('inc.topbar')
+            @topbar
         {{-- End Topbar header --}}
 
         {{-- Left Sidebar - style you can find in sidebar.scss  --}}
-            @include('inc.left-sidebar')
+            @lsidebar
         {{-- End Left Sidebar - style you can find in sidebar.scss  --}}
 
         {{-- Page wrapper  --}}
@@ -55,13 +56,13 @@
                 {{-- End Page Content --}}
 
                 {{-- Right sidebar --}}
-                    @include('inc.right-sidebar')
+                    @rsidebar
                 {{-- End Right sidebar --}}
             </div>
             {{-- End Container fluid  --}}
 
             {{-- footer --}}
-                @include('inc.footer')
+                @footer
             {{-- End footer --}}
 
         @endguest

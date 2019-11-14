@@ -1,21 +1,16 @@
-@extends('layouts.app')
-
-
+@extends('layouts.app', (['title' => 'Management Role']))
 @section('content')
 {{-- Bread crumb and right sidebar toggle --}}
-@breadcumb(['header' => 'Role Management'])
-    @breadc_item(['active' => 'Roles'])
-        @breadc_active Data Master @endbreadc_active
-    @endbreadc_item
-@endbreadcumb
+@breadcrumb(['header' => 'Role List', 'active' => 'View'])
+    @bcItem(['value' => 'Roles'])
+    @bcItem(['value' => 'Data Master'])
+@endbreadcrumb
 {{-- End Bread crumb and right sidebar toggle --}}
 @card
     @slot('header')
-        <a class="btn btn-success pull-right" href="{{ route('roles.create') }}"> Create New Role</a>
+        <a class="btn btn-primary" href="{{ route('roles.create') }}"> Create New Role</a>
     @endslot
-
-    @include('inc.message-succes')
-
+    @ifAlert
     <div class="table-responsive">
         <table class="table">
             <tr>
@@ -30,7 +25,7 @@
                 <td>
                     <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}"><i class="fa fa-eye"></i></a>
                     @can('role-edit')
-                    <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-warning" href="{{ route('roles.edit',$role->id) }}"><i class="fa fa-edit"></i></a>
                     @endcan
                     @can('role-delete')
                     <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline">

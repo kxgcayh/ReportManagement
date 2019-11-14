@@ -43,7 +43,7 @@ class BrandController extends Controller
     {
         $brands = Brand::orderBy('created_at', 'DESC')->paginate(5);
         return view('brands.create', compact('brands'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
 

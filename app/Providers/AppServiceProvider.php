@@ -24,11 +24,27 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::component('components.card', 'card');
-        Blade::component('components.alert', 'alert');
-        Blade::component('components.cardbox', 'cardbox');
-        Blade::component('components.breadcumb', 'breadcumb');
-        Blade::component('components.breadc_item', 'breadc_item');
-        Blade::component('components.breadc_active', 'breadc_active');
+        // Component
+            // Card
+            Blade::component('components.card', 'card');
+            Blade::component('components.cardbox', 'cardbox');
+            Blade::component('components.card-widget', 'cwidget');
+            // Bread Crumb
+            Blade::component('components.breadcrumb', 'breadcrumb');
+            // Other
+            Blade::component('components.alert', 'alert');
+        //.End Component
+
+        // Includes
+            // Templates
+            Blade::include('inc.templates.topbar', 'topbar');
+            Blade::include('inc.templates.footer', 'footer');
+            Blade::include('inc.templates.preloader', 'preloader');
+            Blade::include('inc.templates.left-sidebar', 'lsidebar');
+            Blade::include('inc.templates.right-sidebar', 'rsidebar');
+            // Others
+            Blade::include('inc.ifalert', 'ifAlert');
+            Blade::include('inc.breadcrumb-item', 'bcItem');
+        //.End Includes
     }
 }
