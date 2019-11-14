@@ -9,11 +9,11 @@
         @bcItem(['value' => 'Data Master'])
     @endbreadcrumb
     {{-- End Bread crumb and right sidebar toggle --}}
+    @ifAlert
     @card
     @slot('header')
         <a class="btn btn-primary pull-right" href="{{ route('users.index') }}"> Back</a>
     @endslot
-        @ifAlert
         <table>
             <tr>
                 <td>
