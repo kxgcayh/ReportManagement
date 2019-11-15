@@ -1,16 +1,11 @@
 
-@extends('layouts.app')
-
-@section('title')
-    <title>HOMIE</title>
-@endsection
-
+@extends('layouts.app', (['title' => 'Home']))
 @section('content')
 
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="col-md-5 col-2 align-self-center">
-            <h4 class="text-themecolor">Dashboard</h4>            
+            <h4 class="text-themecolor">Dashboard</h4>
         </div>
     </div>
     <div class="row">
