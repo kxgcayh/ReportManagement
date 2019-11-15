@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
+
     /**
      * Display a listing of the resource.
      *
