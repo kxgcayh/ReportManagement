@@ -1,27 +1,23 @@
 # Report Management
 
-> Dalam bahasa Inggris yaitu Report Management yang artinya Pengelolaan Laporan <br> atau bisa disingkat menjadi RP Man
+> Dalam bahasa Inggris yaitu Report Management yang artinya Pengelolaan Laporan
+> atau bisa disingkat menjadi RP Man
 
 ---
 
-## Table of Contents (Optional)
+## Table of Contents
 
-> If your `README` has a lot of info, section headers might be nice.
-
-- [Installation](#installation)
-- [Features](#features)
-- [Contributing](#contributing)
-- [Team](#team)
-- [FAQ](#faq)
-- [Support](#support)
-- [License](#license)
+- [Report Management](#report-management)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+    - [Clone](#clone)
+    - [Setup](#setup)
+  - [Usage](#usage)
+  - [License](#license)
 
 ---
 
 ## Installation
-
-- All the `code` required to get started
-- Images of what it should look like
 
 ### Clone
 
@@ -29,28 +25,33 @@
 
 ### Setup
 
-- If you want more syntax highlighting, format your code like this:
-
-> Then config with
-
 ```shell
 $ cd ReportManagement
 $ composer install
+$ npm install && npm run dev
 $ cp .env.example .env
+$ php artisan key:generate
 ```
-> Then config your `.env` file, after that do:
+
+- Create a Database
+> Then config your `.env` file.
 
 ```shell
 $ php artisan migrate:fresh --seed
 ```
 ---
 
-## Usage (Optional)
+## Usage
+
+```shell
+$ php artisan serve
+```
+
 > Login with
 
-| Email | Password |
-|:-----:|:--------:|
-| kautsar@admin.com  | password  |
+|       Email       | Password |
+| :---------------: | :------: |
+| kautsar@admin.com | password |
 
 ---
 
@@ -59,4 +60,3 @@ $ php artisan migrate:fresh --seed
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
-- Copyright 2015 © <a href="http://fvcproductions.com" target="_blank">FVCproductions</a>.

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
+
     public function index(Request $request)
     {
         $locations = Location::orderBy('created_at', 'DESC')->paginate(5);

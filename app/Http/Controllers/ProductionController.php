@@ -12,9 +12,10 @@ class ProductionController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:production-list|production-create|production-edit|production-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:production-create', ['only' => ['create','store']]);
-        $this->middleware('permission:production-edit', ['only' => ['edit','update']]);
+        $this->middleware('verified');
+        $this->middleware('permission:production-list|production-create|production-edit|production-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:production-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:production-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:production-delete', ['only' => ['destroy']]);
     }
 

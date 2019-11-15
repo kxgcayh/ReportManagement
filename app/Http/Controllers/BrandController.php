@@ -16,9 +16,10 @@ class BrandController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:brand-list|brand-create|brand-edit|brand-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:brand-create', ['only' => ['create','store']]);
-        $this->middleware('permission:brand-edit', ['only' => ['edit','update']]);
+        $this->middleware('verified');
+        $this->middleware('permission:brand-list|brand-create|brand-edit|brand-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:brand-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:brand-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:brand-delete', ['only' => ['destroy']]);
     }
     /**
