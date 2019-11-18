@@ -15,12 +15,17 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'departement_id' => 2,
             'name' => 'Galih',
+            'is_active' => 1,
             'email' => 'galih@user.com',
-            'password' => bcrypt('password')
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+            'departement_id' => 2,
         ]);
-        $role = Role::create(['name' => 'User']);        
+        $role = Role::create(['name' => 'User']);
+        $permissions = Permission::pluck('id', 'id')
+            ->except('2', '4', '6', '8', '10', '14', '16', '18'); // Only Manage Projects
+        $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
     }
 }

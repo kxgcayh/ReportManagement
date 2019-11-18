@@ -15,12 +15,16 @@ class CreateManagerUserSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'departement_id' => 3,
             'name' => 'Benny',
+            'is_active' => 1,
             'email' => 'benny@manager.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
+            'departement_id' => 3,
         ]);
         $role = Role::create(['name' => 'Manager']);
+        $permissions = Permission::pluck('id', 'id')
+            ->except('14'); // Except Manage Roles
+        $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
     }
 }
