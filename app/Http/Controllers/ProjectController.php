@@ -11,6 +11,8 @@ class ProjectController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
+        $this->middleware('permission:View Locations|Manage Locations', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Manage Locations', ['only' => ['store', 'edit', 'update', 'destroy']]);
     }
 
     /**

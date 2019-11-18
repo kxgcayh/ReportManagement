@@ -6,12 +6,15 @@
 @endbreadcrumb
 
 <div class="row">
-    @cardbox(['header' => ''])
-        <form role="form" action="{{ route('categories.store') }}" method="POST" class="floating-labels">
+    @cardbox(['header' => 'Create Category'])
+        <form role="form" action="{{ route('categories.store') }}" method="POST" class="form-material">
             @csrf
             <div class="form-group">
-                <label for="id_category">Category</label>
-                <input name="name" type="text" id="id_category" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}">
+                @can('Manage Categories')
+                    <input name="name" type="text" id="id_category" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Category Name">
+                @else
+                    <input name="name" type="text" id="id_category" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Category Name" disabled>
+                @endcan
             </div>
             <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Submit</button>
         </form>

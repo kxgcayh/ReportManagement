@@ -13,15 +13,20 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-          'role-list', 'role-create', 'role-edit', 'role-delete', 
-          'brand-list', 'brand-create', 'brand-edit', 'brand-delete',
-          'user-list', 'user-create', 'user-edit', 'user-delete',
-          'production-list', 'production-create', 'production-edit', 'production-delete',
+            'View Brands', 'Manage Brands',
+            'View Categories', 'Manage Categories',
+            'View Departements', 'Manage Departements',
+            'View Locations', 'Manage Locations',
+            'View Productions', 'Manage Productions',
+            'View Projects', 'Manage Projects',
+            'View Roles', 'Manage Roles',
+            'View Types', 'Manage Types',
+            'View Users', 'Manage Users',
         ];
 
 
         foreach ($permissions as $permission) {
-             Permission::create(['name' => $permission]);
+            Permission::create(['name' => $permission]);
         }
     }
 }

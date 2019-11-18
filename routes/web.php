@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
     Route::resource('projects', 'ProjectController')->except(['create']);
-    Route::resource('brands', 'BrandController');
+    Route::resource('brands', 'BrandController')->except(['show']);
 
     Route::resource('productions', 'ProductionController')->except(['show']);
 

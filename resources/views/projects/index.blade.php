@@ -7,12 +7,21 @@
 @cwidget(['widget' => 'create', 'title' => 'Create Project'])
     <form role="form" action="{{ route('projects.store') }}" method="POST" class="form-material">
         @csrf
+        @can('Manage Projects')
+            <div class="form-group">
+                <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Project Name">
+            </div>
+            <div class="form-group">
+                <textarea name="description" id="description" cols="5" rows="5" class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}" placeholder="Description"></textarea>
+            </div>
+        @else
         <div class="form-group">
-            <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Project Name">
-        </div>
-        <div class="form-group">
-            <textarea name="description" id="description" cols="5" rows="5" class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}" placeholder="Description"></textarea>
-        </div>
+                <input name="name" type="text" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Project Name" disabled>
+            </div>
+            <div class="form-group">
+                <textarea name="description" id="description" cols="5" rows="5" class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}" placeholder="Description" disabled></textarea>
+            </div>
+        @endcan
         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right"><i class="mdi mdi-loupe"></i> Submit</button>
     </form>
 @endcwidget

@@ -6,17 +6,14 @@ use App\Models\Location;
 use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Permission;
 
 class ProductionController extends Controller
 {
     function __construct()
     {
         $this->middleware('verified');
-        $this->middleware('permission:production-list|production-create|production-edit|production-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:production-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:production-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:production-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:View Productions|Manage Productions', ['only' => 'index']);
+        $this->middleware('permission:Manage Productions', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
 
     /**

@@ -10,6 +10,8 @@ class TypeController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
+        $this->middleware('permission:View Types|Manage Types', ['only' => 'index']);
+        $this->middleware('permission:Manage Types', ['only' => ['store', 'edit', 'update', 'destroy']]);
     }
     /**
      * Display a listing of the resource.

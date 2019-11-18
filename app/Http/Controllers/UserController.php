@@ -23,10 +23,8 @@ class UserController extends Controller
     function __construct()
     {
         $this->middleware('verified');
-        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:user-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:View Users|Manage Users', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Manage Users', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
 
 

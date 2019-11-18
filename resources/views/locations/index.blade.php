@@ -7,12 +7,21 @@
 @cwidget(['widget' => 'create', 'title' => 'Create Locations'])
     <form role="form" action="{{ route('locations.store') }}" method="POST" class="form-material">
         @csrf
+        @can('Manage Locations')
+            <div class="form-group">
+                <input name="name" type="text" id="id_location" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Location Name">
+            </div>
+            <div class="form-group">
+                <textarea name="description" id="description" cols="5" rows="5" class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}" placeholder="Location Detail"></textarea>
+            </div>
+        @else
         <div class="form-group">
-            <input name="name" type="text" id="id_location" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Location Name">
-        </div>
-        <div class="form-group">
-            <textarea name="description" id="description" cols="5" rows="5" class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}" placeholder="Location Detail"></textarea>
-        </div>
+                <input name="name" type="text" id="id_location" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Location Name" disabled>
+            </div>
+            <div class="form-group">
+                <textarea name="description" id="description" cols="5" rows="5" class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}" placeholder="Location Detail" disabled></textarea>
+            </div>
+        @endcan
         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Submit</button>
     </form>
 @endcwidget

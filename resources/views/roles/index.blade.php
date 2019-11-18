@@ -23,11 +23,9 @@
                 <td>{{ ++$no }}</td>
                 <td>{{ $role->name }}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}"><i class="fa fa-eye"></i></a>
-                    @can('role-edit')
+                    <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}" disabled><i class="fa fa-eye"></i></a>
+                    @can('Manage Roles')
                     <a class="btn btn-warning" href="{{ route('roles.edit',$role->id) }}"><i class="fa fa-edit"></i></a>
-                    @endcan
-                    @can('role-delete')
                     <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">

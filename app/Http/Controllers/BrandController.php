@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Permission;
 
 class BrandController extends Controller
 {
@@ -17,10 +16,8 @@ class BrandController extends Controller
     function __construct()
     {
         $this->middleware('verified');
-        $this->middleware('permission:brand-list|brand-create|brand-edit|brand-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:brand-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:brand-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:brand-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:View Brands|Manage Brands', ['only' => 'index']);
+        $this->middleware('permission:Manage Brands', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -65,19 +62,6 @@ class BrandController extends Controller
         return redirect()->route('brands.index')
             ->with('success', 'Brand created successfully.');
     }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Brand $brands)
-    {
-        return view('brands.show', compact('brand'));
-    }
-
 
     /**
      * Show the form for editing the specified resource.

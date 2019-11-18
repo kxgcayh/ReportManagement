@@ -10,6 +10,8 @@ class LocationController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
+        $this->middleware('permission:View Locations|Manage Locations', ['only' => 'index']);
+        $this->middleware('permission:Manage Locations', ['only' => ['store', 'edit', 'update', 'destroy']]);
     }
 
     public function index(Request $request)

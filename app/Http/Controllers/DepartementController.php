@@ -11,6 +11,8 @@ class DepartementController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
+        $this->middleware('permission:View Departements|Manage Departements', ['only' => 'index']);
+        $this->middleware('permission:Manage Departements', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
 
     public function index(Request $request)
@@ -30,7 +32,7 @@ class DepartementController extends Controller
         $departements = Departement::with('location')->orderBy('created_at', 'DESC')->paginate(5);
         // Menampilkan Nama Departemen dan Lokasi pada List Departemen
         return view('departements.create', compact('departements', 'locations'))
-        ->with('no', ($request->input('page', 1) - 1) * 5);
+            ->with('no', ($request->input('page', 1) - 1) * 5);
     }
 
     public function store(Request $request)

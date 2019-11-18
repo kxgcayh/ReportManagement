@@ -1,6 +1,6 @@
 @extends('layouts.app', (['title' => 'Management Type']))
 @section('content')
-@breadcrumb(['header' => 'List Type', 'active' => 'View'])
+@breadcrumb(['header' => 'Management Type', 'active' => 'View'])
     @bcItem(['value' => 'Types'])
     @bcItem(['value' => 'Data Master'])
 @endbreadcrumb
@@ -10,7 +10,11 @@
         <form role="form" action="{{ route('types.store') }}" method="POST" class="form-material">
             @csrf
             <div class="form-group">
-                <input name="name" type="text" id="id_type" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Type">
+                @can('Manage Types')
+                    <input name="name" type="text" id="id_type" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Type Name">
+                @else
+                    <input name="name" type="text" id="id_type" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Type Name" disabled>
+                @endcan
             </div>
             <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Submit</button>
         </form>
