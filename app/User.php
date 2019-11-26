@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Category;
 use App\Models\Departement;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -46,5 +47,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function departement()
     {
         return $this->belongsTo(Departement::class, 'departement_id');
+    }
+
+    public function category()
+    {
+        return $this->hasMany(Category::class, ['created_by', 'updated_by']);
     }
 }
