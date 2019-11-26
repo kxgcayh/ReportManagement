@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TypeController extends Controller
 {
@@ -37,7 +38,11 @@ class TypeController extends Controller
             'name' => 'required|string|max:50',
         ]);
 
-        $types = Type::create($request->all());
+        $types = new Type;
+        $types->name = $request->name;
+        $types->is_active = 0;
+        $types->created_by = Auth::id();
+        $types->save();
 
         return redirect()->back()
             ->with(['success' => 'Type: ' . $types->name . ' Succesfully Created']);
@@ -70,9 +75,9 @@ class TypeController extends Controller
 
         try {
             $types = Type::findOrFail($id_type);
-            $types->update([
-                'name' => $request->name,
-            ]);
+            $types->name = $request->name;
+            $types->updated_by = Auth::id();
+            $types->save();
             return redirect(route('types.index'))->with(['success' => 'Type: ' . $types->name . ' Changed']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);

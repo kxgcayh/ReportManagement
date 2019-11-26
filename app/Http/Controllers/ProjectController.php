@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -40,7 +41,13 @@ class ProjectController extends Controller
             // description
         ]);
 
-        Project::create($request->all());
+        $projects = new Project;
+        $projects->name = $request->name;
+        $projects->is_active = 0;
+        $projects->description = $request->description ;
+        $projects->created_by = Auth::id();
+        $projects->save();
+
         return redirect()->route('projects.index')
             ->with('success', 'Project created successfully.');
     }
@@ -84,7 +91,10 @@ class ProjectController extends Controller
         ]);
 
         $projects = Project::findOrFail($id_project);
-        $projects->update($request->all());
+        $projects->name = $request->name;
+        $projects->description = $request->description ;
+        $projects->updated_by = Auth::id();
+        $projects->save();
 
         return redirect()->route('projects.index')
             ->with('success', 'Project updated successfully');

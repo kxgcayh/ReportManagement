@@ -54,8 +54,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function departement()
     {
-        return $this->hasMany(Departement::class, ['created_by', 'updated_by']);
         return $this->belongsTo(Departement::class, 'departement_id');
+        return $this->hasMany(Departement::class, ['created_by', 'updated_by']);
     }
 
     public function category()

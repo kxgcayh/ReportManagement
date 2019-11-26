@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class BrandController extends Controller
 {
@@ -54,11 +55,17 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:50',
             'detail' => 'required',
         ]);
 
-        Brand::create($request->all());
+        $brands = new Brand;
+        $brands->name = $request->name;
+        $brands->detail = $request->detail;
+        $brands->is_active = 0;
+        $brands->created_by = Auth::id();
+        $brands->save();
+
         return redirect()->route('brands.index')
             ->with('success', 'Brand created successfully.');
     }
@@ -85,12 +92,15 @@ class BrandController extends Controller
     public function update(Request $request, $id_brand)
     {
         request()->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:50',
             'detail' => 'required',
         ]);
 
         $brands = Brand::findOrFail($id_brand);
-        $brands->update($request->all());
+        $brands->name = $request->name;
+        $brands->detail = $request->detail;
+        $brands->updated_by = Auth::id();
+        $brands->save();
 
         return redirect()->route('brands.index')
             ->with('success', 'Brand updated successfully');

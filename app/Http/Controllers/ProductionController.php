@@ -6,6 +6,7 @@ use App\Models\Location;
 use App\Models\Production;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProductionController extends Controller
 {
@@ -53,7 +54,12 @@ class ProductionController extends Controller
             'name' => 'required|string|max:100',
             'location_id' => 'required|exists:ms_locations,id_location',
         ]);
-        $productions = Production::create($request->all());
+        $productions = new Production;
+        $productions->name = $request->name;
+        $productions->is_active = 0;
+        $productions->location_id = $request->location_id;
+        $productions->created_by = Auth::id();
+        $productions->save();
         return redirect(route('productions.index'))
             ->with(['success' => '<strong>' . $productions->name . '</strong> Ditambahkan']);
     }
@@ -86,7 +92,10 @@ class ProductionController extends Controller
         ]);
 
         $productions = Production::findOrFail($id_production);
-        $productions->update($request->all());
+        $productions->name = $request->name;
+        $productions->location_id = $request->location_id;
+        $productions->updated_by = Auth::id();
+        $productions->save();
 
         return redirect()->route('productions.index')
             ->with(['success' => '<strong>' . $productions->name . '</strong> Diperbarui']);

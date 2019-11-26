@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Location;
 use App\Models\Departement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DepartementController extends Controller
 {
@@ -43,7 +44,12 @@ class DepartementController extends Controller
             'location_id' => 'required|exists:ms_locations,id_location',
         ]);
         // Input Data
-        $departements = Departement::create($request->all());
+        $departements = new Departement;
+        $departements->name = $request->name;
+        $departements->is_active = 0;
+        $departements->location_id = $request->location_id;
+        $departements->created_by = Auth::id();
+        $departements->save();
         // Redirect dengan Pesan Sukses
         return redirect(route('departements.index'))
             ->with(['success' => '<strong>' . $departements->name . '</strong> Ditambahkan']);
@@ -76,6 +82,10 @@ class DepartementController extends Controller
         ]);
         // Query Select based on $id_departement
         $departements = Departement::findOrFail($id_departement);
+        $departements->name = $request->name;
+        $departements->location_id = $request->location_id;
+        $departements->updated_by = Auth::id();
+        $departements->save();
         // Update Data
         $departements->update([
             'name' => $request->name,

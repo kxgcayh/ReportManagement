@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LocationController extends Controller
 {
@@ -29,7 +30,12 @@ class LocationController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $locations = Location::create($request->all());
+        $locations = new Location;
+        $locations->name = $request->name;
+        $locations->is_active = 0;
+        $locations->description = $request->description;
+        $locations->created_by = Auth::id();
+        $locations->save();
 
         return redirect()->back()
             ->with(['success' => 'Location: ' . $locations->name . ' Succesfully Created']);
@@ -59,11 +65,10 @@ class LocationController extends Controller
         try {
             //select data berdasarkan id
             $locations = Location::findOrFail($id_location);
-            //update data
-            $locations->update([
-                'name' => $request->name,
-                'description' => $request->description
-            ]);
+            $locations->name = $request->name;
+            $locations->description = $request->description;
+            $locations->updated_by = Auth::id();
+            $locations->save();
 
             return redirect(route('locations.index'))->with(['success' => 'Location: ' . $locations->name . ' Changed']);
         } catch (\Exception $e) {
