@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
@@ -24,4 +25,9 @@ class Project extends Model
         'name',
         'description',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, ['created_by', 'updated_by']);
+    }
 }

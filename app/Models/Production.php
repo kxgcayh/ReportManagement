@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\User;
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Model;
 
 class Production extends Model
@@ -28,5 +30,10 @@ class Production extends Model
     public function location()
     {
         return $this->belongsTo(Location::class, 'location_id');
-    }    
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, ['created_by', 'updated_by']);
+    }
 }

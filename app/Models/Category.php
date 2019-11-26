@@ -23,10 +23,6 @@ class Category extends Model
      */
     protected $fillable = ['name'];
 
-    /**
-     * Relasi oneToMany
-     * @var array
-     */
     public function user()
     {
         return $this->belongsTo(User::class, ['created_by', 'updated_by']);

@@ -35,5 +35,6 @@ class Departement extends Model
     public function user()
     {
         return $this->hasMany(User::class, 'departement_id');
+        return $this->belongsTo(User::class, ['created_by', 'updated_by']);
     }
 }

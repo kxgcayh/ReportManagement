@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Type extends Model
@@ -21,4 +22,9 @@ class Type extends Model
      * @var array
      */
     protected $fillable = ['name'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, ['created_by', 'updated_by']);
+    }
 }

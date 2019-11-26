@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Report;
+use App\User;
 
 class ReportRevision extends Model
 {
@@ -28,6 +29,11 @@ class ReportRevision extends Model
      */
     public function report()
     {
-        return $this->belongsTo('App\Models\Report', 'report_id');
+        return $this->belongsTo(Report::class, 'report_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, ['created_by', 'updated_by']);
     }
 }

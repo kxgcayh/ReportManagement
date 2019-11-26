@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Project;
@@ -31,19 +32,24 @@ class Report extends Model
      */
     public function brand()
     {
-        return $this->belongsTo('App\Models\Brand', 'brand_id');
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
     public function category()
     {
-        return $this->belongsTo('App\Models\Category', 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
     public function project()
     {
-        return $this->belongsTo('App\Models\Project', 'project_id');
+        return $this->belongsTo(Project::class, 'project_id');
     }
     public function type()
     {
-        return $this->belongsTo('App\Models\Type', 'type_id');
+        return $this->belongsTo(Type::class, 'type_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, ['created_by', 'updated_by']);
     }
 
 }
