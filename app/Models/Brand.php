@@ -28,6 +28,6 @@ class Brand extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, ['created_by', 'updated_by']);
+        return $this->belongsToMany(User::class, 'created_by', 'updated_by');
     }
 }

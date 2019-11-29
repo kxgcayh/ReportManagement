@@ -29,11 +29,11 @@ class Production extends Model
      */
     public function location()
     {
-        return $this->belongsTo(Location::class, 'location_id');
+        return $this->belongsToMany(Location::class, 'location_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, ['created_by', 'updated_by']);
+        return $this->belongsToMany(User::class, 'created_by', 'updated_by');
     }
 }

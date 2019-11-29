@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -44,7 +45,7 @@ class ProjectController extends Controller
         $projects = new Project;
         $projects->name = $request->name;
         $projects->is_active = 0;
-        $projects->description = $request->description ;
+        $projects->description = $request->description;
         $projects->created_by = Auth::id();
         $projects->save();
 
@@ -58,10 +59,11 @@ class ProjectController extends Controller
      * @param  \App\Models\Project
      * @return \Illuminate\Http\Response
      */
-    public function show($id_project)
+    public function show($id_project, User $id)
     {
-        $projects = Project::find($id_project);
-        return view('projects.show', compact('projects'));
+        $users = User::findOrFail($id);
+        $projects = Project::with('user')->find($id_project)->get();
+        return view('projects.show', compact('projects', 'users'));
     }
 
     /**
@@ -92,7 +94,7 @@ class ProjectController extends Controller
 
         $projects = Project::findOrFail($id_project);
         $projects->name = $request->name;
-        $projects->description = $request->description ;
+        $projects->description = $request->description;
         $projects->updated_by = Auth::id();
         $projects->save();
 
