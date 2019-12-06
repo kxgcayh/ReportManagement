@@ -24,16 +24,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Component
             // Card
             Blade::component('components.card', 'card');
             Blade::component('components.cardbox', 'cardbox');
             Blade::component('components.card-widget', 'cwidget');
             // Bread Crumb
             Blade::component('components.breadcrumb', 'breadcrumb');
-            // Other
+            // Other            
             Blade::component('components.alert', 'alert');
-        //.End Component
+            // Modal
+            Blade::component('components.modal', 'modal');
+            Blade::component('components.modal', 'modal');
+            Blade::include('inc.modalBtn', 'modalBtn');
 
         // Includes
             // Templates

@@ -4,10 +4,13 @@ namespace App\Models;
 
 use App\User;
 use App\Models\Location;
+use Awobaz\Compoships\Compoships;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Departement extends Model
 {
+    use Compoships;
     /**
      * Variable yang dapat menentukan primaryKey.
      */
@@ -32,9 +35,8 @@ class Departement extends Model
         return $this->belongsTo(Location::class, 'location_id');
     }
 
-    public function user()
+    public function users()
     {
-        return $this->hasMany(User::class, 'departement_id');
-        return $this->belongsToMany(User::class, 'created_by', 'updated_by');
+        return $this->hasMany(User::class, 'id', 'departement_id');
     }
 }

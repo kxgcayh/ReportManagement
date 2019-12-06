@@ -9,7 +9,8 @@
 
 @card
 @slot('header')
-<a href="{{ route('departements.create') }}" class="btn waves-effect waves-light btn-primary"><i class="fa fa-edit"></i> Create </a>
+<a href="{{ route('departements.create') }}" class="btn waves-effect waves-light btn-primary"><i class="fa fa-edit"></i>
+    Create </a>
 @endslot
 
 @include('inc.ifalert')

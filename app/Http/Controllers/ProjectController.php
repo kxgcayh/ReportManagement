@@ -59,11 +59,10 @@ class ProjectController extends Controller
      * @param  \App\Models\Project
      * @return \Illuminate\Http\Response
      */
-    public function show($id_project, User $id)
+    public function show($id_project)
     {
-        $users = User::findOrFail($id);
-        $projects = Project::with('user')->find($id_project)->get();
-        return view('projects.show', compact('projects', 'users'));
+        $projects = Project::findOrFail($id_project);
+        return view('projects.show', compact('projects'));
     }
 
     /**
@@ -94,7 +93,7 @@ class ProjectController extends Controller
 
         $projects = Project::findOrFail($id_project);
         $projects->name = $request->name;
-        $projects->description = $request->description;
+        $projects->description = $request->description ;
         $projects->updated_by = Auth::id();
         $projects->save();
 

@@ -8,7 +8,8 @@
 @card
 @slot('header')
 <div class="form-group pull-right">
-    <a class="btn btn-primary" href="#"><i class="fa fa-plus-circle"></i> Create Report</a>
+    <a class="btn btn-primary" href="#"><i class="fa fa-plus-circle"></i> Create
+        Report</a>
     <a class="btn btn-info" href="{{ route('projects.index') }}"> Back</a>
 </div>
 @endslot
@@ -26,9 +27,7 @@
     <tr>
         <td>Created By</td>
         <td>:</td>
-        <td value="{{ $projects->user->created_by }}">
-            {{ ucfirst($projects->user->name) }}
-        </td>
+        <td>{{ $projects->created_by }}</td>
     </tr>
     <tr>
         <td>Created At</td>

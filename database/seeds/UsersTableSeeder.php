@@ -14,6 +14,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        // Create User
         $user = User::create([
             'name' => 'Galih',
             'is_active' => 1,
@@ -21,6 +22,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'departement_id' => 2,
+            'created_by' => 1,
         ]);
         $role = Role::create(['name' => 'User']);
         $permissions = Permission::pluck('id', 'id')

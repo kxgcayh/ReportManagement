@@ -20,7 +20,8 @@ class CreateManagerUserSeeder extends Seeder
             'email' => 'benny@manager.com',
             'password' => bcrypt('password'),
             'departement_id' => 3,
-        ]);
+            'created_by' => 1,
+            ]);
         $role = Role::create(['name' => 'Manager']);
         $permissions = Permission::pluck('id', 'id')
             ->except('14'); // Except Manage Roles

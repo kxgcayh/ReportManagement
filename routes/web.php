@@ -16,29 +16,25 @@
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
-    Route::resource('users', 'UserController');
-    Route::resource('projects', 'ProjectController')->except(['create']);
+    Route::resource('users', 'UserController');    
     Route::resource('brands', 'BrandController')->except(['show']);
-
     Route::resource('productions', 'ProductionController')->except(['show']);
-
-    Route::resource('/locations', 'LocationController')->except([
+    Route::resource('locations', 'LocationController')->except([
         'create', 'show'
     ]);
-
-    Route::resource('/types', 'TypeController')->except([
+    Route::resource('types', 'TypeController')->except([
         'create', 'show'
     ]);
-
-    Route::resource('/categories', 'CategoryController')->except([
+    Route::resource('categories', 'CategoryController')->except([
         'create', 'show'
     ]);
-
-    Route::resource('/departements', 'DepartementController')->except([
+    Route::resource('departements', 'DepartementController')->except([
         'show'
-    ]);
+    ]);    
+    Route::resource('projects', 'ProjectController')->except(['create']);    
+    Route::resource('reports', 'ReportController');
 });
