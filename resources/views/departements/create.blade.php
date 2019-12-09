@@ -3,8 +3,8 @@
 @section('content')
 
 @breadcrumb(['header' => 'Create Departement', 'active' => 'Create'])
-    @bcItem(['value' => 'Departements'])
-    @bcItem(['value' => 'Data Master'])
+@bcItem(['value' => 'Departements'])
+@bcItem(['value' => 'Data Master'])
 @endbreadcrumb
 
 <div class="row">
@@ -14,12 +14,14 @@
         @csrf
         <div class="form-group">
             <label for="id_departement">Nama Departement</label>
-            <input id="id_departement" type="text" name="name" required class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}">
+            <input id="id_departement" type="text" name="name" required
+                class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}">
             <p class="text-danger">{{ $errors->first('name') }}</p>
         </div>
         <div class="form-group">
             <label for="location_id">Lokasi</label>
-            <select name="location_id" id="location_id" required class="form-control {{ $errors->has('location_id') ? 'is-invalid':'' }}">
+            <select name="location_id" id="location_id" required
+                class="form-control {{ $errors->has('location_id') ? 'is-invalid':'' }}">
                 <option value=""></option>
                 @foreach ($locations as $locs)
                 <option value="{{ $locs->id_location }}">{{ ucfirst($locs->name) }}</option>

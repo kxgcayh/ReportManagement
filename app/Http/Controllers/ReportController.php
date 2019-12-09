@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Project;
+use App\Models\Category;
 use App\Models\Report;
+use App\Models\Type;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -14,9 +20,9 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        $reports = Report::orderBy('created_at', 'DESC')->paginate(10);
+        $reports = Report::with('brand', 'category', 'project', 'type', 'user')->orderBy('created_at', 'DESC')->paginate(10);
         return view('reports.index', compact('reports'))
-        ->with('no', (request()->input('page', 1) - 1) * 10);   
+        ->with('no', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -24,9 +30,18 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $reports = Report::with('brand', 'category', 'project', 'type', 'user')->orderBy('created_at', 'DESC')->paginate(10);
+        $brands = Brand::orderBy('name', 'ASC')->get();
+        $categories = Category::orderBy('name', 'ASC')->get();
+        $projects = Project::orderBy('name', 'ASC')->get();
+        $types = Type::orderBy('name', 'ASC')->get();
 
+        return view('reports.create',
+        compact(
+        'reports', 'brands', 'categories', 'projects', 'types'
+                ))->with('no', (request()->input('page', 1) - 1) * 10);
     }
 
     /**
@@ -37,7 +52,24 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'name' => 'required|string|max:100',
+            'brand_id' => 'required|exists:tr_brands,id_brand',
+            'category_id' => 'required|exists:ms_categories,id_category',
+            'project_id' => 'required|exists:ms_projects,id_project',
+            'type_id' => 'required|exists:ms_types,id_type'
+        ]);
+        $reports = new Report;
+        $reports->name = $request->name;
+        $reports->is_active = 0;
+        $reports->brand_id = $request->brand_id;
+        $reports->category_id = $request->category_id;
+        $reports->project_id = $request->project_id;
+        $reports->type_id = $request->type_id;
+        $reports->created_by = Auth::id();
+        $reports->save();
+        return redirect(route('reports.index'))
+            ->with(['success' => '<strong>' . $reports->name . '</strong> Ditambahkan']);
     }
 
     /**

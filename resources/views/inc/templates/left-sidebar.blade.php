@@ -29,6 +29,7 @@
                         <li><a href="{{ route('types.index') }}">Type</a></li>
                         <li><a href="{{ route('categories.index') }}">Category</a></li>
                         <li><a href="{{ route('projects.index') }}">Project</a></li>
+                        <li><a href="{{ route('reports.index') }}">Report</a></li>
                     </ul>
                 </li>
                 @endunlessrole

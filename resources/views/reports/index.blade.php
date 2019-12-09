@@ -3,12 +3,16 @@
 @section('content')
 
 @breadcrumb(['header' => 'Report List', 'active' => 'Show'])
-@bcItem(['value' => 'Report'])
-@bcItem(['value' => 'Projects'])
-@bcItem(['value' => 'Data Master'])
+@bcItem(['value' => 'Report']) @bcItem(['value' => 'Projects']) @bcItem(['value' => 'Data Master'])
 @endbreadcrumb
 
-@card(['header' => 'Reports List'])
+@card
+@ifAlert
+@slot('header')
+<a href="{{ route('reports.create') }}" class="btn waves-effect waves-light btn-primary float-right"><i
+        class="fa fa-edit"></i>
+    Create Report </a>
+@endslot
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -20,8 +24,7 @@
                 <th>Category Name</th>
                 <th>Project Name</th>
                 <th>Type</th>
-                <th>Created By</th>
-                <th>Created At</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -30,11 +33,10 @@
                 <td>{{ ++$no }}</td>
                 <td>{{ $report->name }}</td>
                 <td>{{ $report->approval }}</td>
-                <td>{{ $report->brand_id }}</td>
-                <td>{{ $report->category_id }}</td>
-                <td>{{ $report->project_id }}</td>
-                <td>{{ $report->type_id }}</td>
-                <td>{{ $report->created_by }}</td>
+                <td>{{ $report->brand['name'] }}</td>
+                <td>{{ $report->category['name'] }}</td>
+                <td>{{ $report->project['name'] }}</td>
+                <td>{{ $report->type['name'] }}</td>
                 <td>
                     <a class="btn btn-info" name="show" href="{{ route('reports.show',$report->id_report) }}">
                         <i class="fa fa-eye"></i>

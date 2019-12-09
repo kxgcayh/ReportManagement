@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use App\Models\Report;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
@@ -29,5 +30,10 @@ class Project extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by', 'updated_by');
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'project_id');
     }
 }

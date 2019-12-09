@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use App\Models\Report;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -25,6 +26,11 @@ class Category extends Model
 
     public function user()
     {
-        return $this->belongsToMany(User::class, 'created_by', 'updated_by');
+        // return $this->belongsTo(User::class, 'created_by', 'updated_by');
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'category_id');
     }
 }

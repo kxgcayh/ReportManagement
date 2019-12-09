@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use App\Models\Report;
 use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
@@ -34,5 +35,10 @@ class Brand extends Model
     public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'brand_id');
     }
 }
