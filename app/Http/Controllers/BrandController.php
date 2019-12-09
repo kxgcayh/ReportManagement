@@ -27,7 +27,7 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-        $brands = Brand::latest()->paginate(5);
+        $brands = Brand::with('createdBy', 'updatedBy')->latest()->paginate(5);
         return view('brands.index', compact('brands'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }

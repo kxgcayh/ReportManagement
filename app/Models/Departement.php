@@ -12,31 +12,36 @@ class Departement extends Model
 {
     use Compoships;
     /**
-     * Variable yang dapat menentukan primaryKey.
+     * @primaryKey
      */
     protected $primaryKey = 'id_departement';
 
     /**
-     * Variable yang menentukan nama table.
+     * @table
      */
     protected $table = 'tr_departements';
 
     /**
-     * Variable yang mendaftarkan atribut yang bisa di isi.
+     *
      * @var array
      */
     protected $fillable = ['location_id', 'name'];
 
     /**
-     * Variable yang menentukan nama relasi table.
+     * @relation
      */
-    public function location()
+    public function locations()
     {
         return $this->belongsTo(Location::class, 'location_id');
     }
 
-    public function users()
+    // belongsTo User::class
+    public function createdBy()
     {
-        return $this->hasMany(User::class, 'id', 'departement_id');
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

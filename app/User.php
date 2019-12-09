@@ -54,53 +54,53 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function departements()
+    public function departement()
     {
         return $this->belongsTo(Departement::class, 'departement_id');
     }
 
     public function category()
     {
-        // return $this->hasMany(Category::class, ['created_by', 'updated_by']);
+        return $this->hasMany(Category::class);
     }
 
     public function brand()
     {
-        // return $this->hasMany(Brand::class, ['created_by', 'updated_by']);
+        return $this->hasMany(Brand::class);
     }
 
     public function location()
     {
-        // return $this->hasMany(Location::class, ['created_by', 'updated_by']);
+        return $this->hasMany(Location::class);
     }
 
     public function machine()
     {
-        // return $this->hasMany(Machine::class, ['created_by', 'updated_by']);
+        return $this->hasMany(Machine::class);
     }
 
     public function production()
     {
-        // return $this->hasMany(Production::class, ['created_by', 'updated_by']);
+        return $this->hasMany(Production::class);
     }
 
     public function project()
     {
-        // return $this->hasMany(Project::class, ['created_by', 'updated_by']);
+        return $this->hasMany(Project::class);
     }
 
     public function report()
     {
-        // return $this->hasMany(Report::class, ['created_by', 'updated_by']);
+        return $this->hasMany(Report::class);
     }
 
     public function reportRev()
     {
-        // return $this->hasMany(ReportRevision::class, ['created_by', 'updated_by']);
+        return $this->hasMany(ReportRevision::class);
     }
 
     public function type()
     {
-        // return $this->hasMany(Type::class, ['created_by', 'updated_by']);
+        return $this->hasMany(Type::class);
     }
 }

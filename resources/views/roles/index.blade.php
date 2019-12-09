@@ -24,7 +24,7 @@
                 <td>{{ $role->name }}</td>
                 <td>
                     <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}" disabled><i class="fa fa-eye"></i></a>
-                    @can('Manage Roles')
+                    {{-- @can('Manage Roles') --}}
                     <a class="btn btn-warning" href="{{ route('roles.edit',$role->id) }}"><i class="fa fa-edit"></i></a>
                     <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline">
                     @csrf
@@ -33,7 +33,7 @@
                             <i class="fa fa-trash"></i>
                         </button>
                     </form>
-                    @endcan
+                    {{-- @endcan --}}
                 </td>
             </tr>
             @endforeach

@@ -19,7 +19,7 @@ class DepartementController extends Controller
     public function index(Request $request)
     {
         // Mengenalkan Nama Departemen dan Lokasi
-        $departements = Departement::with('location')->orderBy('created_at', 'DESC')->paginate(10);
+        $departements = Departement::with('locations')->orderBy('created_at', 'DESC')->paginate(10);
         // Menampilkan Nama Departemen dan Lokasi pada List Departemen
         return view('departements.index', compact('departements'))
             ->with('no', ($request->input('page', 1) - 1) * 10);
@@ -30,7 +30,7 @@ class DepartementController extends Controller
         // Mengenalkan Location pada Dropdown Create
         $locations = Location::orderBy('name', 'ASC')->get();
         // Mengenalkan Nama Departemen dan Lokasi
-        $departements = Departement::with('location')->orderBy('created_at', 'DESC')->paginate(5);
+        $departements = Departement::with('locations')->orderBy('created_at', 'DESC')->paginate(5);
         // Menampilkan Nama Departemen dan Lokasi pada List Departemen
         return view('departements.create', compact('departements', 'locations'))
             ->with('no', ($request->input('page', 1) - 1) * 5);

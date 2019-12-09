@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'mailtrap.io'),
+    'host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'from@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env('38996fd90395dc'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('b6410a3c76c25b'),
 
     /*
     |--------------------------------------------------------------------------

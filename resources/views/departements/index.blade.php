@@ -31,8 +31,9 @@
             <tr>
                 <td>{{ ++$no }}</td>
                 <td>{{ $depts->name }}</td>
-                <td>{{ $depts->location['name'] }}</td>
-                <td>{{ $depts->location['description'] }}</td>
+                <td>{{ $depts->locations['name'] }}</td>
+                <td>{{ $depts->locations['description'] }}</td>
+
                 <td>
                     <form action="{{ route('departements.destroy', $depts->id_departement) }}" method="POST">
                         @csrf
