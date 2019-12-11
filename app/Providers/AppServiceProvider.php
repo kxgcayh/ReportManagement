@@ -14,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment() !== 'production') {
+        $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+    }
+    // ...
     }
 
     /**
@@ -30,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
             Blade::component('components.card-widget', 'cwidget');
             // Bread Crumb
             Blade::component('components.breadcrumb', 'breadcrumb');
-            // Other            
+            // Other
             Blade::component('components.alert', 'alert');
             // Modal
             Blade::component('components.modal', 'modal');

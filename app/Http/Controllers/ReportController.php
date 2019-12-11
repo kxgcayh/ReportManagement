@@ -31,8 +31,7 @@ class ReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {
-        $reports = Report::with('brand', 'category', 'project', 'type', 'user')->orderBy('created_at', 'DESC')->paginate(10);
+    {        
         $brands = Brand::orderBy('name', 'ASC')->get();
         $categories = Category::orderBy('name', 'ASC')->get();
         $projects = Project::orderBy('name', 'ASC')->get();
@@ -40,7 +39,7 @@ class ReportController extends Controller
 
         return view('reports.create',
         compact(
-        'reports', 'brands', 'categories', 'projects', 'types'
+        'brands', 'categories', 'projects', 'types'
                 ))->with('no', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -53,15 +52,21 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name' => 'required|string|max:100',
+            'name' => 'required|string|max:100',            
             'brand_id' => 'required|exists:tr_brands,id_brand',
             'category_id' => 'required|exists:ms_categories,id_category',
             'project_id' => 'required|exists:ms_projects,id_project',
-            'type_id' => 'required|exists:ms_types,id_type'
+            'type_id' => 'required|exists:ms_types,id_type',
+            'file' => 'required|mimes:pdf,xlx,csv|max:2048'
         ]);
         $reports = new Report;
         $reports->name = $request->name;
+
+        $fileName = time().'.'.$request->file->extension();
+        $reports->file = $request->file->move(public_path('uploads'), $fileName);
+                
         $reports->is_active = 0;
+        $reports->approval = 0;
         $reports->brand_id = $request->brand_id;
         $reports->category_id = $request->category_id;
         $reports->project_id = $request->project_id;

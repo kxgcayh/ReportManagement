@@ -5,8 +5,8 @@
 <div class="container-fluid">
     {{-- Bread crumb and right sidebar toggle --}}
     @breadcrumb(['header' => 'Create User', 'active' => 'Create'])
-        @bcItem(['value' => 'User'])
-        @bcItem(['value' => 'Data Master'])
+    @bcItem(['value' => 'User'])
+    @bcItem(['value' => 'Data Master'])
     @endbreadcrumb
     {{-- End Bread crumb and right sidebar toggle --}}
     <div class="row">
@@ -31,19 +31,22 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    {!! Form::text('name', null, array('class' => 'form-control', 'id' => 'name', 'required')) !!}
+                                    {!! Form::text('name', null, array('class' => 'form-control', 'id' => 'name',
+                                    'required')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    {!! Form::text('email', null, array('class' => 'form-control', 'id' => 'email', 'required')) !!}
+                                    {!! Form::text('email', null, array('class' => 'form-control', 'id' => 'email',
+                                    'required')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label for="departement">Departement</label>
-                                    <select name="departement_id" id="departement_id" required class="form-control {{ $errors->has('departement_id') ? 'is-invalid':'' }}">
+                                    <select name="departement_id" id="departement_id" required
+                                        class="form-control {{ $errors->has('departement_id') ? 'is-invalid':'' }}">
                                         <option value=""></option>
                                         @foreach ($departements as $depts)
                                         <option value="{{ $depts->id_departement }}">
@@ -57,18 +60,21 @@
                             <div class="col-xs-12 col-sm-12 col-md-12 m-t-40 row">
                                 <div class="form-group col-md-6 m-t-20">
                                     <label for="password">Password</label>
-                                    {!! Form::password('password', array('class' => 'form-control', 'id' => 'email', 'required')) !!}
+                                    {!! Form::password('password', array('class' => 'form-control', 'id' => 'email',
+                                    'required')) !!}
                                 </div>
                                 <div class="form-group col-md-6 m-t-20">
                                     <label>Confirm Password:</label>
-                                    {!! Form::password('confirm-password', array('Confirm Password','class' => 'form-control')) !!}
+                                    {!! Form::password('confirm-password', array('Confirm Password','class' =>
+                                    'form-control')) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label>Role:</label>
                                     {{-- {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!} --}}
-                                    <select class="form-control {{ $errors->has('id') ? 'is-invalid':'' }}" multiple name="roles[]" required>
+                                    <select class="form-control {{ $errors->has('id') ? 'is-invalid':'' }}"
+                                        name="roles[]" required>
                                         @foreach ($roles as $role)
                                         <option value="{{ $role->id }}">
                                             {{ ucfirst($role->name) }}
@@ -79,6 +85,8 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                <a href="{{ route('users.index') }}" class="btn waves-effect waves-light btn-info">Back
+                                </a>
                             </div>
                         </div>
                         {!! Form::close() !!}

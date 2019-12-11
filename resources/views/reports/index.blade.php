@@ -9,8 +9,7 @@
 @card
 @ifAlert
 @slot('header')
-<a href="{{ route('reports.create') }}" class="btn waves-effect waves-light btn-primary float-right"><i
-        class="fa fa-edit"></i>
+<a href="{{ route('reports.create') }}" class="btn waves-effect waves-light btn-primary"><i class="fa fa-edit"></i>
     Create Report </a>
 @endslot
 <div class="table-responsive">
@@ -56,7 +55,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="4" class="text-center">Tidak ada data Report</td>
+                <td colspan="8" class="text-center">Tidak ada data Report</td>
             </tr>
             @endforelse
         </tbody>

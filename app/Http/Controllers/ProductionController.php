@@ -24,7 +24,7 @@ class ProductionController extends Controller
      */
     public function index(Request $request)
     {
-        $productions = Production::with('location')->orderBy('created_at', 'DESC')->paginate(5);
+        $productions = Production::with('locations')->orderBy('created_at', 'DESC')->paginate(5);
         return view('productions.index', compact('productions'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
@@ -36,7 +36,7 @@ class ProductionController extends Controller
      */
     public function create(Request $request)
     {
-        $productions = Production::with('location')->orderBy('created_at', 'DESC')->paginate(5);
+        $productions = Production::with('locations')->orderBy('created_at', 'DESC')->paginate(5);
         $locations = Location::orderBy('name', 'ASC')->get();
         return view('productions.create', compact('productions', 'locations'))
             ->with('no', (request()->input('page', 1) - 1) * 5);

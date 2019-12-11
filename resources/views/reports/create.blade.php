@@ -9,13 +9,13 @@
 @endbreadcrumb
 
 @card(['header' => 'Create Report'])
-<form role="form" action="{{ route('reports.store') }}" method="post">
+<form role="form" action="{{ route('reports.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row pt-3">
         <div class="col-md-6">
             <div class="form-group form-material">
                 <label class="control-label" for="id_report">Report Name</label>
-                <input type="text" id="id_report" name="name"
+                <input type="text" id="id_report" name="name" required
                     class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}">
                 <p class="text-danger">{{ $errors->first('name') }}</p>
                 <small class="form-control-feedback"> Write your report name here </small>
@@ -26,6 +26,7 @@
                 <label class="control-label" for="brand_id">Brand Name</label>
                 <select name="brand_id" id="brand_id" required
                     class="form-control {{ $errors->has('brand_id') ? 'is-invalid':'' }}">
+                    <option></option>
                     @foreach ($brands as $item)
                     <option value="{{ $item->id_brand }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
@@ -39,6 +40,7 @@
             <div class="form-group form-material">
                 <label class="control-label" for="category_id">Category Name</label>
                 <select name="category_id" id="category_id" class="form-control">
+                    <option></option>
                     @foreach ($categories as $item)
                     <option value="{{ $item->id_category }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
@@ -50,6 +52,7 @@
             <div class="form-group form-material">
                 <label for="project_id" class="control-label">Project Name</label>
                 <select name="project_id" id="project_id" class="form-control">
+                    <option></option>
                     @foreach ($projects as $item)
                     <option value="{{ $item->id_project }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
@@ -63,6 +66,7 @@
             <div class="form-group form-material">
                 <label for="type_id" class="control-label">Type Name</label>
                 <select name="type_id" id="type_id" class="form-control">
+                    <option></option>
                     @foreach ($types as $item)
                     <option value="{{ $item->id_type }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
@@ -71,8 +75,8 @@
             </div>
         </div>
         <div class=" col-md-6">
-            <label for="input-file-now">Please input file</label><br>
-            <input type="file" id="input-file-now" class="dropify" />
+            <label for="file">Please input file</label><br>
+            <input type="file" id="file" name="file" class="dropify" />
         </div>
     </div>
     <div class="form-group pull-right">

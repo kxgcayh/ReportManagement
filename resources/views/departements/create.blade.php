@@ -52,7 +52,7 @@
                 <tr>
                     <td>{{ ++$no }}</td>
                     <td>{{ $depts->name }}</td>
-                    <td>{{ $depts->location['name'] }}</td>
+                    <td>{{ $depts->locations['name'] }}</td>
                 </tr>
                 @empty
                 <tr>

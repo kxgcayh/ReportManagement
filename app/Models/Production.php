@@ -27,13 +27,13 @@ class Production extends Model
     /**
      * Variable yang menentukan nama relasi table.
      */
-    public function location()
+    public function locations()
     {
-        return $this->belongsToMany(Location::class, 'location_id');
+        return $this->belongsTo(Location::class, 'location_id');
     }
 
     public function user()
     {
-        return $this->belongsToMany(User::class, 'created_by', 'updated_by');
+        return $this->belongsTo(User::class, 'created_by', 'updated_by');
     }
 }

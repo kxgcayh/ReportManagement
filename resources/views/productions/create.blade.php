@@ -1,8 +1,8 @@
 @extends('layouts.app', (['title' => 'Management Production']))
 @section('content')
 @breadcrumb(['header' => 'Create Production', 'active' => 'Create'])
-    @bcItem(['value' => 'Productions'])
-    @bcItem(['value' => 'Data Master'])
+@bcItem(['value' => 'Productions'])
+@bcItem(['value' => 'Data Master'])
 @endbreadcrumb
 <div class="row">
     @cardbox(['header' => ''])
@@ -10,16 +10,19 @@
     <form role="form" action="{{ route('productions.store') }}" method="post" class="form-material">
         @csrf
         <div class="form-group">
-            <input id="id_production" type="text" name="name" required class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Nama Tempat Produksi">
+            <input id="id_production" type="text" name="name" required
+                class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Nama Tempat Produksi">
             <p class="text-danger">{{ $errors->first('name') }}</p>
         </div>
         <div class="form-group">
-            <select name="location_id" id="location_id" required class="form-control {{ $errors->has('location_id') ? 'is-invalid':'' }}">
-                <option value=""># Nama Lokasi #</option>
+            <select name="location_id" id="location_id" required
+                class="form-control {{ $errors->has('location_id') ? 'is-invalid':'' }}">
+                <option></option>
                 @foreach ($locations as $locs)
                 <option value="{{ $locs->id_location }}">{{ ucfirst($locs->name) }}</option>
                 @endforeach
             </select>
+            <small class="form-control-feedback"> Select Location </small>
             <p class="text-danger">{{ $errors->first('location_id') }}</p>
         </div>
         <div class="form-group col-md-6">
@@ -46,7 +49,7 @@
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $prods->name }}</td>
-                    <td>{{ $prods->location['name'] }}</td>
+                    <td>{{ $prods->locations['name'] }}</td>
                 </tr>
                 @empty
                 <tr>
