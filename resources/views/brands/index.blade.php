@@ -19,7 +19,7 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>Details</th>
-                <th>Created By</th>
+                {{-- <th>Created By</th> --}}
                 <th width="280px">Action</th>
             </tr>
         </thead>
@@ -29,7 +29,7 @@
                 <td>{{ ++$no }}</td>
                 <td>{{ $brand->name }}</td>
                 <td>{{ $brand->detail }}</td>
-                <td>{{ $brand->createdBy['name'] }}</td>
+                {{-- <td>{{ $brand->createdBy['name'] }}</td> --}}
                 <td>
                     <form action="{{ route('brands.destroy', [$brand->id_brand]) }}" method="POST">
                         @csrf

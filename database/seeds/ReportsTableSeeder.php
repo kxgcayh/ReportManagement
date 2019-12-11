@@ -15,6 +15,7 @@ class ReportsTableSeeder extends Seeder
         Report::create([
             'id_report' => 1,
             'name' => 'Report Pertamaku',
+            'file' => '',
             'is_active' => 1,
             'approval' => 1,
             'brand_id' => 1,

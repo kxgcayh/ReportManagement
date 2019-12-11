@@ -93,7 +93,7 @@ class CreateRpmanTable extends Migration
         Schema::create('tr_reports', function (Blueprint $table) {
             $table->bigIncrements('id_report');
             $table->string('name');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->boolean('approval');
             $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id')

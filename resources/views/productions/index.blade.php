@@ -25,8 +25,8 @@
                     <tr>
                         <td>{{ ++$no }}</td>
                         <td>{{ $prods->name }}</td>
-                        <td>{{ $prods->location['name'] }}</td>
-                        <td>{{ $prods->location['description'] }}</td>
+                        <td>{{ $prods->locations['name'] }}</td>
+                        <td>{{ $prods->locations['description'] }}</td>
                         <td>
                             <form action="{{route('productions.destroy',[$prods->id_production])}}" method="POST">
                                 @method('DELETE') @csrf

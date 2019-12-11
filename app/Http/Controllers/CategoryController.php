@@ -90,9 +90,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_type)
+    public function destroy($id_category)
     {
-        $categories = Type::findOrFail($id_type);
+        $categories = Category::findOrFail($id_category);
         $categories->delete();
         return redirect()->back()->with(['warning' => 'Category: ' . $categories->name . ' Succesfully Deleted']);
     }
