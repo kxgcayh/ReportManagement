@@ -39,7 +39,7 @@ class ProjectController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            // description
+            'description' => 'nullable|string',
         ]);
 
         $projects = new Project;

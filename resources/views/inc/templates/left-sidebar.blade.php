@@ -7,7 +7,7 @@
                 <li class="nav-small-cap">ReportMan</li>
                 <li>
                     <a class="has-arrow" href="{{route('home') }}" aria-expanded="false"><i
-                            class="mdi mdi-home-variant"></i>Home</a>
+                            class="mdi mdi-home-variant"></i>Beranda</a>
                 </li>
                 <li>
                     <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-bullseye" flo></i><span

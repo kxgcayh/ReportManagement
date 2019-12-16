@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStandartColumnTable extends Migration
+class AddForeignKeyColum extends Migration
 {
     /**
      * Run the migrations.
@@ -14,168 +14,126 @@ class AddStandartColumnTable extends Migration
     public function up()
     {
         Schema::table('ms_locations', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('tr_departements', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('location_id')
+                ->references('id_location')->on('ms_locations')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('tr_users', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('departement_id')
+                ->references('id_departement')->on('tr_departements')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('ms_categories', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('ms_machines', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('ms_projects', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('ms_types', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('tr_productions', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('location_id')
+                ->references('id_location')->on('ms_locations')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('tr_brands', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('tr_reports', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('brand_id')
+                ->references('id_brand')->on('tr_brands')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('category_id')
+                ->references('id_category')->on('ms_categories')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('project_id')
+                ->references('id_project')->on('ms_projects')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('type_id')
+                ->references('id_type')->on('ms_types')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
 
         Schema::table('tr_report_revs', function (Blueprint $table) {
-            $table->boolean('is_active')->nullable()->after('name');
-
-            $table->timestamps();
-            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('report_id')
+                ->references('id_report')->on('tr_reports')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('created_by')
                 ->references('id')->on('tr_users')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')
                 ->references('id')->on('tr_users')
-                ->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
