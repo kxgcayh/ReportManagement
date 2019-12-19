@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +18,9 @@
     {{-- chartist CSS --}}
     <link href="{{ asset('materialpro') }}/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
     <link href="{{ asset('materialpro') }}/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
-    <link href="{{ asset('materialpro') }}/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <link
+        href="{{ asset('materialpro') }}/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css"
+        rel="stylesheet">
     <link href="{{ asset('materialpro') }}/assets/plugins/css-chart/css-chart.css" rel="stylesheet">
     {{-- Vector CSS --}}
     <link href="{{ asset('materialpro') }}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
@@ -25,24 +28,27 @@
     <link href="{{ asset('materialpro') }}/css/style.css" rel="stylesheet">
     {{-- You can change the theme colors from here --}}
     <link href="{{ asset('materialpro') }}/css/colors/megna.css" id="theme" rel="stylesheet">
+    {{-- sweetalert2 --}}
+    <link href="{{ asset('sweetalert2') }}/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
+
 <body class="fix-header fix-sidebar card-no-border logo-center">
     {{-- Preloader - style you can find in spinners.css --}}
-        @preloader
+    @preloader
     {{-- Main wrapper - style you can find in pages.scss --}}
     <div id="main-wrapper">
         @guest
         {{-- Topbar header - style you can find in pages.scss --}}
-            @topbar
+        @topbar
         {{-- End Topbar header --}}
         @else
 
         {{-- Topbar header - style you can find in pages.scss --}}
-            @topbar
+        @topbar
         {{-- End Topbar header --}}
 
         {{-- Left Sidebar - style you can find in sidebar.scss  --}}
-            @lsidebar
+        @lsidebar
         {{-- End Left Sidebar - style you can find in sidebar.scss  --}}
 
         {{-- Page wrapper  --}}
@@ -52,20 +58,20 @@
                 {{-- !Please add breadcumb components --}}
 
                 {{-- Start Page Content /with Row--}}
-                    @yield('content')
+                @yield('content')
                 {{-- End Page Content --}}
 
                 {{-- Right sidebar --}}
-                    @rsidebar
+                @rsidebar
                 {{-- End Right sidebar --}}
             </div>
             {{-- End Container fluid  --}}
 
             {{-- footer --}}
-                @footer
+            @footer
             {{-- End footer --}}
 
-        @endguest
+            @endguest
         </div>
         {{-- End Page wrapper  --}}
     </div>
@@ -95,12 +101,19 @@
     {{-- This page plugins --}}
     {{-- chartist chart --}}
     <script src="{{ asset('materialpro') }}/assets/plugins/chartist-js/dist/chartist.min.js"></script>
-    <script src="{{ asset('materialpro') }}/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <script
+        src="{{ asset('materialpro') }}/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js">
+    </script>
     {{-- Vector map JavaScript --}}
     <script src="{{ asset('materialpro') }}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="{{ asset('materialpro') }}/assets/plugins/vectormap/jquery-jvectormap-us-aea-en.js"></script>
     <script src="{{ asset('materialpro') }}/js/dashboard3.js"></script>
     {{-- Style switcher --}}
     <script src="{{ asset('materialpro') }}/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    {{-- sweetalert2 --}}
+    {{-- <script src="{{ asset('js/sweetalert.min.js') }}"></script> --}}
+    <script src="js/sweetalert.min.js"></script>
+    @include('sweet::alert')
 </body>
+
 </html>

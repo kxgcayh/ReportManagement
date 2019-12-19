@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -66,8 +67,7 @@ class BrandController extends Controller
         $brands->created_by = Auth::id();
         $brands->save();
 
-        return redirect()->route('brands.index')
-            ->with('success', 'Brand created successfully.');
+        return redirect()->route('brands.index')->with('success', 'Brand created successfully.');
     }
 
     /**
@@ -117,8 +117,6 @@ class BrandController extends Controller
     {
         $brands = Brand::findOrFail($id_brand);
         $brands->delete();
-        return redirect()->back()->with([
-            'success' => '<strong>' . $brands->name . '</strong> Telah Dihapus!'
-        ]);
+        return redirect()->back()->with(['success' => '<strong>' . $brands->name . '</strong> Telah Dihapus!']);
     }
 }
