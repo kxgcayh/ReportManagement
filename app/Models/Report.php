@@ -47,8 +47,16 @@ class Report extends Model
         return $this->belongsTo(Type::class, 'type_id');
     }
 
-    public function user()
+    /**
+     * Relation to User Model;
+     * @var array
+     */
+    public function createdBy()
     {
-        return $this->belongsTo(User::class, 'created_by', 'updated_by');
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

@@ -27,7 +27,10 @@ class Brand extends Model
         'detail'
     ];
 
-    // belongsTo User::class
+    /**
+     * Relation to User Model;
+     * @var array
+     */
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');

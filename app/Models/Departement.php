@@ -35,7 +35,10 @@ class Departement extends Model
         return $this->belongsTo(Location::class, 'location_id');
     }
 
-    // belongsTo User::class
+    /**
+     * Relation to User Model;
+     * @var array
+     */
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
