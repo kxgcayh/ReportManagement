@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,7 +29,8 @@ class BrandController extends Controller
     {
         $brands = Brand::with('createdBy', 'updatedBy')->paginate(5);
         $user_brands = Brand::with('createdBy', 'updatedBy')->where('is_active', 1)->paginate(5);
-        return view('brands.index', compact('brands', 'user_brands'))
+        $inactive = Brand::with('createdBy', 'updatedBy')->where('is_active', 0)->get();
+        return view('brands.index', compact('brands', 'user_brands', 'inactive'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 

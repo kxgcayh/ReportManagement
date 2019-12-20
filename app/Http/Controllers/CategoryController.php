@@ -23,7 +23,8 @@ class CategoryController extends Controller
     {
         $user = Auth::user();
         $categories = Category::orderBy('created_at', 'DESC')->paginate(5);
-        return view('categories.index', compact('categories', 'user'))
+        $user_categories = Category::orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        return view('categories.index', compact('categories', 'user', 'user_categories'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
