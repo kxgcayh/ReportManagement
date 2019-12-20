@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             // Modal
             Blade::component('components.modal', 'modal');
             Blade::component('components.modal', 'modal');
-            Blade::include('inc.modalBtn', 'modalBtn');
+            Blade::include('inc.modal-btn', 'modalBtn');
 
         // Includes
             // Templates

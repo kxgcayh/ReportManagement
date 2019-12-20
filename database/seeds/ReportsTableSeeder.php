@@ -23,7 +23,9 @@ class ReportsTableSeeder extends Seeder
             'project_id' => 1,
             'type_id' => 1,
             'created_at' => now(),
+            'updated_at' => now(),
             'created_by' => 1,
+            'updated_by' => 2,
         ]);
     }
 }

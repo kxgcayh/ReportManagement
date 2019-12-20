@@ -18,7 +18,9 @@ class ProjectsTableSeeder extends Seeder
             'is_active' => 1,
             'description' => 'Deskripsi project pertamaku',
             'created_at' => now(),
+            'updated_at' => now(),
             'created_by' => 1,
+            'updated_by' => 2,
         ]);
     }
 }

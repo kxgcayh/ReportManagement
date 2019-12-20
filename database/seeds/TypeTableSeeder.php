@@ -17,7 +17,9 @@ class TypeTableSeeder extends Seeder
             'name' => 'Excel',
             'is_active' => 1,
             'created_at' => now(),
+            'updated_at' => now(),
             'created_by' => 1,
+            'updated_by' => 2,
         ]);
     }
 }

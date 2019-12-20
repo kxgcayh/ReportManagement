@@ -17,7 +17,9 @@ class CategoryTableSeeder extends Seeder
             'name' => 'LHP',
             'is_active' => 1,
             'created_at' => now(),
+            'updated_at' => now(),
             'created_by' => 1,
+            'updated_by' => 2,
         ]);
         Category::create([
             'id_category' => 2,

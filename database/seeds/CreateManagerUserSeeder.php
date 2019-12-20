@@ -21,6 +21,7 @@ class CreateManagerUserSeeder extends Seeder
             'password' => bcrypt('password'),
             'departement_id' => 3,
             'created_by' => 1,
+            'created_at' => now(),
             ]);
         $role = Role::create(['name' => 'Manager']);
         $permissions = Permission::pluck('id', 'id')
