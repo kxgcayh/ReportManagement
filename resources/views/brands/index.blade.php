@@ -6,15 +6,16 @@
 @bcItem(['value' => 'Data Master'])
 @endbreadcrumb
 
+@ifAlert
+
 @card
 @slot('header')
 <a href="{{ route('brands.create') }}" class="btn waves-effect waves-light btn-primary pull-left"><i
-        class="fa fa-edit"></i>
+        class="mdi mdi-plus-circle-outline"></i>
     Create Brand </a>
 @modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Unapproved Data'])
 @endslot
-@ifAlert
 <div class="table-responsive">
     <table class="table table-hover">
         <thead>
@@ -33,7 +34,8 @@
                 <td>{{ ++$no }}</td>
                 <td>{{ $brand->name }}</td>
                 <td>{{ $brand->detail }}</td>
-                <td><label class="badge badge-success">{{ $brand->createdBy['name'] }}</label>/<label
+                <td><label class="badge badge-success">{{ $brand->createdBy['name'] }}</label><i
+                        class="mdi mdi-arrow-right-bold"></i><label
                         class="badge badge-warning">{{ $brand->updatedBy['name'] }}</label>
                 </td>
                 <td>
@@ -88,12 +90,14 @@
         @endrole
     </table>
 </div>
-@endcard
+
 @role('Admin|Manager')
 {{ $brands->links() }}
 @else
 {{ $user_brands->links() }}
 @endrole
+
+@endcard
 
 @modal(['id' => 'inactive', 'size' => 'lg', 'color' => 'info', 'title' => 'Inactive Data List'])
 <table class="table table-hover">
@@ -102,6 +106,7 @@
             <th>Name</th>
             <th>Details</th>
             <th>Created By</th>
+            <th>Created At</th>
         </tr>
     </thead>
     <tbody>
@@ -110,6 +115,7 @@
             <td>{{ $brand->name }}</td>
             <td>{{ $brand->detail }}</td>
             <td>{{ $brand->createdBy['name'] }}</td>
+            <td>{{ $brand->created_at }}</td>
         </tr>
         @empty
         <tr>

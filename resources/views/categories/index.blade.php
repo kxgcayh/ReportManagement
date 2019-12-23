@@ -8,8 +8,10 @@
 @ifAlert
 @card
 @slot('header')
-@modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-information-outline',
+@modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Category'])
+@modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
+'name' => 'Unapproved Data'])
 @endslot
 <div class="table-responsive">
     <table class="table table-hover">
@@ -27,7 +29,8 @@
             <tr>
                 <td>{{ ++$no }}</td>
                 <td>{{ $cats->name }}</td>
-                <td><label class="badge badge-success">{{ $cats->createdBy['name'] }}</label>/<label
+                <td><label class="badge badge-success">{{ $cats->createdBy['name'] }}</label><i
+                        class="mdi mdi-arrow-right-bold"></i><label
                         class="badge badge-warning">{{ $cats->updatedBy['name'] }}</label>
                 </td>
                 <td>
@@ -80,10 +83,15 @@
         @endrole
     </table>
 </div>
+@role('Admin|Manager')
 {{ $categories->links() }}
+@else
+{{ $user_categories->links() }}
+@endrole
+
 @endcard
 
-@modal(['id' => 'create', 'size' => 'lg', 'color' => 'primary', 'title' => 'Create Category'])
+@modal(['id' => 'create', 'size' => '', 'color' => 'primary', 'title' => 'Create Category'])
 <form role="form" action="{{ route('categories.store') }}" method="POST" class="form-material">
     @csrf
     <div class="form-group">
@@ -95,8 +103,35 @@
             class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Category Name" disabled>
         @endcan
     </div>
-    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right">Submit</button>
+    <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10 pull-right">Submit</button>
 </form>
+@endmodal
+
+@modal(['id' => 'inactive', 'size' => 'lg', 'color' => 'info', 'title' => 'Inactive Data List'])
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name Category</th>
+                <th>Created By</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($inactive as $cats)
+            <tr>
+                <td>{{ $cats->name }}</td>
+                <td>{{ $cats->createdBy['name'] }}</td>
+                <td>{{ $cats->created_at }}</td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="4" class="text-center">Tidak ada data Category</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 @endmodal
 
 @endsection

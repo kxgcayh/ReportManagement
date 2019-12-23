@@ -15,16 +15,18 @@ class CategoryController extends Controller
         $this->middleware('permission:Manage Categories', ['only' => ['store', 'edit', 'update', 'destroy']]);
     }
     /**
-     * Display a listing of the resource.
-     *
+     * $categories for Admin and Manager
+     * $user_categories for Users
+     * $inactive for Users
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $user = Auth::user();
-        $categories = Category::orderBy('created_at', 'DESC')->paginate(5);
-        $user_categories = Category::orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
-        return view('categories.index', compact('categories', 'user', 'user_categories'))
+        $categories = Category::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
+        $user_categories = Category::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        $inactive = Category::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
+        return view('categories.index', compact('categories', 'user', 'user_categories', 'inactive'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -57,7 +59,7 @@ class CategoryController extends Controller
      */
     public function edit($id_category)
     {
-        $categories = Category::findOrFail($id_category);
+        $categories = Category::with('createdBy', 'updatedBy')->findOrFail($id_category);
         return view('categories.edit', compact('categories'));
     }
 
@@ -79,7 +81,7 @@ class CategoryController extends Controller
             $categories->name = $request->name;
             $categories->updated_by = Auth::id();
             $categories->save();
-            return redirect(route('categories.index'))->with(['success' => 'Type: ' . $categories->name . ' Changed']);
+            return redirect(route('categories.index'))->with(['success' => 'Category: ' . $categories->name . ' Changed']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
@@ -95,6 +97,6 @@ class CategoryController extends Controller
     {
         $categories = Category::findOrFail($id_category);
         $categories->delete();
-        return redirect()->back()->with(['warning' => 'Category: ' . $categories->name . ' Succesfully Deleted']);
+        return redirect()->back()->with(['danger' => 'Category: ' . $categories->name . ' Succesfully Deleted']);
     }
 }
