@@ -17,8 +17,10 @@ class LocationController extends Controller
 
     public function index(Request $request)
     {
-        $locations = Location::orderBy('created_at', 'DESC')->paginate(5);
-        return view('locations.index', compact('locations'))
+        $locations = Location::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
+        $user_locations = Location::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        $inactive = Location::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
+        return view('locations.index', compact('locations', 'user_locations', 'inactive'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -50,7 +52,7 @@ class LocationController extends Controller
 
     public function edit($id_location)
     {
-        $locations = Location::findOrFail($id_location);
+        $locations = Location::with('createdBy', 'updatedBy')->findOrFail($id_location);
         return view('locations.edit', compact('locations'));
     }
 

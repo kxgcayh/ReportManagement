@@ -19,21 +19,13 @@ class DepartementController extends Controller
     public function index(Request $request)
     {
         // Mengenalkan Nama Departemen dan Lokasi
-        $departements = Departement::with('locations')->orderBy('created_at', 'DESC')->paginate(10);
-        // Menampilkan Nama Departemen dan Lokasi pada List Departemen
-        return view('departements.index', compact('departements'))
-            ->with('no', ($request->input('page', 1) - 1) * 10);
-    }
-
-    public function create(Request $request)
-    {
-        // Mengenalkan Location pada Dropdown Create
+        $departements = Departement::with('locations', 'createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
         $locations = Location::orderBy('name', 'ASC')->get();
-        // Mengenalkan Nama Departemen dan Lokasi
-        $departements = Departement::with('locations')->orderBy('created_at', 'DESC')->paginate(5);
+        $user_departements = Departement::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        $inactive = Departement::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 0)->get();
         // Menampilkan Nama Departemen dan Lokasi pada List Departemen
-        return view('departements.create', compact('departements', 'locations'))
-            ->with('no', ($request->input('page', 1) - 1) * 5);
+        return view('departements.index', compact('departements', 'user_departements', 'inactive', 'locations'))
+            ->with('no', ($request->input('page', 1) - 1) * 10);
     }
 
     public function store(Request $request)
@@ -68,8 +60,8 @@ class DepartementController extends Controller
     public function edit($id_departement)
     {
         // Query Select based on $id_departement
-        $departements = Departement::findOrFail($id_departement);
-        $locations = Location::orderBy('name', 'ASC')->get();
+        $departements = Departement::with('createdBy', 'updatedBy')->findOrFail($id_departement);
+        $locations = Location::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
         return view('departements.edit', compact('departements', 'locations'));
     }
 

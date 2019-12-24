@@ -21,8 +21,10 @@ class TypeController extends Controller
      */
     public function index(Request $request)
     {
-        $types = Type::orderBy('created_at', 'DESC')->paginate(5);
-        return view('types.index', compact('types'))
+        $types = Type::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
+        $user_types = Type::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        $inactive = Type::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
+        return view('types.index', compact('types', 'user_types', 'inactive'))
             ->with('no', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -56,7 +58,7 @@ class TypeController extends Controller
      */
     public function edit($id_type)
     {
-        $types = Type::findOrFail($id_type);
+        $types = Type::with('createdBy', 'updatedBy')->findOrFail($id_type);
         return view('types.edit', compact('types'));
     }
 

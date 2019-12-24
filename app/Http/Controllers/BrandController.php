@@ -27,26 +27,12 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-        $brands = Brand::with('createdBy', 'updatedBy')->paginate(5);
-        $user_brands = Brand::with('createdBy', 'updatedBy')->where('is_active', 1)->paginate(5);
-        $inactive = Brand::with('createdBy', 'updatedBy')->where('is_active', 0)->get();
+        $brands = Brand::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
+        $user_brands = Brand::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        $inactive = Brand::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 0)->get();
         return view('brands.index', compact('brands', 'user_brands', 'inactive'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        $brands = Brand::orderBy('created_at', 'DESC')->paginate(5);
-        return view('brands.create', compact('brands'))
-            ->with('no', (request()->input('page', 1) - 1) * 5);
-    }
-
 
     /**
      * Store a newly created resource in storage.
@@ -79,7 +65,7 @@ class BrandController extends Controller
      */
     public function edit($id_brand)
     {
-        $brands = Brand::findOrFail($id_brand);
+        $brands = Brand::with('createdBy', 'updatedBy')->findOrFail($id_brand);
         return view('brands.edit', compact('brands'));
     }
 

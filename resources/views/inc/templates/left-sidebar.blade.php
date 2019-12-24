@@ -13,6 +13,7 @@
                     <a class="has-arrow" href="{{route('reports.create') }}" aria-expanded="false"><i
                             class="mdi mdi-server-plus"></i>Create Report</a>
                 </li>
+                @role('Admin|Manager')
                 <li>
                     <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-briefcase" flo></i><span
                             class="hide-menu">Data Master</span></a>
@@ -23,8 +24,12 @@
                         <li><a href="{{ route('locations.index') }}">Location</a></li>
                         <li><a href="{{ route('types.index') }}">Type</a></li>
                         <li><a href="{{ route('categories.index') }}">Category</a></li>
-                        <li><a href="{{ route('projects.index') }}">Project</a></li>
                     </ul>
+                </li>
+                @endrole
+                <li>
+                    <a class="has-arrow" href="{{route('projects.index') }}" aria-expanded="false"><i
+                            class="mdi mdi-server-network"></i>Data Project</a>
                 </li>
                 <li>
                     <a class="has-arrow" href="{{route('reports.index') }}" aria-expanded="false"><i
@@ -33,6 +38,10 @@
                 <li>
                     <a href="#" aria-expanded="false"><i class="mdi mdi-account-settings-variant"></i>Account
                         Setting</a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ route('roles.index') }}">Role</a></li>
+                        <li><a href="{{ route('users.index') }}">User</a></li>
+                    </ul>
                 </li>
             </ul>
         </nav>

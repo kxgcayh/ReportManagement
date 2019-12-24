@@ -8,7 +8,7 @@
 
 @ifAlert
 
-@card(['header' => 'Edit Category'])<br>
+@card(['header' => ''])<br>
 
 <form role="form" action="{{ route('categories.update', $categories->id_category) }}" method="POST"
     class="floating-labels">
@@ -20,12 +20,14 @@
                 <label>Created By</label>
                 <input name="created_by" value="{{ $categories->createdBy['name'] }}" type="text"
                     class="form-control form-control-line" id="created_by">
+                <span class="bar"></span>
                 <small>{{ $categories->created_at }}</small>
             </div>
             <div class="form-group col-md-6">
                 <label>Updated By</label>
                 <input name="updated_by" value="{{ $categories->updatedBy['name'] }}" type="text" class="form-control"
                     id="updated_by">
+                <span class="bar"></span>
                 <small>{{ $categories->updated_at }}</small>
             </div>
         </div>

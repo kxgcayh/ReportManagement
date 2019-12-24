@@ -10,9 +10,8 @@
 
 @card
 @slot('header')
-<a href="{{ route('brands.create') }}" class="btn waves-effect waves-light btn-primary pull-left"><i
-        class="mdi mdi-plus-circle-outline"></i>
-    Create Brand </a>
+@modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
+'name' => 'Create Brand'])
 @modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Unapproved Data'])
 @endslot
@@ -124,5 +123,26 @@
         @endforelse
     </tbody>
 </table>
+@endmodal
+
+@modal(['id' => 'create', 'size' => '', 'color' => 'primary', 'title' => 'Create Data Brand'])
+<form role="form" action="{{ route('brands.store') }}" method="post" class="form-material">
+    @csrf
+    <div class="form-group">
+        <input id="id_brand" type="text" name="name" required
+            class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" placeholder="Brand Name">
+        <p class="text-danger">{{ $errors->first('name') }}</p>
+    </div>
+    <div class="form-group">
+        <input id="id_detail" type="text" name="detail" required
+            class="form-control {{ $errors->has('detail') ? 'is-invalid':'' }}" placeholder="Description">
+        <p class="text-danger">{{ $errors->first('detail') }}</p>
+    </div>
+    <div class="form-group pull-right">
+        <button class="btn waves-effect waves-light btn-primary">
+            <i class="fa fa-send"></i> Save
+        </button>
+    </div>
+</form>
 @endmodal
 @endsection

@@ -24,21 +24,11 @@ class ProductionController extends Controller
      */
     public function index(Request $request)
     {
-        $productions = Production::with('locations')->orderBy('created_at', 'DESC')->paginate(5);
-        return view('productions.index', compact('productions'))
-            ->with('no', (request()->input('page', 1) - 1) * 5);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        $productions = Production::with('locations')->orderBy('created_at', 'DESC')->paginate(5);
+        $productions = Production::with('locations', 'createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
+        $user_productions = Production::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        $inactive = Production::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 0)->get();
         $locations = Location::orderBy('name', 'ASC')->get();
-        return view('productions.create', compact('productions', 'locations'))
+        return view('productions.index', compact('productions', 'user_productions', 'inactive', 'locations'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -72,8 +62,8 @@ class ProductionController extends Controller
      */
     public function edit($id_production)
     {
-        $productions = Production::findOrFail($id_production);
-        $locations = location::orderBy('name', 'ASC')->get();
+        $productions = Production::with('createdBy', 'updatedBy')->findOrFail($id_production);
+        $locations = location::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
         return view('productions.edit', compact('productions', 'locations'));
     }
 

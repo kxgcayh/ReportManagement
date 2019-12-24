@@ -24,8 +24,10 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $projects = Project::orderBy('created_at', 'DESC')->paginate(10);
-        return view('projects.index', compact('projects'))
+        $projects = Project::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
+        $user_projects = Project::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        $inactive = Project::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
+        return view('projects.index', compact('projects', 'user_projects', 'inactive'))
             ->with('no', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -73,7 +75,7 @@ class ProjectController extends Controller
      */
     public function edit($id_project)
     {
-        $projects = Project::findOrFail($id_project);
+        $projects = Project::with('createdBy', 'updatedBy')->findOrFail($id_project);
         return view('projects.edit', compact('projects'));
     }
 

@@ -21,8 +21,8 @@ Route::get('home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
     Route::resource('users', 'UserController');
-    Route::resource('brands', 'BrandController')->except(['show']);
-    Route::resource('productions', 'ProductionController')->except(['show']);
+    Route::resource('brands', 'BrandController')->except(['show', 'create']);
+    Route::resource('productions', 'ProductionController')->except(['show', 'create']);
     Route::resource('locations', 'LocationController')->except([
         'create', 'show'
     ]);
@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
         'create', 'show'
     ]);
     Route::resource('departements', 'DepartementController')->except([
-        'show'
+        'show', 'create'
     ]);
     Route::resource('projects', 'ProjectController')->except(['create']);
     Route::resource('reports', 'ReportController');
