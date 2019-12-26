@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
         'show', 'create'
     ]);
     Route::resource('projects', 'ProjectController')->except(['create']);
-
+    
     Route::resource('reports', 'ReportController');
-    Route::post('file-upload', 'ReportController@fileUploadPost')->name('file.upload.post');
+    // Route::post('file-upload', 'ReportController@fileUploadPost')->name('file.upload.post');
 });
