@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Report;
 use App\User;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Project;
+use App\Models\Type;
+use App\Models\Report;
+use Awobaz\Compoships\Compoships;
+use Illuminate\Database\Eloquent\Model;
 
 class ReportRevision extends Model
 {
+    use Compoships;
     /**
      * Variable yang dapat menentukan primaryKey.
      */
@@ -22,7 +28,7 @@ class ReportRevision extends Model
      * Variable yang mendaftarkan atribut yang bisa di isi.
      * @var array
      */
-    protected $fillable = ['name', 'report_id'];
+    protected $fillable = ['report_id', 'file', 'brand_id', 'category_id', 'project_id', 'type_id', 'name'];
 
     /**
      * Variable yang menentukan nama relasi table.
@@ -30,6 +36,22 @@ class ReportRevision extends Model
     public function report()
     {
         return $this->belongsTo(Report::class, 'report_id');
+    }
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+    public function type()
+    {
+        return $this->belongsTo(Type::class, 'type_id');
     }
 
     /**

@@ -7,10 +7,12 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Project;
 use App\Models\Type;
+use Awobaz\Compoships\Compoships;
 use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+    use Compoships;
     /**
      * Variable yang dapat menentukan primaryKey.
      */

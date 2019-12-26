@@ -5,9 +5,11 @@ namespace App\Models;
 use App\User;
 use App\Models\Location;
 use Illuminate\Database\Eloquent\Model;
+use Awobaz\Compoships\Compoships;
 
 class Production extends Model
 {
+    use Compoships;
     /**
      * Variable yang dapat menentukan primaryKey.
      */

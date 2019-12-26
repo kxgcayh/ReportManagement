@@ -12,7 +12,6 @@ use App\Models\Category;
 use App\Models\Production;
 use App\Models\Departement;
 use App\Models\ReportRevision;
-
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;

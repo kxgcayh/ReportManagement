@@ -4,10 +4,12 @@ namespace App\Models;
 
 use App\User;
 use App\Models\Report;
+use Awobaz\Compoships\Compoships;
 use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
 {
+    use Compoships;
     /**
      * Variable yang dapat menentukan primaryKey.
      */
