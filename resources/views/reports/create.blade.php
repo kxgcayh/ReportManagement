@@ -50,6 +50,46 @@
         </div>
         <div class="col-md-6">
             <div class="form-group form-material">
+                <label for="machine_id" class="control-label">Machine Name</label>
+                <select name="machine_id" id="machine_id" class="form-control">
+                    <option></option>
+                    @foreach ($machines as $item)
+                    <option value="{{ $item->id_machine }}">{{ ucfirst($item->name) }}</option>
+                    @endforeach
+                </select>
+                <small class="form-control-feedback"> Select Machine </small>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="form-group form-material">
+                <label for="production_id" class="control-label">Production Name</label>
+                <select name="production_id" id="production_id" class="form-control">
+                    <option></option>
+                    @foreach ($productions as $item)
+                    <option value="{{ $item->id_production }}">{{ ucfirst($item->name) }}</option>
+                    @endforeach
+                </select>
+                <small class="form-control-feedback"> Select Production Place </small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group form-material">
+                <label for="product_id" class="control-label">Product Name</label>
+                <select name="product_id" id="product_id" class="form-control">
+                    <option></option>
+                    @foreach ($products as $item)
+                    <option value="{{ $item->id_product }}">{{ ucfirst($item->name) }}</option>
+                    @endforeach
+                </select>
+                <small class="form-control-feedback"> Select Product Name </small>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="form-group form-material">
                 <label for="project_id" class="control-label">Project Name</label>
                 <select name="project_id" id="project_id" class="form-control">
                     <option></option>
@@ -60,8 +100,6 @@
                 <small class="form-control-feedback"> Select Project </small>
             </div>
         </div>
-    </div>
-    <div class="row pt-3">
         <div class="col-md-6">
             <div class="form-group form-material">
                 <label for="type_id" class="control-label">Type Name</label>
@@ -74,7 +112,9 @@
                 <small class="form-control-feedback"> Select Type </small>
             </div>
         </div>
-        <div class=" col-md-6">
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-6">
             <label for="file">Please input file</label><br>
             <input type="file" id="file" name="file" class="dropify" />
         </div>

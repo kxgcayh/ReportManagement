@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Machine;
+use App\Models\Production;
+use App\Models\Product;
 use App\Models\Project;
 use App\Models\Category;
 use App\Models\Report;
@@ -27,9 +30,9 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        $reports = Report::with('brand', 'category', 'project', 'type', 'createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(10);
-        $user_reports = Report::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
-        $inactive = Report::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
+        $reports = Report::with('brand', 'category', 'production', 'product', 'machine', 'project', 'type', 'createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(10);
+        $user_reports = Report::with('brand', 'category', 'production', 'product', 'machine', 'project', 'type', 'createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        $inactive = Report::with('brand', 'category', 'production', 'product', 'machine', 'project', 'type', 'createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
         return view('reports.index', compact('reports', 'user_reports', 'inactive'))
         ->with('no', (request()->input('page', 1) - 1) * 10);
     }
@@ -43,12 +46,15 @@ class ReportController extends Controller
     {
         $brands = Brand::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
         $categories = Category::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
+        $machines = Machine::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
+        $productions = Production::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
+        $products = Product::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
         $projects = Project::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
         $types = Type::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
 
         return view('reports.create',
         compact(
-        'brands', 'categories', 'projects', 'types'
+        'brands', 'categories', 'machines', 'productions', 'products', 'projects', 'types'
                 ))->with('no', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -64,6 +70,9 @@ class ReportController extends Controller
             'name' => 'required|string|max:100',
             'brand_id' => 'required|exists:tr_brands,id_brand',
             'category_id' => 'required|exists:ms_categories,id_category',
+            'machine_id' => 'required|exists:ms_machines,id_machines',
+            'production_id' => 'required|exists:tr_productions,id_production',
+            'product_id' => 'required|exists:tr_products,id_product',
             'project_id' => 'required|exists:ms_projects,id_project',
             'type_id' => 'required|exists:ms_types,id_type',
             'file' => 'required|mimes:pdf,xlx,csv,txt|max:2048'
@@ -78,6 +87,9 @@ class ReportController extends Controller
         $reports->approval = 0;
         $reports->brand_id = $request->brand_id;
         $reports->category_id = $request->category_id;
+        $reports->machine_id = $request->machine_id;
+        $reports->production_id = $request->production_id;
+        $reports->product_id = $request->product_id;
         $reports->project_id = $request->project_id;
         $reports->type_id = $request->type_id;
         $reports->created_by = Auth::id();
@@ -115,6 +127,9 @@ class ReportController extends Controller
             'name' => 'required|string|max:100',
             'brand_id' => 'required|exists:tr_brands,id_brand',
             'category_id' => 'required|exists:ms_categories,id_category',
+            'machine_id' => 'required|exists:ms_machines,id_machines',
+            'production_id' => 'required|exists:tr_productions,id_production',
+            'product_id' => 'required|exists:tr_products,id_product',
             'project_id' => 'required|exists:ms_projects,id_project',
             'type_id' => 'required|exists:ms_types,id_type',
             'file' => 'required|mimes:pdf,xlx,csv,txt|max:2048'
@@ -124,6 +139,9 @@ class ReportController extends Controller
         $reports->name = $request->name;
         $reports->brand_id = $request->brand_id;
         $reports->category_id = $request->category_id;
+        $reports->machine_id = $request->machine_id;
+        $reports->production_id = $request->production_id;
+        $reports->product_id = $request->product_id;
         $reports->project_id = $request->project_id;
         $reports->type_id = $request->type_id;
 
