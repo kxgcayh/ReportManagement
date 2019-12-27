@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class MachineController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified');
+        $this->middleware('permission:View Machines|Manage Machines', ['only' => 'index']);
+        $this->middleware('permission:Manage Machines', ['only' => ['store', 'edit', 'update', 'destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,17 +22,12 @@ class MachineController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $user = Auth::user();
+        $machines = Machine::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
+        $user_machines = Machine::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        $inactive = Machine::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
+        return view('machines.index', compact('user', 'machines', 'user_machines', 'inactive'))
+            ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -37,18 +38,18 @@ class MachineController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        request()->validate([
+            'name' => 'required|string|max:50',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $machines = new Machine;
+        $machines->name = $request->name;
+        $machines->is_active = 0;
+        $machines->created_by = Auth::id();
+        $machines->save();
+
+        return redirect()->back()
+            ->with(['success' => 'Machine: ' . $machines->name . ' Succesfully Created']);
     }
 
     /**
@@ -57,9 +58,10 @@ class MachineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_machine)
     {
-        //
+        $machines = Machine::with('createdBy', 'updatedBy')->findOrFail($id_machine);
+        return view('machines.edit', compact('machines'));
     }
 
     /**
@@ -69,9 +71,21 @@ class MachineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_machine)
     {
-        //
+        request()->validate([
+            'name' => 'required|string|max:50',
+        ]);
+
+        try {
+            $machines = Machine::findOrFail($id_machine);
+            $machines->name = $request->name;
+            $machines->updated_by = Auth::id();
+            $machines->save();
+            return redirect(route('machines.index'))->with(['success' => 'Machine: ' . $machines->name . ' Changed']);
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -80,8 +94,10 @@ class MachineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_machine)
     {
-        //
+        $machines = Machine::findOrFail($id_machine);
+        $machines->delete();
+        return redirect()->back()->with(['danger' => 'Machine: ' . $machines->name . ' Succesfully Deleted']);
     }
 }

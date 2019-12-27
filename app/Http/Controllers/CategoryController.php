@@ -14,6 +14,7 @@ class CategoryController extends Controller
         $this->middleware('permission:View Categories|Manage Categories', ['only' => 'index']);
         $this->middleware('permission:Manage Categories', ['only' => ['store', 'edit', 'update', 'destroy']]);
     }
+
     /**
      * $categories for Admin and Manager
      * $user_categories for Users

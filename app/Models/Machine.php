@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use App\Models\Report;
 use Illuminate\Database\Eloquent\Model;
 use Awobaz\Compoships\Compoships;
 
@@ -36,5 +37,10 @@ class Machine extends Model
     public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function report()
+    {
+        return $this->hasMany(Report::class);
     }
 }

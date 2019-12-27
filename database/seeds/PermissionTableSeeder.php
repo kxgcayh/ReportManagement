@@ -24,6 +24,7 @@ class PermissionTableSeeder extends Seeder
             'View Roles', 'Manage Roles',
             'View Types', 'Manage Types',
             'View Users', 'Manage Users',
+            'View Machines', 'Manage Machines',
         ];
 
 

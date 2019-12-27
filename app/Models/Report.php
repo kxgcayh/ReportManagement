@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Machine;
 use Awobaz\Compoships\Compoships;
 use Illuminate\Database\Eloquent\Model;
 
@@ -47,6 +48,10 @@ class Report extends Model
     public function type()
     {
         return $this->belongsTo(Type::class, 'type_id');
+    }
+    public function machine()
+    {
+        return $this->belongsTo(Machine::class, 'machine_id');
     }
 
     /**

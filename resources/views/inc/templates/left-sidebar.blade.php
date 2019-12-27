@@ -19,11 +19,12 @@
                             class="hide-menu">Data Master</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ route('brands.index') }}">Brand</a></li>
-                        <li><a href="{{ route('productions.index') }}">Production</a></li>
+                        <li><a href="{{ route('categories.index') }}">Category</a></li>
                         <li><a href="{{ route('departements.index') }}">Departement</a></li>
                         <li><a href="{{ route('locations.index') }}">Location</a></li>
+                        <li><a href="{{ route('machines.index') }}">Machine</a></li>
+                        <li><a href="{{ route('productions.index') }}">Production</a></li>
                         <li><a href="{{ route('types.index') }}">Type</a></li>
-                        <li><a href="{{ route('categories.index') }}">Category</a></li>
                     </ul>
                 </li>
                 @endrole
