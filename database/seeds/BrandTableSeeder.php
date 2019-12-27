@@ -15,9 +15,10 @@ class BrandTableSeeder extends Seeder
         $brands = [
             [
                 'id_brand' => 1,
-                'name' => 'Hilo',
+                'product_id' => 1,
+                'name' => 'Water Sugar Free',
                 'is_active' => true,
-                'detail' => 'Susu Peninggi Badan',
+                'detail' => 'Bebas Gula',
                 'created_at' => now(),
                 'updated_at' => now(),
                 'created_by' => 1,
@@ -25,23 +26,25 @@ class BrandTableSeeder extends Seeder
             ],
             [
                 'id_brand' => 2,
-                'name' => 'Milo',
+                'product_id' => 2,
+                'name' => 'Active Tiramisu',
                 'is_active' => true,
-                'detail' => 'Susu Peningkat Stamina',
+                'detail' => 'Tiramisu yang bikin Seru!',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'created_by' => 1,
-                'updated_by' => 2,
+                'created_by' => 2,
+                'updated_by' => 3,
             ],
             [
                 'id_brand' => 3,
-                'name' => 'L-Men',
+                'product_id' => 3,
+                'name' => 'Madu Bebas Gula',
                 'is_active' => true,
-                'detail' => 'Susu Berotot',
+                'detail' => 'Anti Diabetes',
                 'created_at' => now(),
                 'updated_at' => now(),
-                'created_by' => 1,
-                'updated_by' => 2,
+                'created_by' => 3,
+                'updated_by' => 1,
             ]
         ];
         Brand::insert($brands);

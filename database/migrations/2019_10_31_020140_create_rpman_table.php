@@ -105,8 +105,21 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
+
+        Schema::create('tr_products', function (Blueprint $table) {
+            $table->bigIncrements('id_product');
+            $table->unsignedBigInteger('production_id')->nullable();
+            $table->boolean('is_active')->nullable();
+            $table->string('name');
+            $table->text('detail');
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->timestamps();
+        });
+
         Schema::create('tr_brands', function (Blueprint $table) {
             $table->bigIncrements('id_brand');
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->boolean('is_active')->nullable();
             $table->string('name');
             $table->text('detail');
@@ -119,6 +132,9 @@ class CreateRpmanTable extends Migration
             $table->bigIncrements('id_report');
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('machine_id');
+            $table->unsignedBigInteger('production_id');
+            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('type_id');
             $table->boolean('is_active')->nullable();
@@ -132,6 +148,7 @@ class CreateRpmanTable extends Migration
         Schema::create('tr_report_revs', function (Blueprint $table) {
             $table->bigIncrements('id_report_rev');
             $table->unsignedBigInteger('report_id');
+            $table->boolean('is_active')->nullable();
             $table->string('name');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
@@ -155,6 +172,7 @@ class CreateRpmanTable extends Migration
         Schema::dropIfExists('ms_projects');
         Schema::dropIfExists('ms_types');
         Schema::dropIfExists('tr_productions');
+        Schema::dropIfExists('tr_products');
         Schema::dropIfExists('tr_brands');
         Schema::dropIfExists('tr_reports');
         Schema::dropIfExists('tr_report_revs');
