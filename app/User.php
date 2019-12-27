@@ -11,6 +11,7 @@ use App\Models\Location;
 use App\Models\Category;
 use App\Models\Production;
 use App\Models\Departement;
+use App\Models\Product;
 use App\Models\ReportRevision;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -81,6 +82,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function production()
     {
         return $this->hasMany(Production::class);
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
     }
 
     public function project()

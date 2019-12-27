@@ -46,4 +46,8 @@ class Brand extends Model
     {
         return $this->hasMany(Report::class, 'brand_id');
     }
+    public function products()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,10 +28,11 @@ class BrandController extends Controller
      */
     public function index(Request $request)
     {
-        $brands = Brand::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
-        $user_brands = Brand::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
-        $inactive = Brand::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 0)->get();
-        return view('brands.index', compact('brands', 'user_brands', 'inactive'))
+        $products = Product::orderBy('name', 'ASC')->get();
+        $brands = Brand::with('createdBy', 'updatedBy', 'products')->orderBy('created_at', 'DESC')->paginate(5);
+        $user_brands = Brand::with('createdBy', 'updatedBy', 'products')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
+        $inactive = Brand::with('createdBy', 'updatedBy', 'products')->orderBy('created_at', 'DESC')->where('is_active', 0)->get();
+        return view('brands.index', compact('products', 'brands', 'user_brands', 'inactive'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -43,11 +45,13 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         request()->validate([
+            'product_id' => 'required|exists:tr_products,id_product',
             'name' => 'required|string|max:50',
             'detail' => 'required',
         ]);
 
         $brands = new Brand;
+        $brands->product_id = $request->product_id;
         $brands->name = $request->name;
         $brands->detail = $request->detail;
         $brands->is_active = 0;
@@ -65,8 +69,9 @@ class BrandController extends Controller
      */
     public function edit($id_brand)
     {
-        $brands = Brand::with('createdBy', 'updatedBy')->findOrFail($id_brand);
-        return view('brands.edit', compact('brands'));
+        $products = Product::orderBy('name', 'ASC')->get();
+        $brands = Brand::with('createdBy', 'updatedBy', 'products')->findOrFail($id_brand);
+        return view('brands.edit', compact('products', 'brands'));
     }
 
     /**
@@ -79,11 +84,13 @@ class BrandController extends Controller
     public function update(Request $request, $id_brand)
     {
         request()->validate([
+            'product_id' => 'required|exists:tr_products,id_product',
             'name' => 'required|string|max:50',
             'detail' => 'required',
         ]);
 
         $brands = Brand::findOrFail($id_brand);
+        $brands->product_id = $request->product_id;
         $brands->name = $request->name;
         $brands->detail = $request->detail;
         $brands->updated_by = Auth::id();

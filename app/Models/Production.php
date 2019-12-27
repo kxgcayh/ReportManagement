@@ -34,6 +34,11 @@ class Production extends Model
         return $this->belongsTo(Location::class, 'location_id');
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     /**
      * Relation to User Model;
      * @var array

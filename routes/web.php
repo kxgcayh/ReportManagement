@@ -28,6 +28,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('brands', 'BrandController')->except(['show', 'create']);
     // Machine
     Route::resource('machines', 'MachineController')->except(['show', 'create']);
+    // Product
+    Route::resource('products', 'ProductController')->except(['show', 'create']);
     // Production
     Route::resource('productions', 'ProductionController')->except(['show', 'create']);
     // Location

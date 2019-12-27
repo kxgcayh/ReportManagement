@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\User;
+use App\Models\Brand;
 use App\Models\Report;
+use App\Models\Production;
 use Awobaz\Compoships\Compoships;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,4 +30,33 @@ class Product extends Model
         'name',
         'detail'
     ];
+
+    /**
+     * @relation
+     */
+    public function productions()
+    {
+        return $this->belongsTo(Production::class, 'production_id');
+    }
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+    public function brands()
+    {
+        return $this->hasMany(Brand::class);
+    }
+
+    /**
+     * Relation to User Model;
+     * @var array
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }
