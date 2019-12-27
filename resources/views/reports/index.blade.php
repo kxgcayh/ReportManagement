@@ -5,9 +5,9 @@
 @breadcrumb(['header' => 'Report List', 'active' => 'Show'])
 @bcItem(['value' => 'Report']) @bcItem(['value' => 'Projects']) @bcItem(['value' => 'Data Master'])
 @endbreadcrumb
+@ifAlert
 
 @card
-@ifAlert
 @slot('header')
 <a href="{{ route('reports.create') }}" class="btn waves-effect waves-light btn-primary"><i
         class="mdi mdi-plus-circle-outline"></i>
@@ -44,9 +44,8 @@
                         class="badge badge-warning">{{ $report->updatedBy['name'] }}</label>
                 </td>
                 <td>
-                    <a class="btn btn-info" name="show" href="{{ route('reports.show',$report->id_report) }}">
-                        <i class="fa fa-eye"></i>
-                    </a>
+                    {{-- <a class="btn btn-info" name="show" href="{{ route('reports.show',$report->id_report) }}"><i
+                        class="fa fa-eye"></i></a> --}}
                     <a name="edit" href="{{ route('reports.edit', $report->id_report) }}" class="btn btn-warning">
                         <i class="fa fa-edit"></i>
                     </a>

@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified');
+        $this->middleware('permission:View Reports|Manage Reports', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Manage Reports', ['only' => ['store', 'edit', 'update', 'destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -59,7 +66,7 @@ class ReportController extends Controller
             'category_id' => 'required|exists:ms_categories,id_category',
             'project_id' => 'required|exists:ms_projects,id_project',
             'type_id' => 'required|exists:ms_types,id_type',
-            'file' => 'required|mimes:pdf,xlx,csv|max:2048'
+            'file' => 'required|mimes:pdf,xlx,csv,txt|max:2048'
         ]);
         $reports = new Report;
         $reports->name = $request->name;
@@ -113,14 +120,16 @@ class ReportController extends Controller
             'file' => 'required|mimes:pdf,xlx,csv,txt|max:2048'
         ]);
 
-        $reports = Project::findOrFail($id_report);
+        $reports = Report::findOrFail($id_report);
         $reports->name = $request->name;
         $reports->brand_id = $request->brand_id;
         $reports->category_id = $request->category_id;
         $reports->project_id = $request->project_id;
         $reports->type_id = $request->type_id;
+
         $fileName = time().'.'.$request->file->extension();
         $reports->file = $request->file->move(public_path('uploads'), $fileName);
+
         $reports->updated_by = Auth::id();
         $reports->save();
 
@@ -134,8 +143,18 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_report)
     {
-        //
+        $reports = Report::findOrFail($id_report);
+        $reports->delete();
+        return redirect()->back()->with([
+            'success' => '<strong>' . $reports->name . '</strong> Has been deleted'
+        ]);
+    }
+
+    public function show($id_report)
+    {
+        $reports = Report::with('createdBy', 'updatedBy')->findOrFail($id_report);
+        return view('reports.edit', compact('reports'));
     }
 }

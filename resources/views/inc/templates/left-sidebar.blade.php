@@ -29,7 +29,7 @@
                 @endrole
                 <li>
                     <a class="has-arrow" href="{{route('projects.index') }}" aria-expanded="false"><i
-                            class="mdi mdi-server-network"></i>Data Project</a>
+                            class="mdi mdi-folder-multiple"></i>Data Project</a>
                 </li>
                 <li>
                     <a class="has-arrow" href="{{route('reports.index') }}" aria-expanded="false"><i

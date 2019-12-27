@@ -9,7 +9,7 @@
 @endbreadcrumb
 
 @card(['header' => 'Create Report'])
-<form role="form" action="{{ route('reports.store') }}" method="post" enctype="multipart/form-data">
+<form role="form" action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row pt-3">
         <div class="col-md-6">

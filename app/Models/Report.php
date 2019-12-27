@@ -27,7 +27,7 @@ class Report extends Model
      * Variable yang mendaftarkan atribut yang bisa di isi.
      * @var array
      */
-    protected $fillable = ['name', 'file', 'brand_id', 'category_id', 'project_id', 'type_id'];
+    protected $fillable = ['brand_id', 'category_id', 'project_id', 'type_id', 'name', 'file'];
 
     /**
      * Variable yang menentukan nama relasi table.

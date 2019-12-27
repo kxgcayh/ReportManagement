@@ -6,7 +6,8 @@
 @endbreadcrumb
 @ifAlert
 @card(['header' => ''])
-<form role="form" action="{{ route('reports.update', $reports->id_report) }}" method="POST" class="form-material">
+<form role="form" action="{{ route('reports.update', $reports->id_report) }}" method="POST" class="form-material"
+    enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="_method" value="PUT">
     <fieldset disabled>

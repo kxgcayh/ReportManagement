@@ -13,10 +13,12 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            'View Reports', 'Manage Reports',
             'View Brands', 'Manage Brands',
             'View Categories', 'Manage Categories',
             'View Departements', 'Manage Departements',
             'View Locations', 'Manage Locations',
+            'View Machines', 'Manage Machines',
             'View Productions', 'Manage Productions',
             'View Projects', 'Manage Projects',
             'View Roles', 'Manage Roles',
