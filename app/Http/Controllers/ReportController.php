@@ -33,7 +33,8 @@ class ReportController extends Controller
         $reports = Report::with('brand', 'category', 'production', 'product', 'machine', 'project', 'type', 'createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(10);
         $user_reports = Report::with('brand', 'category', 'production', 'product', 'machine', 'project', 'type', 'createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
         $inactive = Report::with('brand', 'category', 'production', 'product', 'machine', 'project', 'type', 'createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
-        return view('reports.index', compact('reports', 'user_reports', 'inactive'))
+        $trashed = Report::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->onlyTrashed()->get();
+        return view('reports.index', compact('reports', 'user_reports', 'inactive', 'trashed'))
         ->with('no', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -168,6 +169,20 @@ class ReportController extends Controller
         return redirect()->back()->with([
             'success' => '<strong>' . $reports->name . '</strong> Has been deleted'
         ]);
+    }
+
+    public function restore($id_report)
+    {
+        $reports = Report::onlyTrashed()->where('id_report', $id_report);
+        $reports->restore();
+        return redirect()->back()->with(['success' => 'Report Restored']);
+    }
+
+    public function forceDelete($id_report)
+    {
+        $reports = Report::onlyTrashed()->where('id_report', $id_report);
+        $reports->forceDelete();
+        return redirect()->back()->with(['success' => 'Report Deleted']);
     }
 
     public function show($id_report)

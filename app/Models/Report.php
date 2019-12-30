@@ -12,10 +12,11 @@ use App\Models\Category;
 use App\Models\Production;
 use Awobaz\Compoships\Compoships;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Report extends Model
 {
-    use Compoships;
+    use Compoships, SoftDeletes;
     /**
      * Variable yang dapat menentukan primaryKey.
      */
@@ -25,6 +26,11 @@ class Report extends Model
      * Variable yang menentukan nama table.
      */
     protected $table = 'tr_reports';
+
+    /**
+     * Variable yang menentukan SoftDeletes
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Variable yang mendaftarkan atribut yang bisa di isi.

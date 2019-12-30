@@ -74,6 +74,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Project
     Route::resource('projects', 'ProjectController')->except(['create']);
+    Route::get('/projects/restore/{id_project}', 'ProjectController@restore');
+    Route::get('/projects/forceDelete/{id_project}', 'ProjectController@forceDelete');
+
     // Report
     Route::resource('reports', 'ReportController')->except(['show']);
+    Route::get('/reports/restore/{id_report}', 'ReportController@restore');
+    Route::get('/reports/forceDelete/{id_report}', 'ReportController@forceDelete');
 });

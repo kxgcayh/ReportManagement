@@ -11,8 +11,13 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Project'])
+@role('user')
 @modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Unapproved Data'])
+@else
+@modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
+'name' => 'Project Bin'])
+@endrole
 @endslot
 <div class="table-responsive">
     <table class="table table-hover">
@@ -117,6 +122,37 @@
     <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 pull-right"><i
             class="mdi mdi-loupe"></i> Submit</button>
 </form>
+@endmodal
+
+@modal(['id' => 'trash', 'size' => 'lg', 'color' => 'warning', 'title' => 'Project Bin'])
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name Project</th>
+                <th>Deleted At</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($trashed as $projs)
+            <tr>
+                <td>{{ $projs->name }}</td>
+                <td>{{ $projs->deleted_at }}</td>
+                <td>
+                    <a href="/projects/restore/{{ $projs->id_project }}" class="btn btn-success btn-sm">Restore</a>
+                    <a href="/projects/forceDelete/{{ $projs->id_project }}" class="btn btn-danger btn-sm">Force
+                        Delete</a>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="3" class="text-center">Tidak ada data Project</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 @endmodal
 
 @endsection

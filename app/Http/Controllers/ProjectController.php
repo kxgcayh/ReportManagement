@@ -33,7 +33,8 @@ class ProjectController extends Controller
         $projects = Project::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
         $user_projects = Project::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
         $inactive = Project::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
-        return view('projects.index', compact('projects', 'user_projects', 'inactive'))
+        $trashed = Project::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->onlyTrashed()->get();
+        return view('projects.index', compact('projects', 'user_projects', 'inactive', 'trashed'))
             ->with('no', (request()->input('page', 1) - 1) * 10);
     }
 
@@ -122,5 +123,19 @@ class ProjectController extends Controller
         return redirect()->back()->with([
             'success' => '<strong>' . $projects->name . '</strong> Telah Dihapus!'
         ]);
+    }
+
+    public function restore($id_project)
+    {
+        $projects = Project::onlyTrashed()->where('id_project', $id_project);
+        $projects->restore();
+        return redirect()->back()->with(['success' => 'Project Restored']);
+    }
+
+    public function forceDelete($id_project)
+    {
+        $projects = Project::onlyTrashed()->where('id_project', $id_project);
+        $projects->forceDelete();
+        return redirect()->back()->with(['success' => 'Project Deleted']);
     }
 }
