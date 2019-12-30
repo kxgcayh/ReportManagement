@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Machine;
+use App\Models\Production;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Report;
+use App\Models\Type;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller

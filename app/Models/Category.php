@@ -6,10 +6,11 @@ use App\User;
 use App\Models\Report;
 use Illuminate\Database\Eloquent\Model;
 use Awobaz\Compoships\Compoships;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use Compoships;
+    use Compoships, SoftDeletes;
     /**
      * Variable yang dapat menentukan primaryKey.
      */
@@ -19,6 +20,11 @@ class Category extends Model
      * Variable yang menentukan nama table.
      */
     protected $table = 'ms_categories';
+
+    /**
+     * Variable yang menentukan SoftDeletes
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Variable yang mendaftarkan atribut yang bisa di isi.

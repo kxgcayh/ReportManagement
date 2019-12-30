@@ -10,8 +10,14 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Category'])
+@role('user')
 @modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Unapproved Data'])
+@else
+@modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
+'name' => 'Category Bin'])
+@endrole
+
 @endslot
 <div class="table-responsive">
     <table class="table table-hover">
@@ -127,6 +133,37 @@
             @empty
             <tr>
                 <td colspan="4" class="text-center">Tidak ada data Category</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+@endmodal
+
+@modal(['id' => 'trash', 'size' => 'lg', 'color' => 'warning', 'title' => 'Category Bin'])
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name Category</th>
+                <th>Deleted At</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($trashed as $cats)
+            <tr>
+                <td>{{ $cats->name }}</td>
+                <td>{{ $cats->deleted_at }}</td>
+                <td>
+                    <a href="/categories/restore/{{ $cats->id_category }}" class="btn btn-success btn-sm">Restore</a>
+                    <a href="/categories/forceDelete/{{ $cats->id_category }}" class="btn btn-danger btn-sm">Force
+                        Delete</a>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="3" class="text-center">Tidak ada data Category</td>
             </tr>
             @endforelse
         </tbody>

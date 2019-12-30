@@ -24,7 +24,8 @@ class TypeController extends Controller
         $types = Type::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
         $user_types = Type::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
         $inactive = Type::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
-        return view('types.index', compact('types', 'user_types', 'inactive'))
+        $trashed = Type::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->onlyTrashed()->get();
+        return view('types.index', compact('types', 'user_types', 'inactive', 'trashed'))
             ->with('no', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -97,5 +98,19 @@ class TypeController extends Controller
         $types = Type::findOrFail($id_type);
         $types->delete();
         return redirect()->back()->with(['warning' => 'Type: ' . $types->name . ' Succesfully Deleted']);
+    }
+
+    public function restore($id_type)
+    {
+        $types = Type::onlyTrashed()->where('id_type', $id_type);
+        $types->restore();
+        return redirect()->back()->with(['success' => 'Type Restored']);
+    }
+
+    public function forceDelete($id_type)
+    {
+        $types = Type::onlyTrashed()->where('id_type', $id_type);
+        $types->forceDelete();
+        return redirect()->back()->with(['success' => 'Type Deleted']);
     }
 }

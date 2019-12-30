@@ -7,11 +7,12 @@ use App\Models\Brand;
 use App\Models\Report;
 use App\Models\Production;
 use Awobaz\Compoships\Compoships;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use Compoships;
+    use Compoships, SoftDeletes;
     /**
      * Variable yang dapat menentukan primaryKey.
      */
@@ -21,6 +22,11 @@ class Product extends Model
      * Variable yang menentukan nama table.
      */
     protected $table = 'tr_products';
+
+    /**
+     * Variable yang menentukan SoftDeletes
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Variable yang mendaftarkan atribut yang bisa di isi.

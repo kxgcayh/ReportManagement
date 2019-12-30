@@ -6,10 +6,11 @@ use App\User;
 use App\Models\Report;
 use Awobaz\Compoships\Compoships;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Type extends Model
 {
-    use Compoships;
+    use Compoships, SoftDeletes;
     /**
      * Variable yang menentukan primaryKey.
      */
@@ -25,6 +26,11 @@ class Type extends Model
      * @var array
      */
     protected $fillable = ['name'];
+
+    /**
+     * Variable yang menentukan SoftDeletes
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * Relation to User Model;

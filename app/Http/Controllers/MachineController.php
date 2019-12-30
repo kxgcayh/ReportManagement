@@ -26,7 +26,8 @@ class MachineController extends Controller
         $machines = Machine::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
         $user_machines = Machine::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
         $inactive = Machine::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
-        return view('machines.index', compact('user', 'machines', 'user_machines', 'inactive'))
+        $trashed = Machine::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->onlyTrashed()->get();
+        return view('machines.index', compact('user', 'machines', 'user_machines', 'inactive', 'trashed'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -99,5 +100,19 @@ class MachineController extends Controller
         $machines = Machine::findOrFail($id_machine);
         $machines->delete();
         return redirect()->back()->with(['danger' => 'Machine: ' . $machines->name . ' Succesfully Deleted']);
+    }
+
+    public function restore($id_machine)
+    {
+        $machines = Machine::onlyTrashed()->where('id_machine', $id_machine);
+        $machines->restore();
+        return redirect()->back()->with(['success' => 'Machine Restored']);
+    }
+
+    public function forceDelete($id_machine)
+    {
+        $machines = Machine::onlyTrashed()->where('id_machine', $id_machine);
+        $machines->forceDelete();
+        return redirect()->back()->with(['success' => 'Machine Deleted']);
     }
 }

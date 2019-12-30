@@ -23,8 +23,9 @@ class DepartementController extends Controller
         $locations = Location::orderBy('name', 'ASC')->get();
         $user_departements = Departement::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
         $inactive = Departement::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 0)->get();
+        $trashed = Departement::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->onlyTrashed()->get();
         // Menampilkan Nama Departemen dan Lokasi pada List Departemen
-        return view('departements.index', compact('departements', 'user_departements', 'inactive', 'locations'))
+        return view('departements.index', compact('departements', 'user_departements', 'inactive', 'locations', 'trashed'))
             ->with('no', ($request->input('page', 1) - 1) * 10);
     }
 
@@ -86,5 +87,19 @@ class DepartementController extends Controller
         // Redirect dengan Pesan Sukses
         return redirect(route('departements.index'))
             ->with(['success' => '<strong>' . $departements->name . '</strong> Diperbarui']);
+    }
+
+    public function restore($id_departement)
+    {
+        $departements = Departement::onlyTrashed()->where('id_departement', $id_departement);
+        $departements->restore();
+        return redirect()->back()->with(['success' => 'Departement Restored']);
+    }
+
+    public function forceDelete($id_departement)
+    {
+        $departements = Departement::onlyTrashed()->where('id_departement', $id_departement);
+        $departements->forceDelete();
+        return redirect()->back()->with(['success' => 'Departement Deleted']);
     }
 }

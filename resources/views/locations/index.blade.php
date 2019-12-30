@@ -10,8 +10,14 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Location'])
+@role('user')
 @modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Unapproved Data'])
+@else
+@modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
+'name' => 'Location Bin'])
+@endrole
+
 @endslot
 <div class="table-responsive">
     <table class="table">
@@ -142,7 +148,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="4" class="text-center">Tidak ada data Category</td>
+                <td colspan="4" class="text-center">Tidak ada data Lokasi</td>
             </tr>
             @endforelse
         </tbody>
@@ -150,5 +156,35 @@
 </div>
 @endmodal
 
+@modal(['id' => 'trash', 'size' => 'lg', 'color' => 'warning', 'title' => 'Location Bin'])
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name Location</th>
+                <th>Deleted At</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($trashed as $locs)
+            <tr>
+                <td>{{ $locs->name }}</td>
+                <td>{{ $locs->deleted_at }}</td>
+                <td>
+                    <a href="/locations/restore/{{ $locs->id_location }}" class="btn btn-success btn-sm">Restore</a>
+                    <a href="/locations/forceDelete/{{ $locs->id_location }}" class="btn btn-danger btn-sm">Force
+                        Delete</a>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="3" class="text-center">Tidak ada data Lokasi</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+@endmodal
 
 @endsection

@@ -23,6 +23,7 @@
                         <li><a href="{{ route('departements.index') }}">Departement</a></li>
                         <li><a href="{{ route('locations.index') }}">Location</a></li>
                         <li><a href="{{ route('machines.index') }}">Machine</a></li>
+                        <li><a href="{{ route('products.index') }}">Product</a></li>
                         <li><a href="{{ route('productions.index') }}">Production</a></li>
                         <li><a href="{{ route('types.index') }}">Type</a></li>
                     </ul>

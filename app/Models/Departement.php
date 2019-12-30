@@ -6,11 +6,12 @@ use App\User;
 use App\Models\Location;
 use Awobaz\Compoships\Compoships;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Departement extends Model
 {
-    use Compoships;
+    use Compoships, SoftDeletes;
     /**
      * @primaryKey
      */
@@ -20,6 +21,11 @@ class Departement extends Model
      * @table
      */
     protected $table = 'tr_departements';
+
+    /**
+     * Variable yang menentukan SoftDeletes
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      *

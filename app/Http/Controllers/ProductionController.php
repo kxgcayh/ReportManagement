@@ -28,7 +28,8 @@ class ProductionController extends Controller
         $user_productions = Production::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
         $inactive = Production::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 0)->get();
         $locations = Location::orderBy('name', 'ASC')->get();
-        return view('productions.index', compact('productions', 'user_productions', 'inactive', 'locations'))
+        $trashed = Production::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->onlyTrashed()->get();
+        return view('productions.index', compact('productions', 'user_productions', 'inactive', 'locations', 'trashed'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -102,5 +103,19 @@ class ProductionController extends Controller
         $productions = Production::findOrFail($id_production);
         $productions->delete();
         return redirect()->back()->with(['success' => '<strong>' . $productions->name . '</strong> Telah Dihapus!']);
+    }
+
+    public function restore($id_production)
+    {
+        $productions = Production::onlyTrashed()->where('id_production', $id_production);
+        $productions->restore();
+        return redirect()->back()->with(['success' => 'Production Restored']);
+    }
+
+    public function forceDelete($id_production)
+    {
+        $productions = Production::onlyTrashed()->where('id_production', $id_production);
+        $productions->forceDelete();
+        return redirect()->back()->with(['success' => 'Production Deleted']);
     }
 }

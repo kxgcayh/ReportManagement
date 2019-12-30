@@ -28,7 +28,8 @@ class ProductController extends Controller
         $products = Product::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
         $user_products = Product::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
         $inactive = Product::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 0)->get();
-        return view('products.index', compact('products','productions', 'user_products', 'inactive'))
+        $trashed = Product::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->onlyTrashed()->get();
+        return view('products.index', compact('products','productions', 'user_products', 'inactive', 'trashed'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -106,5 +107,19 @@ class ProductController extends Controller
         $products = Product::findOrFail($id_product);
         $products->delete();
         return redirect()->back()->with(['success' => '<strong>' . $products->name . '</strong> Telah Dihapus!']);
+    }
+
+    public function restore($id_product)
+    {
+        $products = Product::onlyTrashed()->where('id_product', $id_product);
+        $products->restore();
+        return redirect()->back()->with(['success' => 'Product Restored']);
+    }
+
+    public function forceDelete($id_product)
+    {
+        $products = Product::onlyTrashed()->where('id_product', $id_product);
+        $products->forceDelete();
+        return redirect()->back()->with(['success' => 'Product Deleted']);
     }
 }

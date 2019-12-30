@@ -26,6 +26,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
         Schema::create('tr_departements', function (Blueprint $table) {
             $table->bigIncrements('id_departement');
@@ -35,6 +36,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
         Schema::create('ms_failed_jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -56,6 +58,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
         Schema::create('ms_password_resets', function (Blueprint $table) {
             $table->string('email');
@@ -69,6 +72,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
         Schema::create('ms_machines', function (Blueprint $table) {
             $table->bigIncrements('id_machine');
@@ -77,6 +81,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
 
         });
         Schema::create('ms_projects', function (Blueprint $table) {
@@ -87,6 +92,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
         Schema::create('ms_types', function (Blueprint $table) {
             $table->bigIncrements('id_type');
@@ -95,6 +101,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
         Schema::create('tr_productions', function (Blueprint $table) {
             $table->bigIncrements('id_production');
@@ -104,6 +111,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
 
         Schema::create('tr_products', function (Blueprint $table) {
@@ -115,6 +123,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
 
         Schema::create('tr_brands', function (Blueprint $table) {
@@ -126,6 +135,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
 
         Schema::create('tr_reports', function (Blueprint $table) {
@@ -144,6 +154,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
         Schema::create('tr_report_revs', function (Blueprint $table) {
             $table->bigIncrements('id_report_rev');
@@ -153,6 +164,7 @@ class CreateRpmanTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
     /**

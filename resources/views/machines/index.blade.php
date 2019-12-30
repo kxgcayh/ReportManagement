@@ -10,8 +10,13 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Machine'])
+@role('user')
 @modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Unapproved Data'])
+@else
+@modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
+'name' => 'Machine Bin'])
+@endrole
 @endslot
 <div class="table-responsive">
     <table class="table table-hover">
@@ -127,6 +132,37 @@
             @empty
             <tr>
                 <td colspan="4" class="text-center">Tidak ada data Machine</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+@endmodal
+
+@modal(['id' => 'trash', 'size' => 'lg', 'color' => 'warning', 'title' => 'Machine Bin'])
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name Machine</th>
+                <th>Deleted At</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($trashed as $macs)
+            <tr>
+                <td>{{ $macs->name }}</td>
+                <td>{{ $macs->deleted_at }}</td>
+                <td>
+                    <a href="/machines/restore/{{ $macs->id_machine }}" class="btn btn-success btn-sm">Restore</a>
+                    <a href="/machines/forceDelete/{{ $macs->id_machine }}" class="btn btn-danger btn-sm">Force
+                        Delete</a>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="3" class="text-center">Tidak ada data Mesin</td>
             </tr>
             @endforelse
         </tbody>

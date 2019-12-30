@@ -32,7 +32,8 @@ class BrandController extends Controller
         $brands = Brand::with('createdBy', 'updatedBy', 'products')->orderBy('created_at', 'DESC')->paginate(5);
         $user_brands = Brand::with('createdBy', 'updatedBy', 'products')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
         $inactive = Brand::with('createdBy', 'updatedBy', 'products')->orderBy('created_at', 'DESC')->where('is_active', 0)->get();
-        return view('brands.index', compact('products', 'brands', 'user_brands', 'inactive'))
+        $trashed = Brand::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->onlyTrashed()->get();
+        return view('brands.index', compact('products', 'brands', 'user_brands', 'inactive', 'trashed'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -112,5 +113,19 @@ class BrandController extends Controller
         $brands = Brand::findOrFail($id_brand);
         $brands->delete();
         return redirect()->back()->with(['success' => '<strong>' . $brands->name . '</strong> Telah Dihapus!']);
+    }
+
+    public function restore($id_brand)
+    {
+        $brands = Brand::onlyTrashed()->where('id_brand', $id_brand);
+        $brands->restore();
+        return redirect()->back()->with(['success' => 'Brand Restored']);
+    }
+
+    public function forceDelete($id_brand)
+    {
+        $brands = Brand::onlyTrashed()->where('id_brand', $id_brand);
+        $brands->forceDelete();
+        return redirect()->back()->with(['success' => 'Brand Deleted']);
     }
 }

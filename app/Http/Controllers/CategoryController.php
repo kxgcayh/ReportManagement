@@ -27,7 +27,8 @@ class CategoryController extends Controller
         $categories = Category::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->paginate(5);
         $user_categories = Category::with('createdBy', 'updatedBy')->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate(5);
         $inactive = Category::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->where('is_active', 0)->get();
-        return view('categories.index', compact('categories', 'user', 'user_categories', 'inactive'))
+        $trashed = Category::with('createdBy', 'updatedBy')->orderBy('created_at', 'ASC')->onlyTrashed()->get();
+        return view('categories.index', compact('categories', 'user', 'user_categories', 'inactive', 'trashed'))
             ->with('no', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -99,5 +100,19 @@ class CategoryController extends Controller
         $categories = Category::findOrFail($id_category);
         $categories->delete();
         return redirect()->back()->with(['danger' => 'Category: ' . $categories->name . ' Succesfully Deleted']);
+    }
+
+    public function restore($id_category)
+    {
+        $brands = Category::onlyTrashed()->where('id_category', $id_category);
+        $brands->restore();
+        return redirect()->back()->with(['success' => 'Category Restored']);
+    }
+
+    public function forceDelete($id_category)
+    {
+        $brands = Category::onlyTrashed()->where('id_category', $id_category);
+        $brands->forceDelete();
+        return redirect()->back()->with(['success' => 'Category Deleted']);
     }
 }

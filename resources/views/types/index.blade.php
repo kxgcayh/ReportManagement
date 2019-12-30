@@ -11,8 +11,13 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Type'])
+@role('user')
 @modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Unapproved Data'])
+@else
+@modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
+'name' => 'Type Bin'])
+@endrole
 @endslot
 <div class="table-responsive">
     <table class="table">
@@ -129,6 +134,37 @@
             @empty
             <tr>
                 <td colspan="4" class="text-center">Tidak ada data Type</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+@endmodal
+
+@modal(['id' => 'trash', 'size' => 'lg', 'color' => 'warning', 'title' => 'Type Bin'])
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name Type</th>
+                <th>Deleted At</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($trashed as $type)
+            <tr>
+                <td>{{ $type->name }}</td>
+                <td>{{ $type->deleted_at }}</td>
+                <td>
+                    <a href="/types/restore/{{ $type->id_type }}" class="btn btn-success btn-sm">Restore</a>
+                    <a href="/types/forceDelete/{{ $type->id_type }}" class="btn btn-danger btn-sm">Force
+                        Delete</a>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="3" class="text-center">Tidak ada data Type</td>
             </tr>
             @endforelse
         </tbody>
