@@ -70,7 +70,7 @@ class ReportController extends Controller
             'name' => 'required|string|max:100',
             'brand_id' => 'required|exists:tr_brands,id_brand',
             'category_id' => 'required|exists:ms_categories,id_category',
-            'machine_id' => 'required|exists:ms_machines,id_machines',
+            'machine_id' => 'required|exists:ms_machines,id_machine',
             'production_id' => 'required|exists:tr_productions,id_production',
             'product_id' => 'required|exists:tr_products,id_product',
             'project_id' => 'required|exists:ms_projects,id_project',

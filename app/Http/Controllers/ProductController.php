@@ -12,9 +12,9 @@ class ProductController extends Controller
 {
     function __construct()
     {
-        // $this->middleware('verified');
-        // $this->middleware('permission:View Products|Manage Products', ['only' => 'index']);
-        // $this->middleware('permission:Manage Products', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+        $this->middleware('verified');
+        $this->middleware('permission:View Products|Manage Products', ['only' => 'index']);
+        $this->middleware('permission:Manage Products', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
     }
 
     /**

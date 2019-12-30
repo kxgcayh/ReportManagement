@@ -20,6 +20,7 @@ class PermissionTableSeeder extends Seeder
             'View Locations', 'Manage Locations',
             'View Machines', 'Manage Machines',
             'View Productions', 'Manage Productions',
+            'View Products', 'Manage Products',
             'View Projects', 'Manage Projects',
             'View Roles', 'Manage Roles',
             'View Types', 'Manage Types',
