@@ -12,7 +12,7 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Brand'])
-@role('user')
+@role('User')
 @modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Unapproved Data'])
 @else

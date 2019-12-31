@@ -12,7 +12,7 @@
 <a href="{{ route('reports.create') }}" class="btn waves-effect waves-light btn-primary"><i
         class="mdi mdi-plus-circle-outline"></i>
     Create Report </a>
-@role('user')
+@role('User')
 @modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Unapproved Data'])
 @else

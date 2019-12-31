@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,7 @@
     <meta name="author" content="">
     {{-- Favicon icon --}}
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('materialpro')}}/assets/images/favicon.png">
-    <title>Material Pro Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
+    <title>RP Man | Login</title>
     {{-- Bootstrap Core CSS --}}
     <link href="{{asset('materialpro')}}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     {{-- chartist CSS --}}
@@ -28,6 +29,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 </head>
+
 <body>
     {{-- Preloader - style you can find in spinners.css --}}
     <div class="preloader">
@@ -35,38 +37,44 @@
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
     {{-- Main wrapper - style you can find in pages.scss --}}
-    <section id="wrapper" class="login-register login-sidebar" style="background-image:url({{asset('materialpro')}}/assets/images/background/background1.jpg);">
+    <section id="wrapper" class="login-register login-sidebar"
+        style="background-image:url({{asset('materialpro')}}/assets/images/background/background1.jpg);">
         <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('login') }}">
                     @csrf
-                    <a href="javascript:void(0)" class="text-center db"><img src="{{asset('materialpro')}}/assets/images/logo-icon.png" alt="Home" /><br />
+                    <a href="javascript:void(0)" class="text-center db"><img
+                            src="{{asset('materialpro')}}/assets/images/logo-icon.png" alt="Home" /><br />
                         <img src="{{asset('materialpro')}}/assets/images/logo-text.png" alt="Home" />
                     </a>
                     <div class="form-group m-t-40">
                         <div class="col-xs-12">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="Email">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}" required placeholder="Email">
                             @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required placeholder="Password">
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <input id="password" type="password"
+                                class="form-control @error('password') is-invalid @enderror" name="password" required
+                                placeholder="Password">
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
                             @if (Route::has('password.request'))
-                            <a href="javascript:void(0)" id="to-recover" class="text-dark pull-left"><i class="fa fa-lock m-r-5"></i> Forgot password?</a>
+                            <a href="javascript:void(0)" id="to-recover" class="text-dark pull-left"><i
+                                    class="fa fa-lock m-r-5"></i> Forgot password?</a>
                             @endif
                         </div>
                     </div>
@@ -129,7 +137,9 @@
     {{-- This page plugins --}}
     {{-- chartist chart --}}
     <script src="{{asset('materialpro')}}/assets/plugins/chartist-js/dist/chartist.min.js"></script>
-    <script src="{{asset('materialpro')}}/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <script
+        src="{{asset('materialpro')}}/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js">
+    </script>
     {{-- c3 JavaScript --}}
     <script src="{{asset('materialpro')}}/assets/plugins/d3/d3.min.js"></script>
     <script src="{{asset('materialpro')}}/assets/plugins/c3-master/c3.min.js"></script>
@@ -138,4 +148,5 @@
     {{-- Style switcher --}}
     <script src="{{asset('materialpro')}}/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 </body>
+
 </html>

@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
         $user = User::create([
             'name' => 'Galih',
             'is_active' => 1,
-            'email' => 'galih@user.com',
+            'email' => 'user@user.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'departement_id' => 2,
@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
         ]);
         $role = Role::create(['name' => 'User']);
         $permissions = Permission::pluck('id', 'id')
-            ->except('2', '4', '6', '8', '10', '14', '16', '18'); // Only Manage Projects
+            ->only('1', '2', '17', '18', '23', '24'); // Only Manage Projects
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
     }

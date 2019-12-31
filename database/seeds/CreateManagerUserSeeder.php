@@ -17,7 +17,7 @@ class CreateManagerUserSeeder extends Seeder
         $user = User::create([
             'name' => 'Benny',
             'is_active' => 1,
-            'email' => 'benny@manager.com',
+            'email' => 'manager@manager.com',
             'password' => bcrypt('password'),
             'departement_id' => 3,
             'created_by' => 1,

@@ -78,9 +78,9 @@ php artisan serve
 
 |       Email       | Password |
 | :---------------: | :------: |
-| kautsar@admin.com | password |
-| benny@manager.com | password |
-|  galih@user.com   | password |
+| admin@admin.com | password |
+| manager@manager.com | password |
+|  user@user.com   | password |
 
 ---
 
