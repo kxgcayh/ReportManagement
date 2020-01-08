@@ -11,8 +11,7 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
-        $this->middleware('permission:View Categories|Manage Categories', ['only' => 'index']);
-        $this->middleware('permission:Manage Categories', ['only' => ['store', 'edit', 'update', 'destroy']]);
+        $this->middleware('permission:Manage Data Master', ['only' => ['create', 'store', 'edit', 'update', 'destroy', 'index']]);
     }
 
     /**

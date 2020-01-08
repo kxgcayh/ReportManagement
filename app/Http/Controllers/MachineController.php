@@ -12,8 +12,7 @@ class MachineController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
-        $this->middleware('permission:View Machines|Manage Machines', ['only' => 'index']);
-        $this->middleware('permission:Manage Machines', ['only' => ['store', 'edit', 'update', 'destroy']]);
+        $this->middleware('permission:Manage Data Master', ['only' => ['create', 'store', 'edit', 'update', 'destroy', 'index']]);
     }
     /**
      * Display a listing of the resource.

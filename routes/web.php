@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RoleController');
     // User
     Route::resource('users', 'UserController');
+
     // Brand
     Route::resource('brands', 'BrandController')->except(['show', 'create']);
     Route::get('/brands/restore/{id_brand}', 'BrandController@restore');
@@ -45,30 +46,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/productions/forceDelete/{id_product}', 'ProductionController@forceDelete');
 
     // Location
-    Route::resource('locations', 'LocationController')->except([
-        'create', 'show'
-    ]);
+    Route::resource('locations', 'LocationController')->except(['create', 'show']);
     Route::get('/locations/restore/{id_location}', 'LocationController@restore');
     Route::get('/locations/forceDelete/{id_location}', 'LocationController@forceDelete');
 
     // Type
-    Route::resource('types', 'TypeController')->except([
-        'create', 'show'
-    ]);
+    Route::resource('types', 'TypeController')->except(['create', 'show']);
     Route::get('/types/restore/{id_type}', 'TypeController@restore');
     Route::get('/types/forceDelete/{id_type}', 'TypeController@forceDelete');
 
     // Categories
-    Route::resource('categories', 'CategoryController')->except([
-        'create', 'show'
-    ]);
+    Route::resource('categories', 'CategoryController')->except(['create', 'show']);
     Route::get('/categories/restore/{id_category}', 'CategoryController@restore');
     Route::get('/categories/forceDelete/{id_category}', 'CategoryController@forceDelete');
 
     // Departement
-    Route::resource('departements', 'DepartementController')->except([
-        'show', 'create'
-    ]);
+    Route::resource('departements', 'DepartementController')->except(['show', 'create']);
     Route::get('/departements/restore/{id_departement}', 'DepartementController@restore');
     Route::get('/departements/forceDelete/{id_departement}', 'DepartementController@forceDelete');
 

@@ -19,8 +19,7 @@ class RoleController extends Controller
     function __construct()
     {
         $this->middleware('verified');
-        $this->middleware('permission:View Roles|Manage Roles', ['only' => ['index', 'show']]);
-        $this->middleware('permission:Manage Roles', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+        $this->middleware('permission:Manage Data Master', ['only' => ['create', 'store', 'edit', 'update', 'destroy', 'index']]);
     }
 
 

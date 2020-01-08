@@ -17,9 +17,8 @@ class BrandController extends Controller
      */
     function __construct()
     {
-        $this->middleware('verified');
-        $this->middleware('permission:View Brands|Manage Brands', ['only' => 'index']);
-        $this->middleware('permission:Manage Brands', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+        $this->middleware('verified');        
+        $this->middleware('permission:Manage Data Master', ['only' => ['create', 'store', 'edit', 'update', 'destroy', 'index']]);
     }
     /**
      * Display a listing of the resource.

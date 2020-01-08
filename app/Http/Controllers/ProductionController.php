@@ -13,8 +13,7 @@ class ProductionController extends Controller
     function __construct()
     {
         $this->middleware('verified');
-        $this->middleware('permission:View Productions|Manage Productions', ['only' => 'index']);
-        $this->middleware('permission:Manage Productions', ['only' => ['create', 'store', 'edit', 'update', 'destroy']]);
+        $this->middleware('permission:Manage Data Master', ['only' => ['create', 'store', 'edit', 'update', 'destroy', 'index']]);
     }
 
     /**

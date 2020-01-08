@@ -14,16 +14,8 @@ class PermissionTableSeeder extends Seeder
     {
         $permissions = [
             'View Reports', 'Manage Reports',
-            'View Brands', 'Manage Brands',
-            'View Categories', 'Manage Categories',
-            'View Departements', 'Manage Departements',
-            'View Locations', 'Manage Locations',
-            'View Machines', 'Manage Machines',
-            'View Productions', 'Manage Productions',
-            'View Products', 'Manage Products',
             'View Projects', 'Manage Projects',
-            'View Roles', 'Manage Roles',
-            'View Types', 'Manage Types',
+            'Manage Data Master', 'Manage Roles',                        
             'View Users', 'Manage Users',
         ];
 
