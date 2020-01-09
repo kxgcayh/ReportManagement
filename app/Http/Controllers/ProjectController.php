@@ -19,8 +19,7 @@ class ProjectController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
-        $this->middleware('permission:View Projects|Manage Projects', ['only' => ['index', 'show']]);
-        $this->middleware('permission:Manage Projects', ['only' => ['store', 'edit', 'update', 'destroy']]);
+        $this->middleware('permission:Manage Projects', ['only' => ['create', 'store', 'edit', 'update', 'destroy', 'index']]);
     }
 
     /**
@@ -70,8 +69,9 @@ class ProjectController extends Controller
      */
     public function show($id_project)
     {
-        $projects = Project::findOrFail($id_project);
-        return view('projects.show', compact('projects'));
+        $reports = Report::where('project_id', $id_project)->findOrFail($id_project);
+        return view('projects.show', compact('reports'))
+        ->with('no', (request()->input('page', 1) - 1) * 10);
     }
 
     /**

@@ -19,8 +19,7 @@ class ReportController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
-        $this->middleware('permission:View Reports|Manage Reports', ['only' => ['index', 'show']]);
-        $this->middleware('permission:Manage Reports', ['only' => ['store', 'edit', 'update', 'destroy']]);
+        $this->middleware('permission:Manage Reports', ['only' => ['create', 'store', 'edit', 'update', 'destroy', 'index']]);
     }
 
     /**
@@ -76,7 +75,7 @@ class ReportController extends Controller
             'product_id' => 'required|exists:tr_products,id_product',
             'project_id' => 'required|exists:ms_projects,id_project',
             'type_id' => 'required|exists:ms_types,id_type',
-            'file' => 'required|mimes:pdf,xlx,csv,txt|max:2048'
+            'file' => 'required|mimes:pdf,xlx,csv,txt,xlsx|max:2048'
         ]);
         $reports = new Report;
         $reports->name = $request->name;
@@ -110,9 +109,12 @@ class ReportController extends Controller
         $reports = Report::with('createdBy', 'updatedBy')->findOrFail($id_report);
         $brands = Brand::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
         $categories = Category::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
+        $machines = Machine::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
+        $productions = Production::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
+        $products = Product::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
         $projects = Project::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
         $types = Type::with('createdBy', 'updatedBy')->orderBy('name', 'ASC')->get();
-        return view('reports.edit', compact('reports', 'brands', 'categories', 'projects', 'types'));
+        return view('reports.edit', compact('reports', 'brands', 'categories', 'machines', 'productions', 'products', 'projects', 'types'));
     }
 
     /**
@@ -128,12 +130,12 @@ class ReportController extends Controller
             'name' => 'required|string|max:100',
             'brand_id' => 'required|exists:tr_brands,id_brand',
             'category_id' => 'required|exists:ms_categories,id_category',
-            'machine_id' => 'required|exists:ms_machines,id_machines',
+            'machine_id' => 'required|exists:ms_machines,id_machine',
             'production_id' => 'required|exists:tr_productions,id_production',
             'product_id' => 'required|exists:tr_products,id_product',
             'project_id' => 'required|exists:ms_projects,id_project',
             'type_id' => 'required|exists:ms_types,id_type',
-            'file' => 'required|mimes:pdf,xlx,csv,txt|max:2048'
+            'file' => 'mimes:pdf,xlx,csv,txt|max:2048'
         ]);
 
         $reports = Report::findOrFail($id_report);

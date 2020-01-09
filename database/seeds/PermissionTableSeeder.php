@@ -13,9 +13,8 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'View Reports', 'Manage Reports',
-            'View Projects', 'Manage Projects',
-            'Manage Data Master', 'Manage Roles',                        
+            'Manage Reports', 'Manage Projects',
+            'Manage Data Master', 'Manage Roles',
             'View Users', 'Manage Users',
         ];
 

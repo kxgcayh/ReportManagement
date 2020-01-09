@@ -25,7 +25,7 @@ class CreateManagerUserSeeder extends Seeder
             ]);
         $role = Role::create(['name' => 'Manager']);
         $permissions = Permission::pluck('id', 'id')
-            ->except('14'); // Except Manage Roles
+            ->except('4'); // Except Manage Roles
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
     }

@@ -41,7 +41,7 @@
                         class="badge badge-warning">{{ $project->updatedBy['name'] }}</label>
                 </td>
                 <td>
-                    <a class="btn btn-info" name="show" href="{{ route('projects.show',$project->id_project) }}">
+                    <a class="btn btn-info" name="show" href="{{ route('projects.show', $project->id_project) }}">
                         <i class="fa fa-eye"></i>
                     </a>
                     <a name="edit" href="{{ route('projects.edit', $project->id_project) }}" class="btn btn-warning">

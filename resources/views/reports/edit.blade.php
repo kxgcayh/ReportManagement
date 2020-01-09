@@ -78,6 +78,63 @@
             </div>
         </div>
         <div class="col-md-6">
+            <div class="form-group form-material">
+                <label for="machine_id" class="control-label">Machine Name</label>
+                <select name="machine_id" id="machine_id" class="form-control">
+                    <option></option>
+                    @foreach ($machines as $item)
+                    <option value="{{ $item->id_machine }}"
+                        {{ $item->id_machine == $reports->machine_id ? 'selected':'' }}>
+                        {{ ucfirst($item->name) }}
+                    </option>
+                    @endforeach
+                </select>
+                <small class="form-control-feedback">
+                    <p class="text-danger">{{ $errors->first('machine_id') }}</p> Select Machine
+                </small>
+            </div>
+        </div>
+    </div>
+    {{-- Production and Product --}}
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="form-group form-material">
+                <label for="production_id" class="control-label">Production Name</label>
+                <select name="production_id" id="production_id" class="form-control">
+                    <option></option>
+                    @foreach ($productions as $item)
+                    <option value="{{ $item->id_production }}"
+                        {{ $item->id_production == $reports->production_id ? 'selected':'' }}>
+                        {{ ucfirst($item->name) }}
+                    </option>
+                    @endforeach
+                </select>
+                <small class="form-control-feedback">
+                    <p class="text-danger">{{ $errors->first('production_id') }}</p> Select Production Place
+                </small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group form-material">
+                <label for="product_id" class="control-label">Product Name</label>
+                <select name="product_id" id="product_id" class="form-control">
+                    <option></option>
+                    @foreach ($products as $item)
+                    <option value="{{ $item->id_product }}"
+                        {{ $item->id_product == $reports->product_id ? 'selected':'' }}>
+                        {{ ucfirst($item->name) }}
+                    </option>
+                    @endforeach
+                </select>
+                <small class="form-control-feedback">
+                    <p class="text-danger">{{ $errors->first('product_id') }}</p> Select Product Name
+                </small>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3">
+        {{-- Project --}}
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="project_id" class="control-label">Project Name</label>
                 <select name="project_id" id="project_id" required
@@ -95,8 +152,7 @@
                 </small>
             </div>
         </div>
-    </div>
-    <div class="row pt-3">
+        {{-- endProject --}}
         <div class="col-md-6">
             <div class="form-group">
                 <label for="type_id" class="control-label">Type Name</label>
@@ -112,9 +168,11 @@
                 </small>
             </div>
         </div>
-        <div class=" col-md-6">
-            <label for="file">Please input file</label><br>
-            <input type="file" id="file" name="file" class="dropify" />
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <label for="file">Please input file</label><br>
+                <input type="file" id="file" name="file" class="dropify" />
+            </div>
         </div>
     </div>
     <div class="form-group pull-right">

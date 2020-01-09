@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
         ]);
         $role = Role::create(['name' => 'User']);
         $permissions = Permission::pluck('id', 'id')
-            ->only('1', '2', '17', '18', '23', '24'); // Only Manage Projects
+            ->only('1', '2'); // Only Manage Reports and Projects
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
     }

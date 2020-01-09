@@ -16,25 +16,47 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Project Name</th>
-                <th>Description</th>
-                <th>Created and Updated By</th>
+                <th>#</th>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Machine</th>
+                <th>Production</th>
+                <th>Product</th>
+                <th>Project</th>
+                <th>Type</th>
+                <th>Created <i class="mdi mdi-arrow-right-bold"></i> Latest</th>
+                <th>status</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>{{ $projects->name }}</td>
-                <td>{{ str_limit($projects->description, 70) }}</td>
-                <td><label class="badge badge-success">{{ $projects->createdBy['name'] }}</label><i
+                <td>{{ ++$no }}</td>
+                <td>{{ $reports->name }}</td>
+                <td>{{ $reports->brand['name'] }}</td>
+                <td>{{ $reports->category['name'] }}</td>
+                <td>{{ $reports->machine['name'] }}</td>
+                <td>{{ $reports->production['name'] }}</td>
+                <td>{{ $reports->product['name'] }}</td>
+                <td>{{ $reports->project['name'] }}</td>
+                <td>{{ $reports->type['name'] }}</td>
+                <td><label class="badge badge-success">{{ $reports->createdBy['name'] }}</label><i
                         class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $projects->updatedBy['name'] }}</label>
+                        class="badge badge-warning">{{ $reports->updatedBy['name'] }}</label>
                 </td>
                 <td>
-                    <a name="edit" href="{{ route('projects.edit', $projects->id_project) }}" class="btn btn-warning">
+                    @if($reports->is_active == 1)
+                    <label class="badge badge-info">Active</label>
+                    @else
+                    <label class="badge badge-warning">Inactive</label>
+                    @endif
+                </td>
+                <td>
+                    <a name="edit" href="{{ route('reports.edit', $reports->id_report) }}" class="btn btn-warning">
                         <i class="fa fa-edit"></i>
                     </a>
-                    <form action="{{ route('projects.destroy', $projects->id_project) }}" method="POST"
+                    <form action="{{ route('reports.destroy', $reports->id_report) }}" method="POST"
                         style="display:inline">
                         @csrf
                         <input type="hidden" name="_method" value="DELETE">
