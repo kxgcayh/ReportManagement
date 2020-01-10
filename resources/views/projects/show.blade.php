@@ -1,6 +1,9 @@
 @extends('layouts.app', (['title' => 'Management Project']))
 @section('content')
-@breadcrumb(['header' => 'Detail Project', 'active' => 'Show'])
+@breadcrumb(['active' => 'Show'])
+@slot('header')
+{{ $reports->project['name'] }}
+@endslot
 @bcItem(['value' => 'Project'])
 @bcItem(['value' => 'Data Master'])
 @endbreadcrumb
@@ -23,10 +26,9 @@
                 <th>Machine</th>
                 <th>Production</th>
                 <th>Product</th>
-                <th>Project</th>
                 <th>Type</th>
-                <th>Created <i class="mdi mdi-arrow-right-bold"></i> Latest</th>
-                <th>status</th>
+                <th>Latest By</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -39,7 +41,6 @@
                 <td>{{ $reports->machine['name'] }}</td>
                 <td>{{ $reports->production['name'] }}</td>
                 <td>{{ $reports->product['name'] }}</td>
-                <td>{{ $reports->project['name'] }}</td>
                 <td>{{ $reports->type['name'] }}</td>
                 <td><label class="badge badge-success">{{ $reports->createdBy['name'] }}</label><i
                         class="mdi mdi-arrow-right-bold"></i><label

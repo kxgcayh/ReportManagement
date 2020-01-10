@@ -11,12 +11,9 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Project'])
-@role('User')
-@modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Unapproved Data'])
-@else
+@role('Manager')
 @modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Project Bin'])
+'name' => 'Recycle Bin'])
 @endrole
 @endslot
 <div class="table-responsive">
@@ -26,7 +23,8 @@
                 <th>#</th>
                 <th>Project Name</th>
                 <th>Description</th>
-                <th>Created and Updated By</th>
+                <th>Created <i class="mdi mdi-arrow-right-bold"></i>Latest By</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -36,9 +34,21 @@
                 <td>{{ ++$no }}</td>
                 <td>{{ $project->name }}</td>
                 <td>{{ str_limit($project->description, 70) }}</td>
-                <td><label class="badge badge-success">{{ $project->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $project->updatedBy['name'] }}</label>
+                <td>
+                    @if($project->updatedBy['name'] == null)
+                    <label class="badge badge-info">{{ $project->createdBy['name'] }}</label>
+                    @else
+                    <label class="badge badge-warning">{{ $project->createdBy['name'] }}</label>
+                    <i class="mdi mdi-arrow-right-bold"></i>
+                    <label class="badge badge-info">{{ $project->updatedBy['name'] }}</label>
+                    @endif
+                </td>
+                <td>
+                    @if($project->is_active == 1)
+                    <label class="badge badge-info">Active</label>
+                    @else
+                    <label class="badge badge-warning">Inactive</label>
+                    @endif
                 </td>
                 <td>
                     <a class="btn btn-info" name="show" href="{{ route('projects.show', $project->id_project) }}">

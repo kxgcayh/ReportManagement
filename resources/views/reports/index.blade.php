@@ -12,12 +12,9 @@
 <a href="{{ route('reports.create') }}" class="btn waves-effect waves-light btn-primary"><i
         class="mdi mdi-plus-circle-outline"></i>
     Create Report </a>
-@role('User')
-@modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Unapproved Data'])
-@else
+@role('Manager')
 @modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Report Bin'])
+'name' => 'Recycle Bin'])
 @endrole
 @endslot
 <div class="table-responsive">
@@ -26,15 +23,18 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Brand Name</th>
-                <th>Category Name</th>
-                <th>Project Name</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Machine</th>
+                <th>Production</th>
+                <th>Product</th>
+                <th>Project</th>
                 <th>Type</th>
-                <th>Created and Updated By</th>
+                <th>Latest By</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
-        @role('Admin|Manager')
         <tbody>
             @forelse ($reports as $report)
             <tr>
@@ -42,11 +42,24 @@
                 <td>{{ $report->name }}</td>
                 <td>{{ $report->brand['name'] }}</td>
                 <td>{{ $report->category['name'] }}</td>
+                <td>{{ $report->machine['name'] }}</td>
+                <td>{{ $report->production['name'] }}</td>
+                <td>{{ $report->product['name'] }}</td>
                 <td>{{ $report->project['name'] }}</td>
                 <td>{{ $report->type['name'] }}</td>
-                <td><label class="badge badge-success">{{ $report->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $report->updatedBy['name'] }}</label>
+                <td>
+                    @if($report->updatedBy['name'] == null)
+                    <label class="badge badge-info">{{ $report->createdBy['name'] }}</label>
+                    @else
+                    <label class="badge badge-info">{{ $report->updatedBy['name'] }}</label>
+                    @endif
+                </td>
+                <td>
+                    @if($report->is_active == 1)
+                    <label class="badge badge-info">Active</label>
+                    @else
+                    <label class="badge badge-warning">Inactive</label>
+                    @endif
                 </td>
                 <td>
                     <a name="edit" href="{{ route('reports.edit', $report->id_report) }}" class="btn btn-warning">
@@ -64,76 +77,13 @@
             </tr>
             @empty
             <tr>
-                <td colspan="8" class="text-center">Tidak ada data Report</td>
-            </tr>
-            @endforelse
-        </tbody>
-        @else
-        <tbody>
-            @forelse ($user_reports as $report)
-            <tr>
-                <td>{{ ++$no }}</td>
-                <td>{{ $report->name }}</td>
-                <td>{{ $report->brand['name'] }}</td>
-                <td>{{ $report->category['name'] }}</td>
-                <td>{{ $report->project['name'] }}</td>
-                <td>{{ $report->type['name'] }}</td>
-                <td><label class="badge badge-success">{{ $report->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $report->updatedBy['name'] }}</label>
-                </td>
-                <td>
-                    </a>
-                    <a name="edit" href="{{ route('reports.edit', $report->id_report) }}" class="btn btn-warning">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <form action="{{ route('reports.destroy', $report->id_report) }}" method="POST"
-                        style="display:inline">
-                        @csrf
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger" name="delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="8" class="text-center">Tidak ada data Report</td>
-            </tr>
-            @endforelse
-        </tbody>
-        @endrole
-    </table>
-</div>
-{{ $reports->links() }}
-
-@modal(['id' => 'inactive', 'size' => 'lg', 'color' => 'info', 'title' => 'Inactive Data List'])
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Name Report</th>
-                <th>Created By</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($inactive as $reps)
-            <tr>
-                <td>{{ $reps->name }}</td>
-                <td>{{ $reps->createdBy['name'] }}</td>
-                <td>{{ $reps->created_at }}</td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="4" class="text-center">Tidak ada data Report</td>
+                <td colspan="12" class="text-center">Tidak ada data Report</td>
             </tr>
             @endforelse
         </tbody>
     </table>
 </div>
-@endmodal
+{{ $reports->links() }}
 
 @endcard
 

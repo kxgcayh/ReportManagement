@@ -26,7 +26,7 @@
                 <th>#</th>
                 <th>Nama Lokasi</th>
                 <th>Deskripsi</th>
-                <th>Created and Updated By</th>
+                <th>Latest By</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -37,9 +37,12 @@
                 <td>{{ ++$no }}</td>
                 <td>{{ $locs->name }}</td>
                 <td>{{ str_limit($locs->description, 40) }}</td>
-                <td><label class="badge badge-success">{{ $locs->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $locs->updatedBy['name'] }}</label>
+                <td>
+                    @if($locs->updatedBy['name'] == null)
+                    <label class="badge badge-info">{{ $locs->createdBy['name'] }}</label>
+                    @else
+                    <label class="badge badge-info">{{ $locs->updatedBy['name'] }}</label>
+                    @endif
                 </td>
                 <td>
                     <form action="{{ route('locations.destroy', $locs->id_location) }}" method="POST">

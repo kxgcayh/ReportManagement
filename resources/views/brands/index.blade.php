@@ -12,14 +12,11 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Brand'])
-@role('User')
-@modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Unapproved Data'])
-@else
-@modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Brand Bin'])
-@endrole
 
+@role('Manager')
+@modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
+'name' => 'Recycle Bin'])
+@endrole
 @endslot
 <div class="table-responsive">
     <table class="table table-hover">
@@ -29,7 +26,7 @@
                 <th>Name</th>
                 <th>Product</th>
                 <th>Details</th>
-                <th>Created and Updated By</th>
+                <th>Latest By</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
@@ -41,9 +38,12 @@
                 <td>{{ $brand->name }}</td>
                 <td>{{ $brand->products['name'] }}</td>
                 <td>{{ $brand->detail }}</td>
-                <td><label class="badge badge-success">{{ $brand->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $brand->updatedBy['name'] }}</label>
+                <td>
+                    @if($brand->updatedBy['name'] == null)
+                    <label class="badge badge-info">{{ $brand->createdBy['name'] }}</label>
+                    @else
+                    <label class="badge badge-info">{{ $brand->updatedBy['name'] }}</label>
+                    @endif
                 </td>
                 <td>
                     <form action="{{ route('brands.destroy', [$brand->id_brand]) }}" method="POST">
@@ -105,33 +105,6 @@
 @endrole
 
 @endcard
-
-@modal(['id' => 'inactive', 'size' => 'lg', 'color' => 'info', 'title' => 'Inactive Data List'])
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Details</th>
-            <th>Created By</th>
-            <th>Created At</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse ($inactive as $brand)
-        <tr>
-            <td>{{ $brand->name }}</td>
-            <td>{{ $brand->detail }}</td>
-            <td>{{ $brand->createdBy['name'] }}</td>
-            <td>{{ $brand->created_at }}</td>
-        </tr>
-        @empty
-        <tr>
-            <td colspan="5" class="text-center">Semua data sudah di approve</td>
-        </tr>
-        @endforelse
-    </tbody>
-</table>
-@endmodal
 
 @modal(['id' => 'create', 'size' => '', 'color' => 'primary', 'title' => 'Create Data Brand'])
 <form role="form" action="{{ route('brands.store') }}" method="post" class="form-material">

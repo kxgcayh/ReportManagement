@@ -13,12 +13,9 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Departement'])
-@role('User')
-@modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Unapproved Data'])
-@else
+@role('Manager')
 @modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Departement Bin'])
+'name' => 'Recycle Bin'])
 @endrole
 @endslot
 <div class="table-responsive">
@@ -29,7 +26,7 @@
                 <th>Nama Departement</th>
                 <th>Lokasi</th>
                 <th>Detail</th>
-                <th>Created and Updated By</th>
+                <th>Latest By</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -41,10 +38,12 @@
                 <td>{{ $depts->name }}</td>
                 <td>{{ $depts->locations['name'] }}</td>
                 <td>{{ str_limit($depts->locations['description'], 50) }}</td>
-                <td><label class="badge badge-success">{{ $depts->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $depts->updatedBy['name'] }}</label>
-                </td>
+                <td>
+                @if($depts->updatedBy['name'] == null)
+                <label class="badge badge-info">{{ $depts->createdBy['name'] }}</label></td>
+                @else
+                <label class="badge badge-info">{{ $depts->updatedBy['name'] }}</label>
+                @endif
                 <td>
                     <form action="{{ route('departements.destroy', $depts->id_departement) }}" method="POST">
                         @csrf
@@ -133,33 +132,6 @@
         <a href="{{ route('departements.index') }}" class="btn waves-effect waves-light btn-info">Back </a>
     </div>
 </form>
-@endmodal
-
-@modal(['id' => 'inactive', 'size' => 'lg', 'color' => 'info', 'title' => 'Inactive Data List'])
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Name Category</th>
-                <th>Created By</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($inactive as $depts)
-            <tr>
-                <td>{{ $depts->name }}</td>
-                <td>{{ $depts->createdBy['name'] }}</td>
-                <td>{{ $depts->created_at }}</td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="4" class="text-center">Tidak ada data Category</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
 @endmodal
 
 @modal(['id' => 'trash', 'size' => 'lg', 'color' => 'warning', 'title' => 'Departement Bin'])

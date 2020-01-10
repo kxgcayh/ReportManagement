@@ -13,24 +13,6 @@
 <form role="form" action="{{ route('machines.update', $machines->id_machine) }}" method="POST" class="floating-labels">
     @csrf
     <input type="hidden" name="_method" value="PUT">
-    <fieldset disabled>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Created By</label>
-                <input name="created_by" value="{{ $machines->createdBy['name'] }}" type="text"
-                    class="form-control form-control-line" id="created_by">
-                <span class="bar"></span>
-                <small>{{ $machines->created_at }}</small>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Updated By</label>
-                <input name="updated_by" value="{{ $machines->updatedBy['name'] }}" type="text" class="form-control"
-                    id="updated_by">
-                <span class="bar"></span>
-                <small>{{ $machines->updated_at }}</small>
-            </div>
-        </div>
-    </fieldset>
     <div class="form-group col-md-11,5">
         <label>Name</label>
         <input name="name" value="{{ $machines->name }}" type="text" id="id_machine"

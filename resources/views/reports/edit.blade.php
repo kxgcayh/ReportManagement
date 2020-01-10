@@ -10,24 +10,6 @@
     enctype="multipart/form-data">
     @csrf
     <input type="hidden" name="_method" value="PUT">
-    <fieldset disabled>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Created By</label>
-                <input name="created_by" value="{{ $reports->createdBy['name'] }}" type="text"
-                    class="form-control form-control-line" id="created_by">
-                <span class="bar"></span>
-                <small>{{ $reports->created_at }}</small>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Updated By</label>
-                <input name="updated_by" value="{{ $reports->updatedBy['name'] }}" type="text" class="form-control"
-                    id="updated_by">
-                <span class="bar"></span>
-                <small>{{ $reports->updated_at }}</small>
-            </div>
-        </div>
-    </fieldset>
     <div class="row pt-3">
         <div class="col-md-6">
             <div class="form-group">

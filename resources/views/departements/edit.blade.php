@@ -14,24 +14,6 @@
     @method('PUT')
     @csrf
     <input type="hidden" name="_method" value="PUT">
-    <fieldset disabled>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Created By</label>
-                <input name="created_by" value="{{ $departements->createdBy['name'] }}" type="text"
-                    class="form-control form-control-line" id="created_by">
-                <span class="bar"></span>
-                <small>{{ $departements->created_at }}</small>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Updated By</label>
-                <input name="updated_by" value="{{ $departements->updatedBy['name'] }}" type="text" class="form-control"
-                    id="updated_by">
-                <span class="bar"></span>
-                <small>{{ $departements->updated_at }}</small>
-            </div>
-        </div>
-    </fieldset>
     <div class="form-group">
         <label for="id_departement">Nama Departement</label>
         <input id="id_departement" type="text" name="name" required value="{{ $departements->name }}"

@@ -28,7 +28,7 @@
                 <th>Name</th>
                 <th>Production</th>
                 <th>Details</th>
-                <th>Created and Updated By</th>
+                <th>Latest By</th>
                 <th width="280px">Action</th>
             </tr>
         </thead>
@@ -40,9 +40,12 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->productions['name'] }}</td>
                 <td>{{ $product->detail }}</td>
-                <td><label class="badge badge-success">{{ $product->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $product->updatedBy['name'] }}</label>
+                <td>
+                    @if($product->updatedBy['name'] == null)
+                    <label class="badge badge-info">{{ $product->createdBy['name'] }}</label>
+                    @else
+                    <label class="badge badge-info">{{ $product->updatedBy['name'] }}</label>
+                    @endif
                 </td>
                 <td>
                     <form action="{{ route('products.destroy', [$product->id_product]) }}" method="POST">
@@ -104,33 +107,6 @@
 @endrole
 
 @endcard
-
-@modal(['id' => 'inactive', 'size' => 'lg', 'color' => 'info', 'title' => 'Inactive Data List'])
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Details</th>
-            <th>Created By</th>
-            <th>Created At</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse ($inactive as $product)
-        <tr>
-            <td>{{ $product->name }}</td>
-            <td>{{ $product->detail }}</td>
-            <td>{{ $product->createdBy['name'] }}</td>
-            <td>{{ $product->created_at }}</td>
-        </tr>
-        @empty
-        <tr>
-            <td colspan="5" class="text-center">Semua data sudah di approve</td>
-        </tr>
-        @endforelse
-    </tbody>
-</table>
-@endmodal
 
 @modal(['id' => 'create', 'size' => '', 'color' => 'primary', 'title' => 'Create Data Product'])
 <form role="form" action="{{ route('products.store') }}" method="post" class="form-material">

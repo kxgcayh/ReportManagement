@@ -11,12 +11,9 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Production'])
-@role('User')
-@modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Unapproved Data'])
-@else
+@role('Manager')
 @modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Production Bin'])
+'name' => 'Recycle Bin'])
 @endrole
 @endslot
 <div class="table-responsive">
@@ -27,7 +24,7 @@
                 <th>Nama Produksi</th>
                 <th>Lokasi</th>
                 <th>Detail</th>
-                <th>Created and Updated By</th>
+                <th>Latest By</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -39,9 +36,12 @@
                 <td>{{ $prods->name }}</td>
                 <td>{{ $prods->locations['name'] }}</td>
                 <td>{{ str_limit($prods->locations['description'], 15) }}</td>
-                <td><label class="badge badge-success">{{ $prods->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $prods->updatedBy['name'] }}</label>
+                <td>
+                    @if($prods->updatedBy['name'] == null)
+                    <label class="badge badge-info">{{ $prods->createdBy['name'] }}</label>
+                    @else
+                    <label class="badge badge-info">{{ $prods->updatedBy['name'] }}</label>
+                    @endif
                 </td>
                 <td>
                     <form action="{{route('productions.destroy',[$prods->id_production])}}" method="POST">
@@ -129,33 +129,6 @@
         <a href="{{ route('productions.index') }}" class="btn waves-effect waves-light btn-primary">Back </a>
     </div>
 </form>
-@endmodal
-
-@modal(['id' => 'inactive', 'size' => 'lg', 'color' => 'info', 'title' => 'Inactive Data List'])
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Details</th>
-            <th>Created By</th>
-            <th>Created At</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse ($inactive as $production)
-        <tr>
-            <td>{{ $production->name }}</td>
-            <td>{{ $production->detail }}</td>
-            <td>{{ $production->createdBy['name'] }}</td>
-            <td>{{ $production->created_at }}</td>
-        </tr>
-        @empty
-        <tr>
-            <td colspan="5" class="text-center">Semua data sudah di approve</td>
-        </tr>
-        @endforelse
-    </tbody>
-</table>
 @endmodal
 
 @modal(['id' => 'trash', 'size' => 'lg', 'color' => 'warning', 'title' => 'Production Bin'])

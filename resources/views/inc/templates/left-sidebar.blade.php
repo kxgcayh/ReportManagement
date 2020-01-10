@@ -9,10 +9,6 @@
                     <a class="has-arrow" href="{{route('home') }}" aria-expanded="false"><i
                             class="mdi mdi-home-variant"></i>Dashboard</a>
                 </li>
-                <li>
-                    <a class="has-arrow" href="{{route('reports.create') }}" aria-expanded="false"><i
-                            class="mdi mdi-server-plus"></i>Create Report</a>
-                </li>
                 @role('Admin|Manager')
                 <li>
                     <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-briefcase" flo></i><span
@@ -29,14 +25,21 @@
                     </ul>
                 </li>
                 @endrole
+                @role('Manager|User')
                 <li>
                     <a class="has-arrow" href="{{route('projects.index') }}" aria-expanded="false"><i
                             class="mdi mdi-folder-multiple"></i>Data Project</a>
                 </li>
                 <li>
+                    <a class="has-arrow" href="{{route('reports.create') }}" aria-expanded="false"><i
+                            class="mdi mdi-server-plus"></i>Create Report</a>
+                </li>
+                <li>
                     <a class="has-arrow" href="{{route('reports.index') }}" aria-expanded="false"><i
                             class="mdi mdi-server-network"></i>Data Report</a>
                 </li>
+                @endrole
+                @role('Admin|Manager')
                 <li>
                     <a href="#" aria-expanded="false"><i class="mdi mdi-account-settings-variant"></i>Account
                         Setting</a>
@@ -45,6 +48,7 @@
                         <li><a href="{{ route('users.index') }}">User</a></li>
                     </ul>
                 </li>
+                @endrole
             </ul>
         </nav>
         {{-- End Sidebar navigation --}}

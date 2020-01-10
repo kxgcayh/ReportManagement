@@ -45,7 +45,7 @@
                     @csrf
                     <a href="javascript:void(0)" class="text-center db"><img
                             src="{{asset('materialpro')}}/assets/images/logo-icon.png" alt="Home" /><br />
-                        <img src="{{asset('materialpro')}}/assets/images/logo-text.png" alt="Home" />
+                        {{-- <img src="{{asset('materialpro')}}/assets/images/logo-text.png" alt="Home" /> --}}
                     </a>
                     <div class="form-group m-t-40">
                         <div class="col-xs-12">

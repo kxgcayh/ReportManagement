@@ -135,7 +135,7 @@ class ReportController extends Controller
             'product_id' => 'required|exists:tr_products,id_product',
             'project_id' => 'required|exists:ms_projects,id_project',
             'type_id' => 'required|exists:ms_types,id_type',
-            'file' => 'mimes:pdf,xlx,csv,txt|max:2048'
+            'file' => 'required|mimes:pdf,xlx,csv,txt,xlsx|max:2048'
         ]);
 
         $reports = Report::findOrFail($id_report);

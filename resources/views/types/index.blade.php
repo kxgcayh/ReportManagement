@@ -11,12 +11,9 @@
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Type'])
-@role('User')
-@modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Unapproved Data'])
-@else
+@role('Manager')
 @modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Type Bin'])
+'name' => 'Recycle Bin'])
 @endrole
 @endslot
 <div class="table-responsive">
@@ -25,7 +22,7 @@
             <tr>
                 <th>#</th>
                 <th>Name Type</th>
-                <th>Created and Updated By</th>
+                <th>Latest By</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -35,9 +32,12 @@
             <tr>
                 <td>{{ ++$no }}</td>
                 <td>{{ $type->name }}</td>
-                <td><label class="badge badge-success">{{ $type->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $type->updatedBy['name'] }}</label>
+                <td>
+                    @if($type->updatedBy['name'] == null)
+                    <label class="badge badge-info">{{ $type->createdBy['name'] }}</label>
+                    @else
+                    <label class="badge badge-info">{{ $type->updatedBy['name'] }}</label>
+                    @endif
                 </td>
                 <td>
                     <form action="{{ route('types.destroy', $type->id_type) }}" method="POST">

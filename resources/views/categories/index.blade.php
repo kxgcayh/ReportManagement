@@ -6,16 +6,15 @@
 @endbreadcrumb
 
 @ifAlert
+
 @card
 @slot('header')
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Category'])
-@role('User')
-@modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'inactive', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Unapproved Data'])
-@else
+
+@role('Manager')
 @modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
-'name' => 'Category Bin'])
+'name' => 'Recycle Bin'])
 @endrole
 
 @endslot
@@ -25,7 +24,7 @@
             <tr>
                 <th>#</th>
                 <th>Name Category</th>
-                <th>Created and Updated By</th>
+                <th>Latest By</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -35,9 +34,12 @@
             <tr>
                 <td>{{ ++$no }}</td>
                 <td>{{ $cats->name }}</td>
-                <td><label class="badge badge-success">{{ $cats->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $cats->updatedBy['name'] }}</label>
+                <td>
+                    @if($cats->updatedBy['name'] == null)
+                    <label class="badge badge-info">{{ $cats->createdBy['name'] }}</label>
+                    @else
+                    <label class="badge badge-info">{{ $cats->updatedBy['name'] }}</label>
+                    @endif
                 </td>
                 <td>
                     <form action="{{ route('categories.destroy', $cats->id_category) }}" method="POST">
@@ -106,33 +108,6 @@
     </div>
     <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10 pull-right">Submit</button>
 </form>
-@endmodal
-
-@modal(['id' => 'inactive', 'size' => 'lg', 'color' => 'info', 'title' => 'Inactive Data List'])
-<div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Name Category</th>
-                <th>Created By</th>
-                <th>Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($inactive as $cats)
-            <tr>
-                <td>{{ $cats->name }}</td>
-                <td>{{ $cats->createdBy['name'] }}</td>
-                <td>{{ $cats->created_at }}</td>
-            </tr>
-            @empty
-            <tr>
-                <td colspan="4" class="text-center">Tidak ada data Category</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
 @endmodal
 
 @modal(['id' => 'trash', 'size' => 'lg', 'color' => 'warning', 'title' => 'Category Bin'])

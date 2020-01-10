@@ -18,7 +18,7 @@
                 <input type="text" id="id_report" name="name" required
                     class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}">
                 <p class="text-danger">{{ $errors->first('name') }}</p>
-                <small class="form-control-feedback"> Write your report name here </small>
+                {{-- <small class="form-control-feedback"> Write your report name here </small> --}}
             </div>
         </div>
         <div class="col-md-6">
@@ -31,7 +31,7 @@
                     <option value="{{ $item->id_brand }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
                 </select>
-                <small class="form-control-feedback"> Select brand </small>
+                {{-- <small class="form-control-feedback"> Select brand </small> --}}
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
                     <option value="{{ $item->id_category }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
                 </select>
-                <small class="form-control-feedback"> Select Category </small>
+                {{-- <small class="form-control-feedback"> Select Category </small> --}}
             </div>
         </div>
         <div class="col-md-6">
@@ -57,7 +57,7 @@
                     <option value="{{ $item->id_machine }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
                 </select>
-                <small class="form-control-feedback"> Select Machine </small>
+                {{-- <small class="form-control-feedback"> Select Machine </small> --}}
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
                     <option value="{{ $item->id_production }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
                 </select>
-                <small class="form-control-feedback"> Select Production Place </small>
+                {{-- <small class="form-control-feedback"> Select Production Place </small> --}}
             </div>
         </div>
         <div class="col-md-6">
@@ -83,7 +83,7 @@
                     <option value="{{ $item->id_product }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
                 </select>
-                <small class="form-control-feedback"> Select Product Name </small>
+                {{-- <small class="form-control-feedback"> Select Product Name </small> --}}
             </div>
         </div>
     </div>
@@ -97,7 +97,7 @@
                     <option value="{{ $item->id_project }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
                 </select>
-                <small class="form-control-feedback"> Select Project </small>
+                {{-- <small class="form-control-feedback"> Select Project </small> --}}
             </div>
         </div>
         <div class="col-md-6">
@@ -109,7 +109,7 @@
                     <option value="{{ $item->id_type }}">{{ ucfirst($item->name) }}</option>
                     @endforeach
                 </select>
-                <small class="form-control-feedback"> Select Type </small>
+                {{-- <small class="form-control-feedback"> Select Type </small> --}}
             </div>
         </div>
     </div>
