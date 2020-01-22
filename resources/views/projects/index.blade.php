@@ -12,7 +12,7 @@
 @modalBtn(['btnClass' => 'primary btn pull-left', 'dataTarget' => 'create', 'icon' => 'mdi mdi-plus-circle-outline',
 'name' => 'Create Project'])
 @role('Manager')
-@modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
+@modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Recycle Bin'])
 @endrole
 @endslot
@@ -47,24 +47,28 @@
                     @if($project->is_active == 1)
                     <label class="badge badge-info">Active</label>
                     @else
-                    <label class="badge badge-warning">Inactive</label>
+                    <label class="badge badge-danger">Inactive</label>
                     @endif
                 </td>
                 <td>
-                    <a class="btn btn-info" name="show" href="{{ route('projects.show', $project->id_project) }}">
-                        <i class="fa fa-eye"></i>
-                    </a>
-                    <a name="edit" href="{{ route('projects.edit', $project->id_project) }}" class="btn btn-warning">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <form action="{{ route('projects.destroy', $project->id_project) }}" method="POST"
-                        style="display:inline">
-                        @csrf
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger" name="delete">
-                            <i class="fa fa-trash"></i>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Menu
                         </button>
-                    </form>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" name="show"
+                                href="{{ route('projects.show', $project->id_project) }}">Show</a>
+                            <a name="edit" href="{{ route('projects.edit', $project->id_project) }}"
+                                class="dropdown-item">Edit</a>
+                            <form action="{{ route('projects.destroy', $project->id_project) }}" method="POST"
+                                style="display:inline">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="dropdown-item" name="delete">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </td>
             </tr>
             @empty
@@ -116,7 +120,7 @@
     <div class="form-group">
         <textarea name="description" id="description" cols="5" rows="5"
             class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}"
-            placeholder="Description"></textarea>
+            placeholder="Description (optional)"></textarea>
     </div>
     @else
     <div class="form-group">

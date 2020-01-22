@@ -13,7 +13,7 @@
         class="mdi mdi-plus-circle-outline"></i>
     Create Report </a>
 @role('Manager')
-@modalBtn(['btnClass' => 'warning btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
+@modalBtn(['btnClass' => 'info btn pull-right', 'dataTarget' => 'trash', 'icon' => 'mdi mdi-information-outline',
 'name' => 'Recycle Bin'])
 @endrole
 @endslot
@@ -30,7 +30,7 @@
                 <th>Product</th>
                 <th>Project</th>
                 <th>Type</th>
-                <th>Latest By</th>
+                <th>LatestBy</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -58,21 +58,26 @@
                     @if($report->is_active == 1)
                     <label class="badge badge-info">Active</label>
                     @else
-                    <label class="badge badge-warning">Inactive</label>
+                    <label class="badge badge-danger">Inactive</label>
                     @endif
                 </td>
                 <td>
-                    <a name="edit" href="{{ route('reports.edit', $report->id_report) }}" class="btn btn-warning">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <form action="{{ route('reports.destroy', $report->id_report) }}" method="POST"
-                        style="display:inline">
-                        @csrf
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger" name="delete">
-                            <i class="fa fa-trash"></i>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Menu
                         </button>
-                    </form>
+                        <div class="dropdown-menu">
+                            <a name="edit" href="{{ route('reports.edit', $report->id_report) }}"
+                                class="dropdown-item">Edit</a>
+                            <form action="{{ route('reports.destroy', $report->id_report) }}" method="POST"
+                                style="display:inline">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="dropdown-item" name="delete">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </td>
             </tr>
             @empty

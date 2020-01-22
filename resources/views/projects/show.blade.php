@@ -42,29 +42,49 @@
                 <td>{{ $reports->production['name'] }}</td>
                 <td>{{ $reports->product['name'] }}</td>
                 <td>{{ $reports->type['name'] }}</td>
-                <td><label class="badge badge-success">{{ $reports->createdBy['name'] }}</label><i
-                        class="mdi mdi-arrow-right-bold"></i><label
-                        class="badge badge-warning">{{ $reports->updatedBy['name'] }}</label>
+                <td>
+                    @if($reports->updatedBy['name'] == null)
+                    <label class="badge badge-info">{{ $reports->createdBy['name'] }}</label>
+                    @else
+                    <label class="badge badge-info">{{ $reports->updatedBy['name'] }}</label>
+                    @endif
                 </td>
                 <td>
                     @if($reports->is_active == 1)
                     <label class="badge badge-info">Active</label>
                     @else
-                    <label class="badge badge-warning">Inactive</label>
+                    <label class="badge badge-danger">Inactive</label>
                     @endif
                 </td>
-                <td>
+                {{-- <td>
                     <a name="edit" href="{{ route('reports.edit', $reports->id_report) }}" class="btn btn-warning">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                    <form action="{{ route('reports.destroy', $reports->id_report) }}" method="POST"
-                        style="display:inline">
-                        @csrf
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger" name="delete">
-                            <i class="fa fa-trash"></i>
+                <i class="fa fa-edit"></i>
+                </a>
+                <form action="{{ route('reports.destroy', $reports->id_report) }}" method="POST" style="display:inline">
+                    @csrf
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-danger" name="delete">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </form>
+                </td> --}}
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Menu
                         </button>
-                    </form>
+                        <div class="dropdown-menu">
+                            <a name="edit" href="{{ route('reports.edit', $reports->id_report) }}"
+                                class="dropdown-item">Edit</a>
+                            <form action="{{ route('reports.destroy', $reports->id_report) }}" method="POST"
+                                style="display:inline">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="dropdown-item" name="delete">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                 </td>
             </tr>
         </tbody>
