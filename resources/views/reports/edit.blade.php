@@ -15,10 +15,7 @@
             <div class="form-group">
                 <label class="control-label" for="id_report">Report Name</label>
                 <input name="name" value="{{ $reports->name }}" type="text" required
-                    class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}">
-                <small class="form-control-feedback">
-                    <p class="text-danger">{{ $errors->first('name') }}</p> Change Report Name
-                </small>
+                    class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}">                
             </div>
         </div>
         <div class="col-md-6">
@@ -33,10 +30,7 @@
                     </option>
                     @endforeach
                 </select>
-                <span class="bar"></span>
-                <small class="form-control-feedback">
-                    <p class="text-danger">{{ $errors->first('brand_id') }}</p> Select brand
-                </small>
+                <span class="bar"></span>                
             </div>
         </div>
     </div>
@@ -53,10 +47,7 @@
                         {{ ucfirst($category->name) }}
                     </option>
                     @endforeach
-                </select>
-                <small class="form-control-feedback">
-                    <p class="text-danger">{{ $errors->first('category_id') }}</p> Select Category
-                </small>
+                </select>                
             </div>
         </div>
         <div class="col-md-6">
@@ -70,10 +61,7 @@
                         {{ ucfirst($item->name) }}
                     </option>
                     @endforeach
-                </select>
-                <small class="form-control-feedback">
-                    <p class="text-danger">{{ $errors->first('machine_id') }}</p> Select Machine
-                </small>
+                </select>                
             </div>
         </div>
     </div>
@@ -90,10 +78,7 @@
                         {{ ucfirst($item->name) }}
                     </option>
                     @endforeach
-                </select>
-                <small class="form-control-feedback">
-                    <p class="text-danger">{{ $errors->first('production_id') }}</p> Select Production Place
-                </small>
+                </select>                
             </div>
         </div>
         <div class="col-md-6">
@@ -107,10 +92,7 @@
                         {{ ucfirst($item->name) }}
                     </option>
                     @endforeach
-                </select>
-                <small class="form-control-feedback">
-                    <p class="text-danger">{{ $errors->first('product_id') }}</p> Select Product Name
-                </small>
+                </select>                
             </div>
         </div>
     </div>
@@ -128,10 +110,7 @@
                         {{ ucfirst($project->name) }}
                     </option>
                     @endforeach
-                </select>
-                <small class="form-control-feedback">
-                    <p class="text-danger">{{ $errors->first('project_id') }}</p> Select Project
-                </small>
+                </select>                
             </div>
         </div>
         {{-- endProject --}}
@@ -144,10 +123,7 @@
                     <option value="{{ $type->id_type }}" {{ $type->id_type == $reports->type_id ? 'selected':'' }}>
                         {{ ucfirst($type->name) }}</option>
                     @endforeach
-                </select>
-                <small class="form-control-feedback">
-                    <p class="text-danger">{{ $errors->first('category_id') }}</p> Select Type
-                </small>
+                </select>                
             </div>
         </div>
         <div class="row pt-3">

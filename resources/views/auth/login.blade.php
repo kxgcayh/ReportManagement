@@ -50,24 +50,14 @@
                     <div class="form-group m-t-40">
                         <div class="col-xs-12">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{ old('email') }}" required placeholder="Email">
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                name="email" value="{{ old('email') }}" required placeholder="Email">                            
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password" required
-                                placeholder="Password">
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                placeholder="Password">                            
                         </div>
                     </div>
                     <div class="form-group">

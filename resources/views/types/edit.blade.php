@@ -9,25 +9,7 @@
 @card(['header' => ''])
 <form role="form" action="{{ route('types.update', $types->id_type) }}" method="POST" class="floating-labels">
     @csrf
-    <input type="hidden" name="_method" value="PUT">
-    <fieldset disabled>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label>Created By</label>
-                <input name="created_by" value="{{ $types->createdBy['name'] }}" type="text"
-                    class="form-control form-control-line" id="created_by">
-                <span class="bar"></span>
-                <small>{{ $types->created_at }}</small>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Updated By</label>
-                <input name="updated_by" value="{{ $types->updatedBy['name'] }}" type="text" class="form-control"
-                    id="updated_by">
-                <span class="bar"></span>
-                <small>{{ $types->updated_at }}</small>
-            </div>
-        </div>
-    </fieldset>
+    <input type="hidden" name="_method" value="PUT">    
     <div class="form-group">
         <label>Type Name</label>
         <input name="name" value="{{ $types->name }}" type="text" id="id_type"

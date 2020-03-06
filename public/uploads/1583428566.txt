@@ -1,0 +1,28 @@
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#= Kautsar Al Bana =#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+=#=#=#=#    Background:
+=#=#=#=#    There is not yet a place to manage reports that can categorize each report
+=#=#=#=#
+=#=#=#=#    Purpose:
+=#=#=#=#    Provides an application to manage report data to be more organized, easier to find and comfortable to
+=#=#=#=#    each user uses
+=#=#=#=#
+=#=#=#=#    August:
+=#=#=#=#    The process of making a Flowchart, Use Case, and ERD
+=#=#=#=#
+=#=#=#=#    September:
+=#=#=#=#    User Management, Approval, Blocking, Reactivation, Role, and Permission
+=#=#=#=#
+=#=#=#=#    October:
+=#=#=#=#    Data Management for Categories, Departments, Locations, Products, Types, and Machines
+=#=#=#=#
+=#=#=#=#    November:
+=#=#=#=#    Management of Reports, Projects, Exports, and Approval
+=#=#=#=#
+=#=#=#=#    December:
+=#=#=#=#    Evaluation, Revision, Socialization to Users, and Launching Application
+=#=#=#=#
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
