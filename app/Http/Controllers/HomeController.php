@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
+use App\Models\Report;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('/home');
+        $reportCount = Report::count();
+        $projectCount = Project::count();
+        return view('home', compact('reportCount', 'projectCount'));
     }
 }
